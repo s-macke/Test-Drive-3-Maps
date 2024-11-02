@@ -527,10 +527,12 @@ function cylinderMesh(pointX, pointY, radius) {
 
 function BuildObject(buf, colormap, offset, isobj) {
     let geom = new THREE.BufferGeometry();
+    //console.log("BuildObject", buf, colormap, offset, isobj);
 
     let mesh = {
         vertices: [],
         lines: [],
+        tris: [],
         obj : new THREE.Object3D()
     }
 
@@ -699,8 +701,8 @@ function BuildObject(buf, colormap, offset, isobj) {
                 if (idx2 >= npoints) continue;
                 let line = cylinderMesh(positionstemp[idx1], positionstemp[idx2], size * 0.002);
                 mesh.lines.push({
-                    l1: idx1,
-                    l2: idx2,
+                    p1: idx1,
+                    p2: idx2,
                     color: c
                 });
 
@@ -723,6 +725,12 @@ function BuildObject(buf, colormap, offset, isobj) {
                 colors.push(c.r, c.g, c.b)
                 colors.push(c.r, c.g, c.b)
                 colors.push(c.r, c.g, c.b)
+                mesh.tris.push({
+                    p1: idx1,
+                    p2: idx2,
+                    p3: idx3,
+                    color: c
+                });
                 break;
 
             // quad
@@ -738,6 +746,12 @@ function BuildObject(buf, colormap, offset, isobj) {
                 colors.push(c.r, c.g, c.b);
                 colors.push(c.r, c.g, c.b);
                 colors.push(c.r, c.g, c.b);
+                mesh.tris.push({
+                    p1: idx1,
+                    p2: idx2,
+                    p3: idx3,
+                    color: c
+                });
 
                 positions.push(positionstemp[idx3].x, positionstemp[idx3].y, positionstemp[idx3].z);
                 positions.push(positionstemp[idx4].x, positionstemp[idx4].y, positionstemp[idx4].z);
@@ -745,6 +759,12 @@ function BuildObject(buf, colormap, offset, isobj) {
                 colors.push(c.r, c.g, c.b);
                 colors.push(c.r, c.g, c.b);
                 colors.push(c.r, c.g, c.b);
+                mesh.tris.push({
+                    p1: idx3,
+                    p2: idx4,
+                    p3: idx1,
+                    color: c
+                });
                 break;
 
             default:
@@ -810,7 +830,10 @@ function BuildObjectList(buf, colormap, offset, n, isobj) {
             objectoffset = Read16(buf, offset + (i - 1) * 2)
         }
         if (isobj[idx] == null) {
-            objs.push({obj: new THREE.Object3D()});
+            objs.push({
+                vertices: [],
+                obj: new THREE.Object3D()
+            });
         } else {
             objs.push(BuildObject(buf, colormap, offset + objectoffset, !!isobj[i]));
         }

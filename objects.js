@@ -46,7 +46,6 @@ function LoadObjects(colormap) {
         1,    1,    0,    0,    0,    0,    0,    0,
     ];
 
-
     maps.objs1 = extract.BuildObjectList(files.datab, colormap, 0x32F1A, 64, isobj);
     //maps.objs4 = extract.BuildObjectList(maps.datab,  colormap, 0x1ED2C, 64);
     isobj = [
