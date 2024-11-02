@@ -1,0 +1,237 @@
+# Wavefront OBJ file
+# vertices:58
+# lines:8
+mtllib colors.mtl
+
+v -2.56 20.48 0.02
+v -2.56 16.64 0.02
+v 2.56 20.48 0.02
+v 2.56 16.64 0.02
+v -2.56 12.8 0.02
+v 2.56 12.8 0.02
+v -2.56 8.96 0.02
+v 2.56 8.96 0.02
+v -2.56 5.12 0.02
+v 2.56 5.12 0.02
+v -2.56 1.28 0.02
+v 5.12 2.56 0.02
+v -2.56 -1.28 0.02
+v 5.12 -2.56 0.02
+v -2.56 -5.12 0.02
+v 2.56 -5.12 0.02
+v -2.56 -8.96 0.02
+v 2.56 -8.96 0.02
+v -2.56 -12.8 0.02
+v 2.56 -12.8 0.02
+v -2.56 -16.64 0.02
+v 2.56 -16.64 0.02
+v -2.56 -20.48 0.02
+v 2.56 -20.48 0.02
+v 20.48 -10.24 0.01
+v 10.24 -10.24 0.01
+v 20.48 -20.48 0.01
+v 10.24 -20.48 0.01
+v -10.24 20.48 0.01
+v -10.24 10.24 0.01
+v -10.24 0 0.01
+v -10.24 -10.24 0.01
+v -10.24 -20.48 0.01
+v -20.48 -20.48 0.01
+v -20.48 -10.24 0.01
+v -20.48 0 0.01
+v -20.48 10.24 0.01
+v -20.48 20.48 0.01
+v 8.96 2.56 0.02
+v 8.96 -2.56 0.02
+v 12.8 2.56 0.02
+v 12.8 -2.56 0.02
+v 16.64 2.56 0.02
+v 16.64 -2.56 0.02
+v 20.48 2.56 0.02
+v 20.48 -2.56 0.02
+v 10.24 20.48 0.01
+v 12.8 12.8 0.01
+v 20.48 20.48 0.01
+v 20.48 10.24 0.01
+v -2.56 1.28 0.5
+v -2.56 1.28 0.58
+v -2.56 5.12 0.5
+v -2.56 5.12 0.58
+v -2.56 -1.28 0.5
+v -2.56 -1.28 0.58
+v -2.56 -5.12 0.5
+v -2.56 -5.12 0.58
+usemtl color_#9f5000
+l 11 51
+usemtl color_#ef5050
+l 51 52
+usemtl color_#9f5000
+l 9 53
+usemtl color_#ef5050
+l 53 54
+usemtl color_#9f5000
+l 13 55
+usemtl color_#ef5050
+l 55 56
+usemtl color_#9f5000
+l 15 57
+usemtl color_#ef5050
+l 57 58
+usemtl color_#000000
+f 2 1 3
+usemtl color_#000000
+f 3 4 2
+usemtl color_#000000
+f 5 2 4
+usemtl color_#000000
+f 4 6 5
+usemtl color_#000000
+f 7 5 6
+usemtl color_#000000
+f 6 8 7
+usemtl color_#000000
+f 9 7 8
+usemtl color_#000000
+f 8 10 9
+usemtl color_#000000
+f 11 9 10
+usemtl color_#000000
+f 10 12 11
+usemtl color_#000000
+f 13 11 12
+usemtl color_#000000
+f 12 14 13
+usemtl color_#000000
+f 15 13 14
+usemtl color_#000000
+f 14 16 15
+usemtl color_#000000
+f 17 15 16
+usemtl color_#000000
+f 16 18 17
+usemtl color_#000000
+f 19 17 18
+usemtl color_#000000
+f 18 20 19
+usemtl color_#000000
+f 21 19 20
+usemtl color_#000000
+f 20 22 21
+usemtl color_#000000
+f 23 21 22
+usemtl color_#000000
+f 22 24 23
+usemtl color_#009f50
+f 20 18 26
+usemtl color_#28c728
+f 26 25 27
+usemtl color_#28c728
+f 27 28 26
+usemtl color_#009f50
+f 22 20 26
+usemtl color_#009f50
+f 26 28 22
+usemtl color_#009f50
+f 24 22 28
+usemtl color_#009f50
+f 1 2 29
+usemtl color_#009f50
+f 2 5 30
+usemtl color_#009f50
+f 30 29 2
+usemtl color_#009f50
+f 5 7 30
+usemtl color_#009f50
+f 7 9 30
+usemtl color_#009f50
+f 9 11 31
+usemtl color_#009f50
+f 31 30 9
+usemtl color_#009f50
+f 11 13 31
+usemtl color_#009f50
+f 13 15 32
+usemtl color_#009f50
+f 32 31 13
+usemtl color_#009f50
+f 15 17 32
+usemtl color_#009f50
+f 17 19 32
+usemtl color_#009f50
+f 19 21 33
+usemtl color_#009f50
+f 33 32 19
+usemtl color_#009f50
+f 21 23 33
+usemtl color_#9f9f50
+f 32 33 34
+usemtl color_#9f9f50
+f 34 35 32
+usemtl color_#28c728
+f 31 32 35
+usemtl color_#28c728
+f 35 36 31
+usemtl color_#9f9f50
+f 30 31 36
+usemtl color_#9f9f50
+f 36 37 30
+usemtl color_#28c728
+f 29 30 37
+usemtl color_#28c728
+f 37 38 29
+usemtl color_#000000
+f 14 12 39
+usemtl color_#000000
+f 39 40 14
+usemtl color_#000000
+f 40 39 41
+usemtl color_#000000
+f 41 42 40
+usemtl color_#000000
+f 42 41 43
+usemtl color_#000000
+f 43 44 42
+usemtl color_#000000
+f 44 43 45
+usemtl color_#000000
+f 45 46 44
+usemtl color_#009f50
+f 44 46 25
+usemtl color_#009f50
+f 42 44 25
+usemtl color_#009f50
+f 25 26 42
+usemtl color_#009f50
+f 40 42 26
+usemtl color_#009f50
+f 26 18 40
+usemtl color_#009f50
+f 16 14 40
+usemtl color_#009f50
+f 40 18 16
+usemtl color_#009f50
+f 4 3 47
+usemtl color_#009f50
+f 47 48 4
+usemtl color_#009f50
+f 48 47 49
+usemtl color_#009f50
+f 49 50 48
+usemtl color_#009f50
+f 6 4 48
+usemtl color_#009f50
+f 8 6 48
+usemtl color_#009f50
+f 45 43 48
+usemtl color_#009f50
+f 48 50 45
+usemtl color_#009f50
+f 43 41 48
+usemtl color_#009f50
+f 41 39 8
+usemtl color_#009f50
+f 8 48 41
+usemtl color_#009f50
+f 12 10 8
+usemtl color_#009f50
+f 8 39 12

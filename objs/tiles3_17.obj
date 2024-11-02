@@ -1,0 +1,334 @@
+# Wavefront OBJ file
+# vertices:77
+# lines:0
+mtllib colors.mtl
+
+v -2.56 20.48 0.02
+v -3.84 16.64 0.02
+v 2.56 20.48 0.02
+v 3.84 16.64 0.02
+v -2.56 12.8 0.02
+v 2.56 12.8 0.02
+v -2.56 8.96 0.02
+v 2.56 8.96 0.02
+v -2.56 5.12 0.02
+v 2.56 5.12 0.02
+v -2.56 2.56 0.02
+v 2.56 2.56 0.02
+v 2.56 -2.56 0.02
+v -2.56 -2.56 0.02
+v 2.56 -5.12 0.02
+v -2.56 -5.12 0.02
+v -2.56 -8.96 0.02
+v 2.56 -8.96 0.02
+v -2.56 -12.8 0.02
+v 2.56 -12.8 0.02
+v -3.84 -16.64 0.02
+v 3.84 -16.64 0.02
+v -2.56 -20.48 0.02
+v 2.56 -20.48 0.02
+v 5.12 -14.08 0.02
+v 4.48 -8.96 0.02
+v 7.04 -10.24 0.02
+v 6.4 -5.12 0.02
+v 8.96 -6.4 0.02
+v 9.6 -2.56 0.02
+v 7.04 -2.56 0.02
+v 9.6 2.56 0.02
+v 7.04 2.56 0.02
+v 8.96 6.4 0.02
+v 6.4 5.12 0.02
+v 7.04 10.24 0.02
+v 4.48 8.96 0.02
+v 5.12 14.08 0.02
+v -5.12 14.08 0.02
+v -4.48 8.96 0.02
+v -7.04 10.24 0.02
+v -6.4 5.12 0.02
+v -8.96 6.4 0.02
+v -7.04 2.56 0.02
+v -9.6 2.56 0.02
+v -7.04 -2.56 0.02
+v -9.6 -2.56 0.02
+v -6.4 -5.12 0.02
+v -8.96 -6.4 0.02
+v -4.48 -8.96 0.02
+v -7.04 -10.24 0.02
+v -5.12 -14.08 0.02
+v 3.84 -6.4 -0.32
+v 5.12 -3.84 -0.48
+v -10.24 20.48 0.01
+v -6.4 16.64 0.01
+v -8.96 12.8 0.01
+v -14.08 11.52 0.01
+v -20.48 10.24 0.01
+v -20.48 0 0.01
+v -20.48 20.48 0.02
+v -15.36 16.64 0.01
+v -20.48 -10.24 0.01
+v -20.48 -20.48 0.01
+v -10.24 -20.48 0.01
+v -2.56 -20.48 0.01
+v 10.24 -20.48 0.01
+v 20.48 -20.48 0.01
+v 20.48 -10.24 0.01
+v 20.48 0 0.01
+v 20.48 10.24 0.01
+v 20.48 20.48 0.01
+v 10.24 20.48 0.01
+v -2.56 0 0.02
+v 2.56 0 0.02
+v 2.56 0 0.06
+v -2.56 0 0.06
+usemtl color_#000000
+f 2 1 3
+usemtl color_#000000
+f 3 4 2
+usemtl color_#000000
+f 4 2 5
+usemtl color_#000000
+f 5 6 4
+usemtl color_#000000
+f 6 5 7
+usemtl color_#000000
+f 7 8 6
+usemtl color_#000000
+f 8 7 9
+usemtl color_#000000
+f 9 10 8
+usemtl color_#000000
+f 10 9 11
+usemtl color_#000000
+f 11 12 10
+usemtl color_#000000
+f 11 12 13
+usemtl color_#000000
+f 13 14 11
+usemtl color_#000000
+f 14 13 15
+usemtl color_#000000
+f 15 16 14
+usemtl color_#000000
+f 15 16 17
+usemtl color_#000000
+f 17 18 15
+usemtl color_#000000
+f 18 17 19
+usemtl color_#000000
+f 19 20 18
+usemtl color_#000000
+f 20 19 21
+usemtl color_#000000
+f 21 22 20
+usemtl color_#000000
+f 22 21 23
+usemtl color_#000000
+f 23 24 22
+usemtl color_#000000
+f 20 22 25
+usemtl color_#000000
+f 25 20 26
+usemtl color_#000000
+f 26 27 25
+usemtl color_#000000
+f 27 26 28
+usemtl color_#000000
+f 28 29 27
+usemtl color_#000000
+f 28 29 30
+usemtl color_#000000
+f 30 31 28
+usemtl color_#000000
+f 31 30 32
+usemtl color_#000000
+f 32 33 31
+usemtl color_#000000
+f 33 32 34
+usemtl color_#000000
+f 34 35 33
+usemtl color_#000000
+f 35 34 36
+usemtl color_#000000
+f 36 37 35
+usemtl color_#000000
+f 37 36 38
+usemtl color_#000000
+f 38 6 37
+usemtl color_#000000
+f 6 38 4
+usemtl color_#000000
+f 2 5 39
+usemtl color_#000000
+f 39 5 40
+usemtl color_#000000
+f 40 41 39
+usemtl color_#000000
+f 41 40 42
+usemtl color_#000000
+f 42 43 41
+usemtl color_#000000
+f 43 42 44
+usemtl color_#000000
+f 44 45 43
+usemtl color_#000000
+f 45 44 46
+usemtl color_#000000
+f 46 47 45
+usemtl color_#000000
+f 47 46 48
+usemtl color_#000000
+f 48 49 47
+usemtl color_#000000
+f 48 50 51
+usemtl color_#000000
+f 51 49 48
+usemtl color_#000000
+f 50 19 52
+usemtl color_#000000
+f 52 51 50
+usemtl color_#000000
+f 19 52 21
+usemtl color_#009f50
+f 50 19 17
+usemtl color_#009f50
+f 17 50 48
+usemtl color_#009f50
+f 48 16 17
+usemtl color_#009f50
+f 48 16 14
+usemtl color_#009f50
+f 14 46 48
+usemtl color_#009f50
+f 46 14 11
+usemtl color_#009f50
+f 11 44 46
+usemtl color_#009f50
+f 44 11 9
+usemtl color_#009f50
+f 9 42 44
+usemtl color_#009f50
+f 42 9 7
+usemtl color_#009f50
+f 7 40 42
+usemtl color_#009f50
+f 40 7 5
+usemtl color_#009f50
+f 6 8 37
+usemtl color_#009f50
+f 37 35 10
+usemtl color_#009f50
+f 10 8 37
+usemtl color_#009f50
+f 35 10 12
+usemtl color_#009f50
+f 12 33 35
+usemtl color_#009f50
+f 33 31 13
+usemtl color_#009f50
+f 13 12 33
+usemtl color_#009f50
+f 20 26 18
+usemtl color_#509f50
+f 26 18 53
+usemtl color_#509f50
+f 53 26 28
+usemtl color_#509f50
+f 53 15 18
+usemtl color_#509f50
+f 53 54 15
+usemtl color_#509f50
+f 53 54 28
+usemtl color_#509f50
+f 28 54 31
+usemtl color_#509f50
+f 31 54 13
+usemtl color_#509f50
+f 13 54 15
+usemtl color_#009f50
+f 2 1 55
+usemtl color_#009f50
+f 55 56 2
+usemtl color_#009f50
+f 56 2 39
+usemtl color_#009f50
+f 56 39 41
+usemtl color_#009f50
+f 41 57 56
+usemtl color_#009f50
+f 57 41 43
+usemtl color_#009f50
+f 43 58 57
+usemtl color_#009f50
+f 45 43 59
+usemtl color_#009f50
+f 59 60 45
+usemtl color_#009f50
+f 43 59 58
+usemtl color_#009f50
+f 58 59 61
+usemtl color_#009f50
+f 61 62 58
+usemtl color_#009f50
+f 55 61 62
+usemtl color_#009f50
+f 60 45 47
+usemtl color_#009f50
+f 47 49 63
+usemtl color_#009f50
+f 63 60 47
+usemtl color_#009f50
+f 49 63 64
+usemtl color_#009f50
+f 64 51 49
+usemtl color_#009f50
+f 51 64 65
+usemtl color_#009f50
+f 65 52 51
+usemtl color_#009f50
+f 52 65 21
+usemtl color_#009f50
+f 21 65 66
+usemtl color_#009f50
+f 22 24 67
+usemtl color_#009f50
+f 67 22 25
+usemtl color_#009f50
+f 25 67 68
+usemtl color_#009f50
+f 68 27 25
+usemtl color_#009f50
+f 27 68 69
+usemtl color_#009f50
+f 69 29 27
+usemtl color_#009f50
+f 29 69 70
+usemtl color_#009f50
+f 70 30 29
+usemtl color_#009f50
+f 30 70 32
+usemtl color_#009f50
+f 32 70 71
+usemtl color_#009f50
+f 71 34 32
+usemtl color_#009f50
+f 34 71 72
+usemtl color_#009f50
+f 72 36 34
+usemtl color_#009f50
+f 36 72 73
+usemtl color_#009f50
+f 73 38 36
+usemtl color_#009f50
+f 38 4 73
+usemtl color_#009f50
+f 73 4 3
+usemtl color_#2878c7
+f 58 62 57
+usemtl color_#2878c7
+f 57 62 55
+usemtl color_#2878c7
+f 55 56 57
+usemtl color_#efefef
+f 74 75 76
+usemtl color_#efefef
+f 76 77 74

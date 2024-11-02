@@ -1,0 +1,40 @@
+# Wavefront OBJ file
+# vertices:15
+# lines:7
+mtllib colors.mtl
+
+v 0 0 0
+v 0 0 0.39
+v 0 0 0.35000000000000003
+v -0.12 0 0.44
+v 0.12 0 0.44
+v -0.08 0 0.54
+v -0.08 0 0.44
+v -0.12 0 0.58
+v 0.12 0 0.58
+v -0.03 0 0.54
+v -0.03 0 0.44
+v 0.03 0 0.44
+v 0.03 0 0.54
+v 0.08 0 0.44
+v 0.08 0 0.54
+usemtl color_#000000
+l 6 7
+usemtl color_#000000
+l 10 11
+usemtl color_#000000
+l 11 12
+usemtl color_#000000
+l 12 13
+usemtl color_#000000
+l 10 13
+usemtl color_#000000
+l 14 15
+usemtl color_#9f5000
+l 1 2
+usemtl color_#efefef
+f 3 4 5
+usemtl color_#efefef
+f 4 8 9
+usemtl color_#efefef
+f 9 5 4

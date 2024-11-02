@@ -1,0 +1,152 @@
+# Wavefront OBJ file
+# vertices:59
+# lines:7
+mtllib colors.mtl
+
+v 0 0 0.1
+v -0.03 0 0.05
+v -0.01 0 0.16
+v -0.09 0 0.1
+v 0.08 0 0.16
+v 0.14 0 0.06
+v -0.01 -0.04 0.13
+v 0.08 -0.04 0.11
+v -0.03 -0.02 0.19
+v 0.02 -0.06 0.19
+v -0.06 0 0.03
+v -0.12 0 0.07
+v -0.06 -0.04 0.08
+v -0.06 0.04 0.08
+v -0.11 0.03 -0.02
+v -0.11 -0.03 -0.02
+v -0.13 0 -0.02
+v -0.1 0 -0.02
+v -0.13 -0.02 0.03
+v -0.14 0 0
+v -0.18 0 0.02
+v -0.14 0.02 0.01
+v 0.08 0.04 0.11
+v -0.01 0.04 0.14
+v -0.03 0.02 0.19
+v 0.02 0.06 0.19
+v -0.02 0.11 0.02
+v 0.01 0.14 0.04
+v 0 0 0.06
+v 0.17 0.22 0.04
+v 0.21 0.32 0.02
+v 0.16 0.21 0.08
+v 0.23 0.28 0.01
+v 0.18 0.24 0.02
+v -0.01 -0.04 0.19
+v 0.03 -0.04 0.26
+v -0.04 -0.01 0.26
+v -0.05 -0.06 0.26
+v 0.06 0.04 0.21
+v 0.05 0.04 0.25
+v 0.11 0.04 0.24
+v 0.09 0.07 0.25
+v -0.02 -0.11 0.02
+v 0.01 -0.14 0.04
+v 0.17 -0.22 0.04
+v 0.21 -0.32 0
+v 0.16 -0.21 0.08
+v 0.24 -0.27 -0.01
+v 0.18 -0.21 -0.01
+v 0.14 0.04 0.06
+v 0.14 -0.05 0.06
+v 0.3 0.04 0.06
+v 0.3 -0.07 0.06
+v 0.11 -0.05 0.1
+v 0.34 -0.1 0.1
+v 0.34 0.1 0.1
+v 0.11 0.05 0.1
+v -0.16 0 0.03
+v -0.13 0 0.03
+usemtl color_#9f0000
+l 35 36
+usemtl color_#9f0000
+l 36 37
+usemtl color_#9f0000
+l 36 38
+usemtl color_#9f0000
+l 24 39
+usemtl color_#9f0000
+l 39 40
+usemtl color_#9f0000
+l 40 41
+usemtl color_#9f0000
+l 40 42
+usemtl color_#efefef
+f 2 3 5
+usemtl color_#efefef
+f 5 6 2
+usemtl color_#efefef
+f 8 7 9
+usemtl color_#efefef
+f 9 10 8
+usemtl color_#efef50
+f 4 2 11
+usemtl color_#efef50
+f 11 12 4
+usemtl color_#efef50
+f 13 14 15
+usemtl color_#efef50
+f 15 16 13
+usemtl color_#efef50
+f 11 12 17
+usemtl color_#efef50
+f 17 18 11
+usemtl color_#9f0000
+f 19 20 21
+usemtl color_#9f0000
+f 21 22 20
+usemtl color_#efefef
+f 23 24 25
+usemtl color_#efefef
+f 25 26 23
+usemtl color_#efefef
+f 2 27 28
+usemtl color_#efefef
+f 28 29 2
+usemtl color_#efefef
+f 27 28 30
+usemtl color_#efefef
+f 30 31 27
+usemtl color_#e5d9e5
+f 30 28 29
+usemtl color_#e5d9e5
+f 29 32 30
+usemtl color_#e5d9e5
+f 30 33 34
+usemtl color_#efefef
+f 2 43 44
+usemtl color_#efefef
+f 44 29 2
+usemtl color_#efefef
+f 43 44 45
+usemtl color_#efefef
+f 45 46 43
+usemtl color_#e5d9e5
+f 45 44 29
+usemtl color_#e5d9e5
+f 29 47 45
+usemtl color_#e5d9e5
+f 45 48 49
+usemtl color_#efefef
+f 5 50 6
+usemtl color_#efefef
+f 6 51 5
+usemtl color_#e5d9e5
+f 51 50 52
+usemtl color_#e5d9e5
+f 52 53 51
+usemtl color_#e5d9e5
+f 53 51 54
+usemtl color_#e5d9e5
+f 54 55 53
+usemtl color_#e5d9e5
+f 56 57 50
+usemtl color_#e5d9e5
+f 50 52 56
+usemtl color_#9f0000
+f 22 58 59

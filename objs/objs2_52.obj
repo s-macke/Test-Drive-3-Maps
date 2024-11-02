@@ -1,0 +1,123 @@
+# Wavefront OBJ file
+# vertices:38
+# lines:0
+mtllib colors.mtl
+
+v -1.92 3.04 0
+v -2.08 3.04 0
+v -2.08 3.04 2.75
+v -1.92 3.04 2.72
+v -1.92 4.16 2.75
+v -2.08 4.16 2.72
+v -2.08 4.16 0
+v -1.92 4.16 0
+v -2.56 3.68 0
+v -2.56 3.52 0
+v -2.56 3.52 2.72
+v -2.56 3.68 2.75
+v -1.44 3.68 2.72
+v -1.44 3.52 2.75
+v -1.44 3.52 0
+v -1.44 3.68 0
+v -2.38 4.1 0
+v -2.38 4.1 2.72
+v -2.5 3.98 0
+v -2.5 3.98 2.72
+v -1.62 4.1 0
+v -1.62 4.1 2.72
+v -1.5 3.98 0
+v -1.5 3.98 2.72
+v -2.5 3.22 0
+v -2.5 3.22 2.72
+v -1.5 3.22 2.72
+v -1.5 3.22 0
+v -1.62 3.1 2.72
+v -1.62 3.1 0
+v -2.38 3.1 2.72
+v -2.38 3.1 0
+v -2.04 3.2800000000000002 2.88
+v -2 3.6 2.93
+v -2 3.6 2.72
+v -1.96 3.92 2.87
+v -2.32 3.64 2.87
+v -1.68 3.56 2.87
+usemtl color_#bb815e
+f 1 2 3
+usemtl color_#bb815e
+f 3 4 1
+usemtl color_#6c441c
+f 5 6 7
+usemtl color_#6c441c
+f 7 8 5
+usemtl color_#9f2800
+f 9 10 11
+usemtl color_#9f2800
+f 11 12 9
+usemtl color_#9f2800
+f 13 14 15
+usemtl color_#9f2800
+f 15 16 13
+usemtl color_#502800
+f 17 18 6
+usemtl color_#502800
+f 6 7 17
+usemtl color_#9f2800
+f 19 20 12
+usemtl color_#9f2800
+f 12 9 19
+usemtl color_#7c522c
+f 17 18 20
+usemtl color_#7c522c
+f 20 19 17
+usemtl color_#7c522c
+f 21 22 5
+usemtl color_#7c522c
+f 5 8 21
+usemtl color_#9f2800
+f 23 24 13
+usemtl color_#9f2800
+f 13 16 23
+usemtl color_#9f5000
+f 23 24 22
+usemtl color_#9f5000
+f 22 21 23
+usemtl color_#9f2800
+f 25 26 11
+usemtl color_#9f2800
+f 11 10 25
+usemtl color_#ad2c00
+f 27 28 15
+usemtl color_#ad2c00
+f 15 14 27
+usemtl color_#bb5800
+f 29 30 1
+usemtl color_#bb5800
+f 1 4 29
+usemtl color_#ad2c00
+f 29 30 28
+usemtl color_#ad2c00
+f 28 27 29
+usemtl color_#ad2c00
+f 31 32 2
+usemtl color_#ad2c00
+f 2 3 31
+usemtl color_#ad2c00
+f 31 32 25
+usemtl color_#ad2c00
+f 25 26 31
+usemtl color_#ad2c00
+f 3 33 34
+usemtl color_#ad2c00
+f 34 35 3
+usemtl color_#ad2c00
+f 5 36 34
+usemtl color_#ad2c00
+f 34 35 5
+usemtl color_#ad2c00
+f 34 35 12
+usemtl color_#ad2c00
+f 12 37 34
+usemtl color_#ad2c00
+f 34 35 14
+usemtl color_#ad2c00
+f 14 38 34

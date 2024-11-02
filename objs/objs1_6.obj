@@ -1,0 +1,78 @@
+# Wavefront OBJ file
+# vertices:29
+# lines:16
+mtllib colors.mtl
+
+v 0 0 0
+v 0 0 0.34
+v 0.08 0 0.3
+v 0.2 0 0.42
+v 0.2 0 0.56
+v 0.08 0 0.68
+v -0.08 0 0.68
+v -0.2 0 0.56
+v -0.2 0 0.42
+v -0.08 0 0.3
+v -0.16 0 0.56
+v -0.12 0 0.56
+v -0.16 0 0.48
+v -0.12 0 0.48
+v -0.16 0 0.4
+v -0.12 0 0.4
+v -0.08 0 0.56
+v 0 0 0.56
+v -0.04 0 0.56
+v -0.04 0 0.4
+v 0.04 0 0.56
+v 0.08 0 0.56
+v 0.04 0 0.4
+v 0.08 0 0.4
+v 0.12 0 0.56
+v 0.16 0 0.56
+v 0.12 0 0.48
+v 0.16 0 0.48
+v 0.12 0 0.4
+usemtl color_#000000
+l 11 12
+usemtl color_#000000
+l 11 13
+usemtl color_#000000
+l 13 14
+usemtl color_#000000
+l 14 16
+usemtl color_#000000
+l 15 16
+usemtl color_#000000
+l 17 18
+usemtl color_#000000
+l 19 20
+usemtl color_#000000
+l 21 22
+usemtl color_#000000
+l 21 23
+usemtl color_#000000
+l 22 24
+usemtl color_#000000
+l 23 24
+usemtl color_#000000
+l 25 26
+usemtl color_#000000
+l 25 29
+usemtl color_#000000
+l 26 28
+usemtl color_#000000
+l 27 28
+usemtl color_#9f5000
+l 1 2
+usemtl color_#9f0000
+f 3 4 9
+usemtl color_#9f0000
+f 9 10 3
+usemtl color_#9f0000
+f 4 5 8
+usemtl color_#9f0000
+f 8 9 4
+usemtl color_#9f0000
+f 5 6 7
+usemtl color_#9f0000
+f 7 8 5

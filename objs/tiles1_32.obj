@@ -1,0 +1,238 @@
+# Wavefront OBJ file
+# vertices:55
+# lines:0
+mtllib colors.mtl
+
+v -2.56 20.48 0.01
+v 2.56 20.48 0.01
+v 1.28 15.36 0.01
+v -2.56 16.64 0.01
+v -1.28 11.52 0.01
+v -3.84 12.8 0.01
+v -1.28 7.68 0.01
+v -5.12 7.68 0.01
+v -1.28 6.4 0.01
+v -1.28 2.56 0.01
+v -3.84 2.56 0.01
+v -3.84 -1.28 0.01
+v -6.4 0 0.01
+v -3.84 -6.4 0.01
+v -5.12 -6.4 0.01
+v -2.56 -8.96 0.01
+v -3.84 -8.96 0.01
+v -1.92 -12.8 0.01
+v -3.84 -12.8 0.01
+v -0.64 -16.8 0.01
+v -2.56 -16.64 0.01
+v 0.64 -20.48 0.01
+v -0.64 -20.48 0.01
+v 1.28 3.84 0.01
+v -10.24 -20.48 0.01
+v -20.48 -20.48 0.01
+v -20.48 -10.24 0.01
+v -20.48 0 0.01
+v -10.24 10.24 0.01
+v -20.48 10.24 0.01
+v -20.48 20.48 0.01
+v -10.24 20.48 0.01
+v 10.24 20.48 0.01
+v 10.24 10.24 0.01
+v 20.48 20.48 0.01
+v 20.48 10.24 0.01
+v 1.28 10.24 0.01
+v 2.56 5.12 0.01
+v 5.12 3.84 0.01
+v 3.2 2.56 0.01
+v 5.12 2.56 0.01
+v 7.68 2.56 0.01
+v 7.68 1.28 0.01
+v 11.52 1.28 0.01
+v 11.52 -0.64 0.01
+v 16.64 1.28 0.01
+v 16.64 0 0.01
+v 20.48 0.64 0.01
+v 20.48 -0.64 0.01
+v 20.48 -10.24 0.01
+v 8.96 -10.24 3.21
+v 5.12 -6.4 2.09
+v 2.56 -2.56 2.25
+v 10.24 -20.48 0.01
+v 20.48 -20.48 0.01
+usemtl color_#5050ef
+f 1 2 3
+usemtl color_#5050ef
+f 3 4 1
+usemtl color_#5050ef
+f 4 3 5
+usemtl color_#5050ef
+f 5 6 4
+usemtl color_#5050ef
+f 6 5 7
+usemtl color_#5050ef
+f 7 8 6
+usemtl color_#5050ef
+f 8 7 9
+usemtl color_#5050ef
+f 8 9 10
+usemtl color_#5050ef
+f 10 11 8
+usemtl color_#2878c7
+f 11 10 12
+usemtl color_#2878c7
+f 12 13 11
+usemtl color_#2878c7
+f 13 12 14
+usemtl color_#2878c7
+f 14 15 13
+usemtl color_#7878c7
+f 15 14 16
+usemtl color_#7878c7
+f 16 17 15
+usemtl color_#2878c7
+f 17 16 18
+usemtl color_#2878c7
+f 18 19 17
+usemtl color_#7878c7
+f 19 18 20
+usemtl color_#7878c7
+f 20 21 19
+usemtl color_#2878c7
+f 21 20 22
+usemtl color_#2878c7
+f 22 23 21
+usemtl color_#9f7850
+f 8 11 13
+usemtl color_#9f7850
+f 9 24 10
+usemtl color_#9f7850
+f 12 10 14
+usemtl color_#009f50
+f 21 23 25
+usemtl color_#009f50
+f 19 21 25
+usemtl color_#009f50
+f 25 26 19
+usemtl color_#009f50
+f 17 19 26
+usemtl color_#009f50
+f 26 27 17
+usemtl color_#009f50
+f 15 17 27
+usemtl color_#009f50
+f 13 15 27
+usemtl color_#009f50
+f 27 28 13
+usemtl color_#009f50
+f 8 13 28
+usemtl color_#009f50
+f 28 29 8
+usemtl color_#009f50
+f 29 28 30
+usemtl color_#28c728
+f 29 30 31
+usemtl color_#28c728
+f 31 32 29
+usemtl color_#009f50
+f 8 29 32
+usemtl color_#009f50
+f 32 6 8
+usemtl color_#009f50
+f 4 6 32
+usemtl color_#009f50
+f 32 1 4
+usemtl color_#009f50
+f 2 33 34
+usemtl color_#009f50
+f 34 3 2
+usemtl color_#9f9f50
+f 33 35 36
+usemtl color_#9f9f50
+f 36 34 33
+usemtl color_#9f7850
+f 3 37 5
+usemtl color_#9f7850
+f 5 37 38
+usemtl color_#9f7850
+f 38 7 5
+usemtl color_#009f50
+f 3 34 38
+usemtl color_#009f50
+f 38 37 3
+usemtl color_#7878c7
+f 7 38 24
+usemtl color_#7878c7
+f 24 9 7
+usemtl color_#2878c7
+f 24 38 39
+usemtl color_#2878c7
+f 39 40 24
+usemtl color_#2878c7
+f 40 39 41
+usemtl color_#7878c7
+f 41 39 42
+usemtl color_#7878c7
+f 42 43 41
+usemtl color_#9f7850
+f 40 41 43
+usemtl color_#2878c7
+f 43 42 44
+usemtl color_#2878c7
+f 44 45 43
+usemtl color_#2878c7
+f 45 44 46
+usemtl color_#2878c7
+f 46 47 45
+usemtl color_#2878c7
+f 47 46 48
+usemtl color_#2878c7
+f 48 49 47
+usemtl color_#009f50
+f 39 38 34
+usemtl color_#009f50
+f 39 34 42
+usemtl color_#009f50
+f 42 34 46
+usemtl color_#009f50
+f 46 44 42
+usemtl color_#009f50
+f 48 46 34
+usemtl color_#009f50
+f 34 36 48
+usemtl color_#009f50
+f 45 47 49
+usemtl color_#009f50
+f 49 50 45
+usemtl color_#005000
+f 45 50 51
+usemtl color_#005000
+f 45 51 52
+usemtl color_#005000
+f 45 52 53
+usemtl color_#005000
+f 45 53 43
+usemtl color_#005000
+f 43 53 40
+usemtl color_#005000
+f 40 53 24
+usemtl color_#005000
+f 24 53 10
+usemtl color_#005000
+f 10 53 14
+usemtl color_#005000
+f 14 53 16
+usemtl color_#005000
+f 16 53 52
+usemtl color_#005000
+f 16 52 18
+usemtl color_#005000
+f 18 52 20
+usemtl color_#005000
+f 20 52 51
+usemtl color_#005000
+f 20 51 54
+usemtl color_#009f50
+f 20 54 22
+usemtl color_#005000
+f 51 50 54
+usemtl color_#009f50
+f 50 55 54

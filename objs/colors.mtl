@@ -1,0 +1,224 @@
+# Wavefront Material Library
+
+newmtl color_#000000
+Kd 0 0 0
+
+newmtl color_#c7c778
+Kd 0.78125 0.78125 0.46875
+
+newmtl color_#005000
+Kd 0 0.3125 0
+
+newmtl color_#009f50
+Kd 0 0.625 0.3125
+
+newmtl color_#efef9f
+Kd 0.9375 0.9375 0.625
+
+newmtl color_#00009f
+Kd 0 0 0.625
+
+newmtl color_#9f5000
+Kd 0.625 0.3125 0
+
+newmtl color_#ef5050
+Kd 0.9375 0.3125 0.3125
+
+newmtl color_#9f9f50
+Kd 0.625 0.625 0.3125
+
+newmtl color_#28c728
+Kd 0.15625 0.78125 0.15625
+
+newmtl color_#505000
+Kd 0.3125 0.3125 0
+
+newmtl color_#c7c7c7
+Kd 0.78125 0.78125 0.78125
+
+newmtl color_#5050ef
+Kd 0.3125 0.3125 0.9375
+
+newmtl color_#2878c7
+Kd 0.15625 0.46875 0.78125
+
+newmtl color_#7878c7
+Kd 0.46875 0.46875 0.78125
+
+newmtl color_#787828
+Kd 0.46875 0.46875 0.15625
+
+newmtl color_#502800
+Kd 0.3125 0.15625 0
+
+newmtl color_#505050
+Kd 0.3125 0.3125 0.3125
+
+newmtl color_#efefef
+Kd 0.9375 0.9375 0.9375
+
+newmtl color_#78c778
+Kd 0.46875 0.78125 0.46875
+
+newmtl color_#787878
+Kd 0.46875 0.46875 0.46875
+
+newmtl color_#9f7850
+Kd 0.625 0.46875 0.3125
+
+newmtl color_#009f00
+Kd 0 0.625 0
+
+newmtl color_#005050
+Kd 0 0.3125 0.3125
+
+newmtl color_#5e7c00
+Kd 0.3671875 0.484375 0
+
+newmtl color_#585458
+Kd 0.34375 0.328125 0.34375
+
+newmtl color_#bbabbb
+Kd 0.734375 0.671875 0.734375
+
+newmtl color_#9f9f9f
+Kd 0.625 0.625 0.625
+
+newmtl color_#9f0000
+Kd 0.625 0 0
+
+newmtl color_#bb5800
+Kd 0.734375 0.34375 0
+
+newmtl color_#509f50
+Kd 0.3125 0.625 0.3125
+
+newmtl color_#efef50
+Kd 0.9375 0.9375 0.3125
+
+newmtl color_#dbc3db
+Kd 0.859375 0.765625 0.859375
+
+newmtl color_#cbb7cb
+Kd 0.796875 0.71875 0.796875
+
+newmtl color_#e5d9e5
+Kd 0.8984375 0.8515625 0.8984375
+
+newmtl color_#d5cdd5
+Kd 0.8359375 0.8046875 0.8359375
+
+newmtl color_#bdb1bd
+Kd 0.7421875 0.6953125 0.7421875
+
+newmtl color_#ada5ad
+Kd 0.6796875 0.6484375 0.6796875
+
+newmtl color_#ad7e5e
+Kd 0.6796875 0.4921875 0.3671875
+
+newmtl color_#7c522c
+Kd 0.484375 0.3203125 0.171875
+
+newmtl color_#c77828
+Kd 0.78125 0.46875 0.15625
+
+newmtl color_#c72828
+Kd 0.78125 0.15625 0.15625
+
+newmtl color_#2828c7
+Kd 0.15625 0.15625 0.78125
+
+newmtl color_#bf0000
+Kd 0.75 0 0
+
+newmtl color_#ad5400
+Kd 0.6796875 0.328125 0
+
+newmtl color_#c77878
+Kd 0.78125 0.46875 0.46875
+
+newmtl color_#9f5050
+Kd 0.625 0.3125 0.3125
+
+newmtl color_#998b99
+Kd 0.6015625 0.546875 0.6015625
+
+newmtl color_#898089
+Kd 0.5390625 0.5 0.5390625
+
+newmtl color_#000050
+Kd 0 0 0.3125
+
+newmtl color_#2c2a2c
+Kd 0.171875 0.1640625 0.171875
+
+newmtl color_#7c7a7c
+Kd 0.484375 0.4765625 0.484375
+
+newmtl color_#c79f78
+Kd 0.78125 0.625 0.46875
+
+newmtl color_#009f9f
+Kd 0 0.625 0.625
+
+newmtl color_#78c7c7
+Kd 0.46875 0.78125 0.78125
+
+newmtl color_#9f2850
+Kd 0.625 0.15625 0.3125
+
+newmtl color_#509f9f
+Kd 0.3125 0.625 0.625
+
+newmtl color_#9f2800
+Kd 0.625 0.15625 0
+
+newmtl color_#6e626e
+Kd 0.4296875 0.3828125 0.4296875
+
+newmtl color_#6c70fb
+Kd 0.421875 0.4375 0.984375
+
+newmtl color_#5e60f5
+Kd 0.3671875 0.375 0.9609375
+
+newmtl color_#383838
+Kd 0.21875 0.21875 0.21875
+
+newmtl color_#df0000
+Kd 0.875 0 0
+
+newmtl color_#500000
+Kd 0.3125 0 0
+
+newmtl color_#fb6c6c
+Kd 0.984375 0.421875 0.421875
+
+newmtl color_#5e565e
+Kd 0.3671875 0.3359375 0.3671875
+
+newmtl color_#bd626e
+Kd 0.7421875 0.3828125 0.4296875
+
+newmtl color_#7c2a2c
+Kd 0.484375 0.1640625 0.171875
+
+newmtl color_#6c1c1c
+Kd 0.421875 0.109375 0.109375
+
+newmtl color_#bb815e
+Kd 0.734375 0.5078125 0.3671875
+
+newmtl color_#6c441c
+Kd 0.421875 0.265625 0.109375
+
+newmtl color_#ad2c00
+Kd 0.6796875 0.171875 0
+
+newmtl color_#89562c
+Kd 0.5390625 0.3359375 0.171875
+
+newmtl color_#1c1c1c
+Kd 0.109375 0.109375 0.109375
+

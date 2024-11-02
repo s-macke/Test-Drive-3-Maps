@@ -1,0 +1,124 @@
+# Wavefront OBJ file
+# vertices:31
+# lines:0
+mtllib colors.mtl
+
+v -20.48 20.48 0.01
+v -10.24 20.48 0.01
+v -10.24 10.24 0.01
+v -20.48 10.24 0.01
+v -10.24 0 0.01
+v -20.48 0 0.01
+v 0 10.24 0.01
+v 0 20.48 0.01
+v 10.24 10.24 0.01
+v 10.24 20.48 0.01
+v 20.48 10.24 0.01
+v 20.48 20.48 0.01
+v 20.48 0 0.01
+v 10.24 0 0.01
+v 20.48 -10.24 0.01
+v 7.68 -16.64 0.01
+v 20.48 -20.48 0.01
+v 10.24 -20.48 0.01
+v -20.48 -10.24 0.01
+v -7.68 -15.36 0.01
+v -20.48 -20.48 0.01
+v -10.24 -20.48 0.01
+v -1.28 3.84 0.01
+v 1.28 3.84 0.01
+v 5.12 -8.96 0.01
+v 2.56 -2.56 0.01
+v -5.12 -2.56 0.01
+v -5.12 -8.96 0.01
+v -2.56 -12.8 0.01
+v 2.56 -15.36 0.01
+v 0 -20.48 0.01
+usemtl color_#28c728
+f 1 2 3
+usemtl color_#28c728
+f 3 4 1
+usemtl color_#9f9f50
+f 4 3 5
+usemtl color_#9f9f50
+f 5 6 4
+usemtl color_#9f9f50
+f 2 3 7
+usemtl color_#9f9f50
+f 7 8 2
+usemtl color_#28c728
+f 8 7 9
+usemtl color_#28c728
+f 9 10 8
+usemtl color_#9f9f50
+f 10 9 11
+usemtl color_#9f9f50
+f 11 12 10
+usemtl color_#28c728
+f 9 11 13
+usemtl color_#28c728
+f 13 14 9
+usemtl color_#009f50
+f 14 13 15
+usemtl color_#009f50
+f 15 16 14
+usemtl color_#009f50
+f 16 15 17
+usemtl color_#009f50
+f 17 18 16
+usemtl color_#009f50
+f 5 6 19
+usemtl color_#009f50
+f 19 20 5
+usemtl color_#009f50
+f 20 19 21
+usemtl color_#009f50
+f 21 22 20
+usemtl color_#009f50
+f 3 5 23
+usemtl color_#009f50
+f 23 7 3
+usemtl color_#009f50
+f 7 24 14
+usemtl color_#009f50
+f 14 9 7
+usemtl color_#009f50
+f 24 14 25
+usemtl color_#009f50
+f 25 26 24
+usemtl color_#009f50
+f 14 25 16
+usemtl color_#009f50
+f 5 23 27
+usemtl color_#009f50
+f 20 28 27
+usemtl color_#009f50
+f 27 5 20
+usemtl color_#005050
+f 23 7 24
+usemtl color_#005050
+f 24 23 27
+usemtl color_#005050
+f 27 26 24
+usemtl color_#005050
+f 26 27 28
+usemtl color_#005050
+f 28 25 26
+usemtl color_#005050
+f 25 28 29
+usemtl color_#005050
+f 29 30 25
+usemtl color_#005050
+f 30 25 16
+usemtl color_#005050
+f 29 28 20
+usemtl color_#00009f
+f 20 29 30
+usemtl color_#00009f
+f 30 31 20
+usemtl color_#00009f
+f 31 30 16
+usemtl color_#00009f
+f 16 18 31
+usemtl color_#00009f
+f 20 31 22
