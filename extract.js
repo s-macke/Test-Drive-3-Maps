@@ -503,10 +503,10 @@ let Colors = [
 */
 
 function Read16(dat, address) {
-    return dat[address] | (dat[address+1] << 8)
+    return dat[address] | (dat[address + 1] << 8)
 }
 
-function cylinderMesh(pointX, pointY) {
+function cylinderMesh(pointX, pointY, radius) {
     let direction = new THREE.Vector3().subVectors(pointY, pointX);
     let orientation = new THREE.Matrix4();
 
@@ -517,7 +517,7 @@ function cylinderMesh(pointX, pointY) {
         0, 0, 1, 0,
         0, -1, 0, 0,
         0, 0, 0, 1));
-    let edgeGeometry = new THREE.CylinderGeometry(5, 5, direction.length(), 3, 1, true);
+    let edgeGeometry = new THREE.CylinderGeometry(radius, radius, direction.length(), 3, 1, true);
     //alert(JSON.stringify(edgeGeometry.faceVertexUvs));
     edgeGeometry.faceVertexUvs = [[]];
     edgeGeometry.applyMatrix4(orientation)
@@ -526,8 +526,13 @@ function cylinderMesh(pointX, pointY) {
 }
 
 function BuildObject(buf, colormap, offset, isobj) {
-    let obj = new THREE.Object3D();
     let geom = new THREE.BufferGeometry();
+
+    let mesh = {
+        vertices: [],
+        lines: [],
+        obj : new THREE.Object3D()
+    }
 
     let npoly = buf[offset + 0];
     let npoints = buf[offset + 1];
@@ -545,6 +550,9 @@ function BuildObject(buf, colormap, offset, isobj) {
     offset += isobj ? 8 : 4;
     //offset += nsprites===0 ? 8 : 4;
 
+    let min = new THREE.Vector3(100000, 100000, 100000);
+    let max = new THREE.Vector3(-100000, -100000, -100000);
+
     for (let i = 0; i < npoints; i++) {
         let zp = Read16(buf, offset + i * 2 + npoints * 0);
         let xp = Read16(buf, offset + i * 2 + npoints * 2);
@@ -554,8 +562,15 @@ function BuildObject(buf, colormap, offset, isobj) {
         yp = (yp << 16) >> 16;
         zp = (zp << 16) >> 16;
         let v = new THREE.Vector3(xp, yp, zp);
+        mesh.vertices.push(v);
         //let v = new THREE.Vector3(xp / 1., yp / 1., zp / 1.);
         positionstemp.push(v)
+        if (v.x < min.x) min.x = v.x;
+        if (v.y < min.y) min.y = v.y;
+        if (v.z < min.z) min.z = v.z;
+        if (v.x > max.x) max.x = v.x;
+        if (v.y > max.y) max.y = v.y;
+        if (v.z > max.z) max.z = v.z;
         /*
                 let boxGeometry = new THREE.SphereGeometry(1);
                 boxGeometry.faceVertexUvs = [[]];
@@ -565,9 +580,11 @@ function BuildObject(buf, colormap, offset, isobj) {
                     colors.push(1., 1., 1.)
                 }
          */
-
     }
     offset += npoints * 3 * 2;
+
+    let sizeobj = new THREE.Vector3(max.x - min.x, max.y - min.y, max.z - min.z);
+    let size = Math.max(sizeobj.x, sizeobj.y, sizeobj.z);
 
     for (let i = 0; i < npoly; i++) {
         let idx1 = Read16(buf, offset + 0 + i * 8);
@@ -680,7 +697,12 @@ function BuildObject(buf, colormap, offset, isobj) {
             case 0x03:
                 if (idx1 >= npoints) continue;
                 if (idx2 >= npoints) continue;
-                let line = cylinderMesh(positionstemp[idx1], positionstemp[idx2]);
+                let line = cylinderMesh(positionstemp[idx1], positionstemp[idx2], size * 0.002);
+                mesh.lines.push({
+                    l1: idx1,
+                    l2: idx2,
+                    color: c
+                });
 
                 let array = line.toNonIndexed().attributes["position"].array;
                 for (let j = 0; j < array.length / 3; j++) {
@@ -766,8 +788,8 @@ function BuildObject(buf, colormap, offset, isobj) {
     geom.computeVertexNormals();
     let material = new THREE.MeshLambertMaterial({color: 0xffffff, vertexColors: THREE.FaceColors});
     material.side = THREE.DoubleSide;
-    obj.add(new THREE.Mesh(geom, material));
-    return obj;
+    mesh.obj.add(new THREE.Mesh(geom, material));
+    return mesh;
 }
 
 function LoadPalette(buf, offset) {
@@ -788,7 +810,7 @@ function BuildObjectList(buf, colormap, offset, n, isobj) {
             objectoffset = Read16(buf, offset + (i - 1) * 2)
         }
         if (isobj[idx] == null) {
-            objs.push(new THREE.Object3D());
+            objs.push({obj: new THREE.Object3D()});
         } else {
             objs.push(BuildObject(buf, colormap, offset + objectoffset, !!isobj[i]));
         }
