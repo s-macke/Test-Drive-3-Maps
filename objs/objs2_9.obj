@@ -1,14 +1,13 @@
 # Wavefront OBJ file
-# vertices:6
-# lines:1
 mtllib colors.mtl
 
+o objs2_9
 v 0 0 0
-v 0 0.36 0.06
-v 0.16 0.34 0.06
-v -0.16 0.34 0.06
-v -0.16 0.62 0.1
-v 0.16 0.62 0.1
+v 0 0.036000000000000004 0.006
+v 0.016 0.034 0.006
+v -0.016 0.034 0.006
+v -0.016 0.062 0.01
+v 0.016 0.062 0.01
 usemtl color_#9f5000
 l 1 2
 usemtl color_#efefef
