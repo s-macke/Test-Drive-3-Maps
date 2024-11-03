@@ -166,7 +166,6 @@ function LoadMap(idx) {
         case 10:
             colormap = GetColorMap(files.scene01, mapoffset[0]);
             LoadObjects(colormap);
-
             BuildMap(files.datab, 0x21603, maps.tiles1, maps.tiles2, maps.objs1);
             break;
 

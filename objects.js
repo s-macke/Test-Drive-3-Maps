@@ -31,9 +31,9 @@ function LoadObjects(colormap) {
         0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0,
     ];
-    maps.tiles1 = extract.BuildObjectList(files.scene01, colormap, 0x0045B, 59, isobj);
-    maps.tiles2 = extract.BuildObjectList(files.datab,   colormap, 0x2373B, 64, isobj);
-    maps.tiles3 = extract.BuildObjectList(files.scene02, colormap, 0x00488, 64, isobj);
+    maps.tiles1 = extract.BuildObjectList("tiles1",files.scene01, colormap, 0x0045B, 59, isobj);
+    maps.tiles2 = extract.BuildObjectList("tiles2",files.datab,   colormap, 0x2373B, 64, isobj);
+    maps.tiles3 = extract.BuildObjectList("tiles3",files.scene02, colormap, 0x00488, 64, isobj);
 
     isobj = [
         0,    0,    0,    0,    0,    0,    0,    0,
@@ -46,7 +46,7 @@ function LoadObjects(colormap) {
         1,    1,    0,    0,    0,    0,    0,    0,
     ];
 
-    maps.objs1 = extract.BuildObjectList(files.datab, colormap, 0x32F1A, 64, isobj);
+    maps.objs1 = extract.BuildObjectList("objs1",files.datab, colormap, 0x32F1A, 64, isobj);
     //maps.objs4 = extract.BuildObjectList(maps.datab,  colormap, 0x1ED2C, 64);
     isobj = [
         null, null, null, null, null, 0,    0,    0,
@@ -59,14 +59,14 @@ function LoadObjects(colormap) {
         1,    1,    0,    0,    0,    0,    0,    0,
     ];
 
-    maps.objs2 = extract.BuildObjectList(files.scene02, colormap, 0x1534D, 64, isobj);
+    maps.objs2 = extract.BuildObjectList("objs2",files.scene02, colormap, 0x1534D, 64, isobj);
 
     maps.cars = [
-        extract.BuildObject(files.cmyth, colormap, 0, true),
-        extract.BuildObject(files.cdiab, colormap, 0, true),
-        extract.BuildObject(files.ccerv, colormap, 0, true),
-        extract.BuildObject(files.cstel, colormap, 0, true),
-        extract.BuildObject(files.ccnsx, colormap, 0, true)
+        extract.BuildObject("car1", files.cmyth, colormap, 0, true),
+        extract.BuildObject("car2", files.cdiab, colormap, 0, true),
+        extract.BuildObject("car3", files.ccerv, colormap, 0, true),
+        extract.BuildObject("car4", files.cstel, colormap, 0, true),
+        extract.BuildObject("car5", files.ccnsx, colormap, 0, true)
     ];
 
     // datab  0x32F1A

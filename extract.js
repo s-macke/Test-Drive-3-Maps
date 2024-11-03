@@ -525,15 +525,17 @@ function cylinderMesh(pointX, pointY, radius) {
     return edgeGeometry;
 }
 
-function BuildObject(buf, colormap, offset, isobj) {
+function BuildObject(name, buf, colormap, offset, isobj) {
+    console.log("BuildObject " + name);
     let geom = new THREE.BufferGeometry();
     //console.log("BuildObject", buf, colormap, offset, isobj);
 
     let mesh = {
+        name: name,
         vertices: [],
         lines: [],
         tris: [],
-        obj : new THREE.Object3D()
+        obj: new THREE.Object3D()
     }
 
     let npoly = buf[offset + 0];
@@ -677,18 +679,17 @@ function BuildObject(buf, colormap, offset, isobj) {
 
         switch (type) {
             case 0x00:
-            case 0x01: {
-                /*
-                console.log(idx1, idx2, idx3);
+            case 0x01: { // e. g. wheels
+                console.log("type 0/1:", idx1, idx2, idx3, idx4);
                 if (idx1 >= npoints) continue;
-
-                let boxGeometry = new THREE.SphereGeometry(1);
+/*
+                let boxGeometry = new THREE.SphereGeometry(10, 4, 4);
                 boxGeometry.faceVertexUvs = [[]];
                 let array = boxGeometry.toNonIndexed().attributes["position"].array;
                 let v = positionstemp[idx1];
                 for (let j = 0; j < array.length / 3; j++) {
                     positions.push(array[j * 3 + 0] + v.x, array[j * 3 + 1] + v.y, array[j * 3 + 2] + v.z)
-                    colors.push(1., 1., 1.)
+                    colors.push(c0.r, c0.g, c0.b)
                 }
 */
             }
@@ -773,22 +774,24 @@ function BuildObject(buf, colormap, offset, isobj) {
         }
     }
     offset += npoly * 4 * 2;
+
+    // sprites
     /*
         for(let i=0; i<nsprites; i++)
         {
-            let zp = buf[ofs + i*8 + 0] | (buf[ofs + i*8 + 1] << 8);
-            let xp = buf[ofs + i*8 + 2] | (buf[ofs + i*8 + 3] << 8);
-            let yp = buf[ofs + i*8 + 4] | (buf[ofs + i*8 + 5] << 8);
+            let zp = buf[offset + i*8 + 0] | (buf[offset + i*8 + 1] << 8);
+            let xp = buf[offset + i*8 + 2] | (buf[offset + i*8 + 3] << 8);
+            let yp = buf[offset + i*8 + 4] | (buf[offset + i*8 + 5] << 8);
             xp = (xp << 16) >> 16;
             yp = (yp << 16) >> 16;
             zp = (zp << 16) >> 16;
             let v = new THREE.Vector3(xp, yp, zp);
 
-            let idx4 = buf[ofs + 6 + i*8 + 0] | (buf[ofs + 6 + i*8 + 1] << 8);
+            let idx4 = buf[offset + 6 + i*8 + 0] | (buf[offset + 6 + i*8 + 1] << 8);
             //alert(idx4);
             //if (idx4 === 2) continue;
 
-            let boxGeometry = new THREE.SphereGeometry(1);
+            let boxGeometry = new THREE.SphereGeometry(5);
             boxGeometry.faceVertexUvs = [[]];
             let array = boxGeometry.toNonIndexed().attributes["position"].array;
             for (let j = 0; j < array.length / 3; j++) {
@@ -799,7 +802,7 @@ function BuildObject(buf, colormap, offset, isobj) {
             //geom.mergeMesh(box);
             //alert(idx4);
         }
-    */
+*/
     offset += nsprites * 4 * 2;
 
     geom.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
@@ -820,7 +823,7 @@ function LoadPalette(buf, offset) {
     }
 }
 
-function BuildObjectList(buf, colormap, offset, n, isobj) {
+function BuildObjectList(name, buf, colormap, offset, n, isobj) {
     let objs = [];
     for (let i = 0; i < n; i++) {
         let idx = i;
@@ -835,7 +838,8 @@ function BuildObjectList(buf, colormap, offset, n, isobj) {
                 obj: new THREE.Object3D()
             });
         } else {
-            objs.push(BuildObject(buf, colormap, offset + objectoffset, !!isobj[i]));
+            let n = name + "_" + i;
+            objs.push(BuildObject(n, buf, colormap, offset + objectoffset, !!isobj[i]));
         }
     }
     return objs;
