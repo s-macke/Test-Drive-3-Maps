@@ -47,12 +47,14 @@ export function BuildMap(dat, offset, tiles1, tiles2, objs) {
             ob.position.z += height * 256;
             */
             //map.push(ob)
-            map.push(CloneMesh(
+            let obt = CloneMesh(
                 ob,
                 (2048 + 2048) * (i - 16),
                 -(2048 + 2048) * (j - 8),
                 height * 256,
-                -Math.PI / 2 * (rot)))
+                -Math.PI / 2 * (rot))
+            obt.name += "_map_" + i + "_" + j
+            map.push(obt)
         }
     }
 
@@ -73,17 +75,25 @@ export function BuildMap(dat, offset, tiles1, tiles2, objs) {
         //yp = (yp << 16) >> 16;
         //zp = (zp << 16) >> 16;
         let rot = dat[ofs + 6 + 320 * 4 + i] >> 6;
+
 /*
         ob.rotation.z += -Math.PI / 2 * (rot);
         ob.position.x += (2048 + 2048) * (-15.5);
         ob.position.y += (2048 + 2048) * (-7.5);
         ob.position.z += -1999.*4;
+        ob.position.x += zp*4;
         ob.position.y += xp*4;
         ob.position.z += yp*4;
-        ob.position.x += zp*4;
         map.push(ob)
  */
-
+        let obt = CloneMesh(
+            ob,
+            (2048 + 2048) * (-15.5) + zp*4,
+            (2048 + 2048) * (-7.5) + xp*4,
+            -1999.*4 + yp*4,
+            -Math.PI / 2 * (rot))
+        obt.name += "_obj_" + i
+        map.push(obt)
     }
     return map
 }
