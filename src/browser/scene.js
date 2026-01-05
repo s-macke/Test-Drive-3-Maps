@@ -2,6 +2,9 @@ import * as THREE from 'three';
 
 "use strict";
 
+// Disable color management to match legacy Three.js color appearance
+THREE.ColorManagement.enabled = false;
+
 function Scene() {
 
 	this.scene = new THREE.Scene();
@@ -12,14 +15,14 @@ function Scene() {
 	this.renderer.setClearColor( 0x8080FF ); 
 	window.addEventListener( 'resize', this.OnWindowResize.bind(this), false );
 	document.body.appendChild( this.renderer.domElement );
-	
+
 	this.camera.position.z = 500;
 	
 	this.directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 	this.directionalLight.position.set( 1, 1, 1 );
 	this.scene.add( this.directionalLight );
 
-	this.ambientLight = new THREE.AmbientLight(0x808080);
+	this.ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 	this.scene.add( this.ambientLight );	
 }
 
