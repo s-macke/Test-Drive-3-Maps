@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { join } from 'path';
 
 
 // This function converts a color object in which the colors stored as floats to a hex string
@@ -24,7 +25,7 @@ function AddMtl(color) {
     mtlcontent += "\n"
 }
 
-export function StoreObj(filename, objs) {
+export function StoreObj(filename, objs, objsDir) {
     console.log("Write " + filename)
     let content = "# Wavefront OBJ file\n"
     content += "mtllib colors.mtl\n"
@@ -61,6 +62,6 @@ export function StoreObj(filename, objs) {
 
     if (doStore) {
         fs.writeFileSync(filename, content);
-        fs.writeFileSync("objs/colors.mtl", mtlcontent)
+        fs.writeFileSync(join(objsDir, "colors.mtl"), mtlcontent)
     }
 }

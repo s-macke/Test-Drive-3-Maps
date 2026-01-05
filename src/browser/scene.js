@@ -1,4 +1,4 @@
-import * as THREE from './three.module.js';
+import * as THREE from 'three';
 
 "use strict";
 
@@ -40,40 +40,6 @@ Scene.prototype.RemoveAllMeshes = function() {
 
 Scene.prototype.Render = function() {
 	this.renderer.render(this.scene, this.camera);
-}
-
-Scene.prototype.BuildTestMesh = function() {
-	
-	let geom = new THREE.Geometry();
-	let v1 = new THREE.Vector3(-1, -1, 0);
-	let v2 = new THREE.Vector3( 1, -1, 0);
-	let v3 = new THREE.Vector3( 1,  1, 0);
-	let v4 = new THREE.Vector3(-1,  1, 0);
-
-	geom.vertices.push(v1);
-	geom.vertices.push(v2);
-	geom.vertices.push(v3);
-	geom.vertices.push(v4);
-
-	geom.faces.push( new THREE.Face3( 0, 1, 2 ) );
-	geom.faces.push( new THREE.Face3( 2, 3, 0 ) );
-
-	for (let i=0; i<geom.faces.length; i++ )
-	{
-		let face = geom.faces[i];
-		//face.color = new THREE.Color(0xFF0000);
-		face.color.setHex( Math.random() * 0xffffff );
-		//face.materials = [ new THREE.MeshBasicMaterial( { color: Math.random() * 0xffffff } ) ];
-	}
-	//let material = new THREE.MeshBasicMaterial( { color: 0xffffff, vertexColors: THREE.FaceColors } );
-	//let material = new THREE.MeshLambertMaterial( { color: 0xffffff, vertexColors: THREE.FaceColors } );
-	//let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-	//let material = new THREE.MeshFaceMaterial();
-	//material.side = THREE.DoubleSide;
-	geom.computeFaceNormals();
-	
-	let cube = new THREE.Mesh( geom, material );
-	return cube;
 }
 
 Scene.prototype.OnWindowResize = function(event)

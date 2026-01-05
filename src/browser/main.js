@@ -1,10 +1,10 @@
 import * as Scene from './scene.js'
 import * as utils from './utils.js'
 import * as FlyControls from './FlyControls.js';
-import * as extract from './extract.js';
-import {GetColorMap} from "./color.js";
-import {LoadObjects, maps} from "./objects.js";
-import {files} from "./files.js";
+import * as extract from '@shared/extract.js';
+import {GetColorMap} from "@shared/color.js";
+import {LoadObjects, maps} from "@shared/objects.js";
+import {files} from "@shared/files.js";
 
 
 let scene = new Scene.Scene();
@@ -257,5 +257,4 @@ utils.DownloadAllAsync([
     function () {
         alert("Cannot download files");
     });
-
 

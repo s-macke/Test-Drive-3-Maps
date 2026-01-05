@@ -1,5 +1,5 @@
 import * as extract from "./extract.js";
-import * as THREE from "./three.module.js";
+import * as THREE from 'three';
 
 function CloneMesh(obj, xt, yt, zt, rot) {
     let obj2 = {

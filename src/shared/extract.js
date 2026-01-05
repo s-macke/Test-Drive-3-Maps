@@ -1,4 +1,4 @@
-import * as THREE from './three.module.js';
+import * as THREE from 'three';
 
 "use strict";
 
@@ -490,7 +490,7 @@ let Colors = [
     0, 255, 255,
     190, 89, 0,
     190, 174, 190,
-    
+
     89, 85, 89,
     109, 113, 255,
     150, 223, 166,
@@ -807,9 +807,8 @@ function BuildObject(name, buf, colormap, offset, isobj) {
 
     geom.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
     geom.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-    geom.computeFaceNormals();
     geom.computeVertexNormals();
-    let material = new THREE.MeshLambertMaterial({color: 0xffffff, vertexColors: THREE.FaceColors});
+    let material = new THREE.MeshLambertMaterial({color: 0xffffff, vertexColors: true});
     material.side = THREE.DoubleSide;
     mesh.obj.add(new THREE.Mesh(geom, material));
     return mesh;

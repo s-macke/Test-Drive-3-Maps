@@ -23,7 +23,6 @@
             z-index: 100;
             color: white;
         }
-
     </style>
 </head>
 <body>
@@ -32,7 +31,7 @@
     fly controls
     <b>WASD</b> move, <b>R|F</b> up | down, <b>Q|E</b> roll, <b>up|down</b> pitch, <b>left|right</b> yaw
 
-    <input id="mousenav" type="checkbox" name="mousenav" value="mnav" onchange="controls.ChangeMouseStatus(this.checked);"> Mouse Navigation
+    <input id="mousenav" type="checkbox" name="mousenav" value="mnav"> Mouse Navigation
 
     <select id="selector" name="Mapselector">
         <option value="0">Pacific Course 1</option>
@@ -53,15 +52,9 @@
         <option value="15">Objects 2</option>
         <option value="16">Cars</option>
     </select>
-
 </div>
 
-<script type="module" src="three.module.js"></script>
-<script type="module" src="FlyControls.js"></script>
-<script type="module" src="utils.js"></script>
-<script type="module" src="scene.js"></script>
-<script type="module" src="extract.js"></script>
-<script type="module" src="main.js"></script>
+<script type="module" src="/src/browser/main.js"></script>
 
 </body>
 </html>
