@@ -53,7 +53,7 @@ Offset    Size      Description
 0x0057    1         Unknown flag (0x00 or 0x01)
 0x0058    432       Route names (36 entries × 12 chars each)
 0x0208    12        Routing data (12 bytes, values 0-3)
-0x0214    388       Color mapping table
+0x0214    388       Unknown data table (NOT color mapping)
 0x0398    48        Index table (24 × 16-bit values)
 0x03C8    14        Unknown
 0x03D6    250       Car names / UI strings (null-terminated, 0xAA delimited)
@@ -101,8 +101,31 @@ Example from SCENE01.LST:
 ### Index Table (0x0398 - 0x03C7)
 
 24 16-bit little-endian values organized as 4 rows × 6 columns:
-- May reference offsets into the color mapping table
+- May reference offsets into the unknown data table
 - Values appear to be packed indices
+
+### UI Strings (0x03D6 - 0x04CF)
+
+250 bytes containing null-terminated strings delimited by 0xAA bytes:
+- 24 strings total per scene
+- First ~12 entries: Car/vehicle names
+- Remaining entries: UI labels (stats, actions, units)
+
+Content differs completely between scenes:
+
+**SCENE01 (Pacific):**
+```
+Mythos, CERV III, Diablo, Viper, 959, F40, Ferrari, Jaguar,
+Lamborghini, Porsche, Mercedes, Maserati, RPM, Turbo, Wheelbase,
+Suspension, Top Speed, Weight, Horsepower, Torque, Steering, Chassis, MPH, Test Drive
+```
+
+**SCENE02 (Cape Cod):**
+```
+Lotus, NSX, Vector, Corvette, 962, BMW, Countach, Stealth,
+300ZX, Caspita, Alfa Romeo, Carrera, Brakes, Wipers, Fenders,
+Carburetor, Lights, Tires, Rearview, Signal, Shifter, KPH, Yield, Exhaust
+```
 
 ### Resource Table (0x04D0 - 0x0665)
 
@@ -255,5 +278,6 @@ The marker value 0x65 (101 decimal) in resource entries is the ASCII code for 'e
 
 ## References
 
+- LST viewer tool: `src/tools/lstviewer/lstviewer.ts` (run: `npm run lstview -- <file>`)
 - Implementation: `src/shared/extract.js`
 - Forum discussion: http://www.accursedfarms.com/forums/viewtopic.php?f=63&t=5960
