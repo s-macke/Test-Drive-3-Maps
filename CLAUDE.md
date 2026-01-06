@@ -49,13 +49,30 @@ Original game data files required for extraction:
 | File          | Description                                                                              |
 |---------------|------------------------------------------------------------------------------------------|
 | `SCENE01.DAT` | Pacific Coast course data (5 maps, tiles, palettes)                                      |
-| `SCENE01.LST` | Resource index for SCENE01.DAT                                                           |
-| `scene02.dat` | Cape Cod course data (5 maps, tiles, objects)                                            |
-| `SCENE02.LST` | Resource index for SCENE02.DAT                                                           |
+| `SCENE01.LST` | Resource index for SCENE01.DAT (scene variant, 1638 bytes)                               |
+| `SCENE02.DAT` | Cape Cod course data (5 maps, tiles, objects)                                            |
+| `SCENE02.LST` | Resource index for SCENE02.DAT (scene variant, 1638 bytes)                               |
 | `DATAB.DAT`   | Shared tiles, objects, menu graphics                                                     |
 | `DATAC.DAT`   | Color palettes                                                                           |
-| `C*.DAT`      | Car data files (with corresponding C*.LST index files)                                   |
+| `C*.DAT`      | Car data files (CCERV, CCNSX, CDIAB, CMYTH, CSTEL)                                       |
+| `C*.LST`      | Car resource index files (car variant, 675 bytes each)                                   |
 | `C*.POB`      | Player car models (CCERV=Corvette, CCNSX=NSX, CDIAB=Diablo, CMYTH=Mythos, CSTEL=Stealth) |
+
+### LST Files
+
+LST files are binary resource indices that provide offsets and sizes for resources within corresponding DAT files. Two variants exist:
+
+| LST File    | DAT File    | Variant | Content                   |
+|-------------|-------------|---------|---------------------------|
+| SCENE01.LST | SCENE01.DAT | Scene   | Pacific Coast course data |
+| SCENE02.LST | SCENE02.DAT | Scene   | Cape Cod course data      |
+| CCERV.LST   | CCERV.DAT   | Car     | Corvette CERV III         |
+| CCNSX.LST   | CCNSX.DAT   | Car     | Acura NSX                 |
+| CDIAB.LST   | CDIAB.DAT   | Car     | Lamborghini Diablo        |
+| CMYTH.LST   | CMYTH.DAT   | Car     | Pininfarina Mythos        |
+| CSTEL.LST   | CSTEL.DAT   | Car     | Stealth R/T Turbo         |
+
+See [`spec/lst-file-format.md`](spec/lst-file-format.md) for detailed format documentation.
 
 ## Source Files
 

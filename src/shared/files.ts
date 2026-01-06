@@ -25,7 +25,7 @@ export const files: GameFiles = {
 const FILE_PATHS = {
     scene01: 'SCENE01.DAT',
     datab: 'DATAB.DAT',
-    scene02: 'scene02.dat',
+    scene02: 'SCENE02.dat',
     datac: 'DATAC.DAT',
     ccerv: 'CCERV.POB',
     ccnsx: 'CCNSX.POB',

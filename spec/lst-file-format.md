@@ -2,120 +2,258 @@
 
 This document describes the .LST (list) files used in Test Drive III: The Passion (1990).
 
-**Status:** Work in progress - structure is partially understood.
+**Status:** Partially decoded - scene LST resource table understood, car LST structure still under investigation.
 
 ## Overview
 
-LST files are binary resource index files that describe the contents and layout of corresponding .DAT files. Each major .DAT file has an associated .LST file.
+LST files are binary resource index files that describe the contents and layout of corresponding .DAT files. They serve as a directory/manifest for locating resources within the associated DAT file.
+
+**Important:** LST is a generic format that varies significantly based on the type of data in the corresponding DAT file. There are at least two distinct variants:
+
+1. **Scene LST files** (SCENE01.LST, SCENE02.LST) - Index course/map data
+2. **Car LST files** (C*.LST) - Index car model and configuration data
+
+These variants share only the basic concept (name + resource offsets) but have very different internal structures.
 
 ## Known LST Files
 
-| LST File    | Corresponding DAT  | Content Type              |
-|-------------|--------------------|---------------------------|
-| SCENE01.LST | SCENE01.DAT        | Pacific Coast course data |
-| SCENE02.LST | SCENE02.DAT        | Cape Cod course data      |
-| CCERV.LST   | CCERV.DAT          | Corvette car data         |
-| CDIAB.LST   | CDIAB.DAT          | Diablo car data           |
-| CMYTH.LST   | CMYTH.DAT          | Mythos car data           |
-| CSTEL.LST   | CSTEL.DAT          | Stealth car data          |
+| LST File    | Corresponding DAT | Size (bytes) | Variant | Content Type              |
+|-------------|-------------------|--------------|---------|---------------------------|
+| SCENE01.LST | SCENE01.DAT       | 1638         | Scene   | Pacific Coast course data |
+| SCENE02.LST | SCENE02.DAT       | 1638         | Scene   | Cape Cod course data      |
+| CCERV.LST   | CCERV.DAT         | 675          | Car     | Corvette CERV III         |
+| CCNSX.LST   | CCNSX.DAT         | 675          | Car     | Acura NSX                 |
+| CDIAB.LST   | CDIAB.DAT         | 675          | Car     | Lamborghini Diablo        |
+| CMYTH.LST   | CMYTH.DAT         | 675          | Car     | Pininfarina Mythos        |
+| CSTEL.LST   | CSTEL.DAT         | 675          | Car     | Stealth R/T Turbo         |
 
-## File Structure
+## Common Elements
 
-### Scene LST Files (SCENE01.LST, SCENE02.LST)
+All LST files share:
+- **Offset 0x0000**: Null-terminated name string (up to 18 characters + null)
+- **Offset 0x0013+**: Variant-specific binary data
 
-Size: 1638 bytes
+Everything after the name differs based on the LST variant.
+
+---
+
+## Scene LST Files (SCENE01.LST, SCENE02.LST)
+
+Size: 1638 bytes (0x666)
+
+### Complete Structure
 
 ```
-Offset  Size    Description
-------  ----    -----------
-0x0000  18      Course name (null-terminated string)
-0x0012  varies  Binary header data (offsets? counts?)
-0x004F  9       Unknown (observed: "111111111")
-0x0058  varies  Route/section names (fixed-width strings)
-0x0208  varies  Additional binary data
-0x0398  varies  Index tables?
+Offset    Size      Description
+------    ----      -----------
+0x0000    19        Course name (null-terminated string, 18 chars + null)
+0x0013    1         Number of maps (always 5)
+0x0014    59        Map configuration header (see below)
+0x004F    8         Flags string "11111111" (ASCII)
+0x0057    1         Unknown flag (0x00 or 0x01)
+0x0058    432       Route names (36 entries × 12 chars each)
+0x0208    12        Routing data (12 bytes, values 0-3)
+0x0214    388       Color mapping table
+0x0398    48        Index table (24 × 16-bit values)
+0x03C8    14        Unknown
+0x03D6    250       Car names / UI strings (null-terminated, 0xAA delimited)
+0x04D0    14        Resource table header (first entry)
+0x04DE    392       Resource table entries (28 entries × 14 bytes)
 ```
 
-#### Embedded Strings
+### Map Configuration Header (0x0014 - 0x004E)
 
-Scene LST files contain readable route names:
-- "Scenic Coast", "Highway 101", "Highway 1", "Shortcut"
-- "Coast Hills", "Highway 156"
-- "Valley Farms", "Highway 33", "Highway 140"
-- "Foothills", "Highway 49"
-- "Sierra Vista", "Highway 120"
-- "Section 6/7/8/9", "Subroute 1/2/3"
+59 bytes containing map-related data. Structure partially understood:
+- Contains 16-bit values
+- Values include map identifiers ('1' through '5' as ASCII 0x31-0x35)
+- Remainder is padding (zeros)
 
-### Car LST Files (C*.LST)
+### Route Names (0x0058 - 0x0207)
+
+36 fixed-width strings, 12 characters each:
+- Entries 0-19: 5 maps × 4 route names (main route + 3 alternatives)
+- Entries 20-35: 4 sections × 4 subroutes (unused/placeholders)
+
+Example from SCENE01.LST:
+```
+[0]  "Scenic Coast"     [4]  "Coast Hills"      [8]  "Valley Farms"
+[1]  "Highway 101"      [5]  "Highway 156"      [9]  "Highway 33"
+[2]  "Highway 1"        [6]  "Highway 1"        [10] "Highway 140"
+[3]  "Shortcut"         [7]  "Shortcut"         [11] "Shortcut"
+```
+
+### Routing Data (0x0208 - 0x0213)
+
+12 bytes defining default route selections:
+- Both SCENE01 and SCENE02 have: `[0, 2, 1, 3, 0, 1, 3, 1, 2, 0, 1, 3]`
+- Values 0-3 reference the 4 route options per map
+
+### Unknown Data Table (0x0214 - 0x0397)
+
+388 bytes of structured data with unknown purpose:
+- Most values have low nibble = 0xC (e.g., 0x6C, 0x7C, 0x8C...)
+- High nibble ranges 0x6-0xF (10 distinct values)
+- Special marker values: 0x00, 0x01, 0x02, 0x03, 0x0B, 0x3B, 0x7B, 0xAB
+- Purpose unknown - possibly terrain types, route segments, or checkpoint data
+
+**Note:** Actual color mapping is stored in the DAT file within each map structure at offset `map_base + 0x1F27`, not in the LST file.
+
+### Index Table (0x0398 - 0x03C7)
+
+24 16-bit little-endian values organized as 4 rows × 6 columns:
+- May reference offsets into the color mapping table
+- Values appear to be packed indices
+
+### Resource Table (0x04D0 - 0x0665)
+
+Contains DAT file resource directory.
+
+#### Header Entry (0x04D0 - 0x04DD)
+
+14 bytes, special format:
+```c
+struct ResourceHeader {
+    uint16_t unknown1;      // e.g., 2758
+    uint16_t unknown2;      // e.g., 54487
+    uint16_t marker;        // Always 0x0065 (101 = 'e')
+    uint32_t offset;        // Always 0x00000000 (first resource)
+    uint16_t size;          // Size of first resource (e.g., 666 = title)
+    uint16_t padding;       // Always 0
+};
+```
+
+#### Resource Entries (0x04DE onwards)
+
+28 entries, each 14 bytes:
+```c
+struct ResourceEntry {
+    uint16_t entry_size;    // Related to resource processing
+    uint16_t checksum;      // Possibly CRC or computed value
+    uint16_t marker;        // Always 0x0065 (101 = 'e')
+    uint32_t dat_offset;    // Absolute offset into DAT file
+    uint16_t size;          // Size of resource in bytes
+    uint16_t padding;       // Always 0
+};
+```
+
+#### Known Resource Types (by size)
+
+| Size   | Type           | Description                    |
+|--------|----------------|--------------------------------|
+| 8504   | MAP            | Course map data (0x2137 bytes) |
+| 337    | PALETTE        | 112-color palette (0x151)      |
+| 7      | TINY_DATA      | Small data blocks (separators) |
+| 64997  | TILES          | Terrain tile graphics          |
+| 449    | ICON           | Menu icon graphic              |
+| 666    | TITLE          | Title screen data              |
+
+Example resource table for SCENE01.LST:
+```
+Idx  DAT Offset   Size    Type
+---  ----------  ------   --------
+ 0   0x00029A      449    ICON
+ 1   0x00045B    64997    TILES
+ 2   0x010240     8504    MAP (Course 1)
+ 3   0x012378      337    PALETTE
+ ...
+12   0x01A1CC     8504    MAP (Course 2)
+16   0x01C319     8504    MAP (Course 3)
+20   0x021565     8504    MAP (Course 4)
+24   0x0236B2     8504    MAP (Course 5)
+```
+
+---
+
+## Car LST Files (C*.LST)
 
 Size: 675 bytes
 
-```
-Offset  Size    Description
-------  ----    -----------
-0x0000  18      Car name (null-terminated string)
-                e.g., "Chevrolet CERV III"
-0x0013  varies  Binary data (offsets into DAT file?)
-```
+Car LST files index resources in the corresponding C*.DAT files, which contain car 3D models and related data.
 
-## Binary Data Analysis
-
-The binary sections appear to contain:
-
-1. **16-bit little-endian values** - Likely offsets or sizes
-2. **Resource indices** - References to data within the .DAT file
-3. **Color/palette data** - Some sections contain values in VGA color range
-
-### Example: CCERV.LST Header
+### Structure
 
 ```
-Offset  Hex          Interpretation
+Offset    Size      Description
+------    ----      -----------
+0x0000    19        Car name (null-terminated, e.g., "Chevrolet CERV III")
+0x0013    656       Binary data (offsets, sizes, configuration)
+```
 
+### Binary Data (0x0013 onwards)
 
+The structure after the name is **not fully understood**. It contains 16-bit values that likely include:
+- Offsets into the corresponding C*.DAT file
+- Resource sizes
+- Possibly car configuration/physics parameters
 
-
-
-
-
-
-------  ---          --------------
-0x0000  "Chevrolet CERV III\0"  Car name
-0x0013  41 16        0x1641 = 5697 (offset?)
-0x0015  9f 03        0x039F = 927 (size?)
-0x0017  50 04        0x0450 = 1104
-0x0019  be 13        0x13BE = 5054
-0x001B  48 1e        0x1E48 = 7752
+Example values from CCERV.LST:
+```
+Offset  Value   Notes
+------  -----   -----
+0x0013  5697    (0x1641)
+0x0015   927    (0x039F)
+0x0017  1104    (0x0450)
+0x0019  5054    (0x13BE)
+0x001B  7752    (0x1E48)
 ...
 ```
 
-### Example: SCENE01.LST Header
+### Key Differences from Scene LST
 
+- **No 14-byte resource entries** with the 0x65 marker
+- **No route names** or course-specific sections
+- **Different size** (675 bytes vs 1638 bytes)
+- Structure is more compact and less understood
+
+---
+
+## Implementation Notes
+
+### Reading the Resource Table
+
+```python
+def read_scene_resource_table(lst_data):
+    """Parse resource table from scene LST file."""
+    resources = []
+
+    # Skip to resource table
+    offset = 0x4D0
+
+    # Read header entry
+    header_size = struct.unpack_from('<H', lst_data, offset + 10)[0]
+
+    # Read regular entries starting at 0x4DE
+    offset = 0x4DE
+    while offset + 14 <= len(lst_data):
+        entry_size = struct.unpack_from('<H', lst_data, offset)[0]
+        checksum = struct.unpack_from('<H', lst_data, offset + 2)[0]
+        marker = struct.unpack_from('<H', lst_data, offset + 4)[0]
+        dat_offset = struct.unpack_from('<I', lst_data, offset + 6)[0]
+        size = struct.unpack_from('<H', lst_data, offset + 10)[0]
+        padding = struct.unpack_from('<H', lst_data, offset + 12)[0]
+
+        # Validate entry
+        if marker != 0x65 or padding != 0:
+            break
+
+        resources.append({
+            'offset': dat_offset,
+            'size': size,
+            'checksum': checksum
+        })
+
+        offset += 14
+
+    return resources
 ```
-Offset  Hex          Interpretation
-------  ---          --------------
-0x0000  "Pacific - Yosemite\0"  Course name
-0x0013  05 3c        0x3C05 = 15365
-0x0015  03 5f        0x5F03 = 24323
-0x0017  02 27        0x2702 = 9986
-...
-```
 
-## Relationship to DAT Files
+### Marker Byte
 
-The LST file likely serves as an index/directory for the corresponding DAT file:
-- Provides offsets to locate resources within the DAT
-- Contains metadata (names, counts, sizes)
-- May define the loading order for resources
+The marker value 0x65 (101 decimal) in resource entries is the ASCII code for 'e', possibly standing for "entry" or used as a validation signature.
 
-## Open Questions
-
-1. What is the exact structure of the binary header?
-2. How do the offset values map to DAT file locations?
-3. What do the repeated "111111111" bytes signify?
-4. How are the route/section indices organized?
-5. What is the relationship between LST entries and DAT resources?
-6. Why do some cars have LST files but CCNSX.POB does not?
+---
 
 ## References
 
-- Implementation: `src/shared/extract.js` (comments reference "lst files")
+- Implementation: `src/shared/extract.js`
+- Forum discussion: http://www.accursedfarms.com/forums/viewtopic.php?f=63&t=5960
