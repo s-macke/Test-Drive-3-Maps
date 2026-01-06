@@ -14,25 +14,24 @@ File offset tables for Test Drive III data files.
 | `0x124C9 - 0x14233`   | `0x1D6A` |          | LZW     | Unknown                                  |
 | `0x14234 - 0x1548F`   | `0x125B` |          | LZW     | Unknown                                  |
 | `0x15490 - 0x17D66`   | `0x28D6` |          |         | Unknown                                  |
-| `0x17D67 - 0x17D74`   | `0x000D` |          |         | Unknown (not loaded)                     |
-| `0x17D67 - 0x17D6D`   | `0x0006` |          |         | Unknown                                  |
-| `0x17D6E - 0x17D74`   | `0x0006` |          |         | Unknown                                  |
+| `0x17D67 - 0x17D6D`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
+| `0x17D6E - 0x17D74`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
 | `0x17D75 - 0x18B9E`   | `0x0E29` |          |         | Unknown                                  |
 | `0x18B9F - 0x257E9`   | `0xCC4A` |          |         | Unknown (not loaded)                     |
 | `0x18B9F`             | `0x09A0` |          |         | Unknown                                  |
 | `0x19540`             | `0x0C8B` |          |         | Unknown                                  |
 | `0x1A1CC`             | `0x2137` |          | Map     | Second map                               |
-| `0x1C304 - 0x1C309`   | `0x0006` |          |         | Unknown                                  |
-| `0x1C30B`             | `0x0006` |          |         | Unknown                                  |
-| `0x1C312`             | `0x0006` |          |         | Unknown                                  |
+| `0x1C304 - 0x1C30A`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
+| `0x1C30B - 0x1C311`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
+| `0x1C312 - 0x1C318`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
 | `0x1C319`             | `0x2137` |          | Map     | Third map                                |
 | `0x1E451`             | `0x0150` |          | Palette | 112-color palette                        |
 | `0x1E5A2`             | `0x1C09` |          | LZW     | Unknown                                  |
 | `0x201AC`             | `0x13B8` |          | LZW     | Unknown                                  |
 | `0x21565`             | `0x2137` |          | Map     | Fourth map                               |
-| `0x2369D`             | `0x0006` |          |         | Unknown                                  |
-| `0x236A4`             | `0x0006` |          |         | Unknown                                  |
-| `0x236AB`             | `0x0006` |          |         | Unknown                                  |
+| `0x2369D - 0x236A3`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
+| `0x236A4 - 0x236AA`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
+| `0x236AB - 0x236B1`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
 | `0x236B2`             | `0x2137` |          | Map     | Fifth map                                |
 | `0x257EA - 0x2593A`   | `0x0150` |          | Palette | 112-color palette                        |
 | `0x2593B - 0x28591`   | `0x2C56` |          | LZW+RLE | Second image                             |
@@ -46,9 +45,9 @@ File offset tables for Test Drive III data files.
 | `0x002BD - 0x00487`   | `0x01CA` |          | LZW+RLE | Icon graphic                             |
 | `0x00488 - 0x1014C`   | `0xFCC4` |          | 3D      | Tiles                                    |
 | `0x1014D`             | `0x2137` |          | Map     | First map (at 0x1022C)                   |
-| `0x12285`             | `0x0006` |          |         | Unknown                                  |
-| `0x1228C`             | `0x0006` |          |         | Unknown                                  |
-| `0x12293`             | `0x0006` |          |         | Unknown                                  |
+| `0x12285 - 0x1228B`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
+| `0x1228C - 0x12292`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
+| `0x12293 - 0x12299`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
 | `0x1229A`             | `0x30B2` |          |         | Unknown                                  |
 | `0x1534D`             | `0x7DCC` |          | 3D      | More objects                             |
 | `0x1D11A`             | `0x1E6E` |          |         | Unknown                                  |
@@ -60,9 +59,10 @@ File offset tables for Test Drive III data files.
 | `0x23818`             | `0x2171` |          | LZW     | Unknown                                  |
 | `0x2598A`             | `0x08E8` |          | LZW     | Unknown                                  |
 | `0x26273`             | `0x2137` |          | Map     | Third map                                |
-| `0x283AB`             | `0x0006` |          |         | Unknown                                  |
-| `0x283B2`             | `0x0006` |          |         | Fourth map???                            |
-| `0x283B9`             | `0x0006` |          |         | Unknown                                  |
+| `0x283AB - 0x283B1`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
+| `0x283B2 - 0x283B8`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
+| `0x283B9 - 0x283BF`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
+| `0x283C0`             | `0x2137` |          | Map     | Fourth map                               |
 | `0x2A4F8`             | `0x0150` |          | Palette | 112-color palette                        |
 | `0x2A649`             | `0x2318` |          | LZW     | Unknown                                  |
 | `0x2C962`             | `0x0F19` |          | LZW     | Unknown                                  |
@@ -126,11 +126,11 @@ File offset tables for Test Drive III data files.
 
 ## DATAC.DAT
 
-| Offset    | Size     | Filename     | Format  | Description                              |
-|-----------|----------|--------------|---------|------------------------------------------|
-| `0x00000` | `0x0150` | SELCOLR.BIN? | Palette | 112-color palette                        |
-| `0x00151` | `0x0150` | OTWCOL.BIN?  | Palette | 112-color palette                        |
-| `0x002A2` | `0x00F7` |              | LZW     | Unknown                                  |
-| `0x0039A` | `0x00FA` |              | LZW     | Unknown                                  |
-| `0x00495` | `0x0150` |              | Palette | 112-color palette                        |
-| `0x005E6` | `0x0112` |              | LZW     | Unknown                                  |
+| Offset    | Size     | Filename     | Format  | Description                                    |
+|-----------|----------|--------------|---------|------------------------------------------------|
+| `0x00000` | `0x0150` | SELCOLR.BIN? | Palette | 112-color palette (for MPH HUD text)           |
+| `0x00151` | `0x0150` | OTWCOL.BIN?  | Palette | 112-color palette (for KPH HUD text)           |
+| `0x002A2` | `0x00F7` |              | LZW+RLE | HUD text "TIME MPH POINTS" 184×5 (black + red) |
+| `0x0039A` | `0x00FA` |              | LZW+RLE | HUD text "TIME KPH POINTS" 184×5 (black + red) |
+| `0x00495` | `0x0150` |              | Palette | 112-color palette (for compass)                |
+| `0x005E6` | `0x0112` | COMPASS.LZ?  | LZW+RLE | Compass strip 152×8                            |

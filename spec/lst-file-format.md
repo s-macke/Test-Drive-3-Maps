@@ -161,28 +161,70 @@ struct ResourceEntry {
 
 #### Known Resource Types (by size)
 
-| Size   | Type           | Description                    |
-|--------|----------------|--------------------------------|
-| 8504   | MAP            | Course map data (0x2137 bytes) |
-| 337    | PALETTE        | 112-color palette (0x151)      |
-| 7      | TINY_DATA      | Small data blocks (separators) |
-| 64997  | TILES          | Terrain tile graphics          |
-| 449    | ICON           | Menu icon graphic              |
-| 666    | TITLE          | Title screen data              |
+| Size   | Type           | Format  | Description                    |
+|--------|----------------|---------|--------------------------------|
+| 8504   | MAP            | Map     | Course map data (0x2137 bytes) |
+| 337    | PALETTE        | Palette | 112-color palette (0x151)      |
+| 7      | SIGNATURE      | Binary  | Developer signature "TJL 90" + 0xFF (appears 3× per map) |
+| ~65000 | TILES          | 3D      | Terrain tile graphics (64997 for SCENE01, 64709 for SCENE02) |
+| 449-459| ICON           | LZW+RLE | Menu icon graphic              |
+| ~666   | TITLE          | LZW+RLE | Title screen data (not in resource table) |
+| ~7500  | LZW_DATA       | LZW     | Compressed data (purpose varies) |
+| ~5000  | LZW_DATA       | LZW     | Compressed data (purpose varies) |
+| ~10000 | UNKNOWN        | ?       | Unknown format (not LZW)       |
+| ~2500  | UNKNOWN        | ?       | Unknown format (first code > 256) |
+| ~3500  | UNKNOWN        | ?       | Unknown format                 |
+
+**Note:** Title graphic at offset 0x000 is NOT included in the resource table. It is loaded separately, likely via a hardcoded offset.
+
+#### Resource Table Pattern
+
+The resource table follows a consistent structure for scene files:
+
+```
+[0]  ICON (LZW+RLE)      - Menu icon graphic
+[1]  TILES (3D)          - Terrain tile data
+[2]  MAP                 - Course 1
+[3]  PALETTE             - 112-color palette
+[4-5] LZW data           - Additional compressed data
+[6]  Unknown data
+[7-8] SIGNATURE ×2       - "TJL 90" developer markers
+[9-11] Various data
+[12] MAP                 - Course 2
+[13-15] SIGNATURE ×3     - "TJL 90" developer markers
+[16] MAP                 - Course 3
+[17] PALETTE
+[18-19] LZW data
+[20] MAP                 - Course 4
+[21-23] SIGNATURE ×3
+[24] MAP                 - Course 5
+[25] PALETTE
+[26-27] LZW data (images)
+```
+
+**Note:** The title graphic at DAT offset 0x000 is NOT in the resource table - it is loaded via hardcoded offset.
 
 Example resource table for SCENE01.LST:
 ```
-Idx  DAT Offset   Size    Type
----  ----------  ------   --------
- 0   0x00029A      449    ICON
- 1   0x00045B    64997    TILES
- 2   0x010240     8504    MAP (Course 1)
- 3   0x012378      337    PALETTE
+Idx  DAT Offset   Size    Type        Format
+---  ----------  ------   ---------   -------
+ 0   0x00029A      449    ICON        LZW+RLE
+ 1   0x00045B    64997    TILES       3D
+ 2   0x010240     8504    MAP         Map
+ 3   0x012378      337    PALETTE     Palette
+ 4   0x0124C9     7531    LZW_DATA    LZW
+ 5   0x014234     4700    LZW_DATA    LZW
  ...
-12   0x01A1CC     8504    MAP (Course 2)
-16   0x01C319     8504    MAP (Course 3)
-20   0x021565     8504    MAP (Course 4)
-24   0x0236B2     8504    MAP (Course 5)
+ 7   0x017D67        7    SIGNATURE   "TJL 90"
+ 8   0x017D6E        7    SIGNATURE   "TJL 90"
+...
+12   0x01A1CC     8504    MAP         Map (Course 2)
+13   0x01C304        7    SIGNATURE   "TJL 90"
+14   0x01C30B        7    SIGNATURE   "TJL 90"
+15   0x01C312        7    SIGNATURE   "TJL 90"
+16   0x01C319     8504    MAP         Map (Course 3)
+...
+24   0x0236B2     8504    MAP         Map (Course 5)
 ```
 
 ---

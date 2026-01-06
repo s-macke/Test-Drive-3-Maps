@@ -15,11 +15,27 @@ import path from 'node:path';
 const RESOURCE_TYPES: Record<number, string> = {
     8504: 'MAP',
     337: 'PALETTE',
-    7: 'TINY_DATA',
-    64997: 'TILES',
-    449: 'ICON',
+    7: 'SIGNATURE',    // "TJL 90" + 0xFF developer marker
+    64997: 'TILES',      // SCENE01
+    64709: 'TILES',      // SCENE02
+    32205: 'OBJECTS',    // SCENE02 extra objects
+    449: 'ICON',         // SCENE01
+    459: 'ICON',         // SCENE02
     666: 'TITLE',
 };
+
+// Format detection by size range
+function getResourceFormat(size: number): string {
+    if (size === 8504) return 'Map';
+    if (size === 337) return 'Palette';
+    if (size === 7) return 'Binary';
+    if (size >= 64000 && size <= 65000) return '3D';
+    if (size >= 30000 && size <= 35000) return '3D';
+    if (size >= 400 && size <= 700) return 'LZW+RLE';
+    // Most other variable-size entries are LZW compressed
+    if (size >= 2000 && size <= 12000) return 'LZW?';
+    return '?';
+}
 
 function getResourceType(size: number): string {
     return RESOURCE_TYPES[size] ?? `DATA(${size})`;
@@ -186,14 +202,15 @@ function formatSceneLST(lst: SceneLST, filename: string): string {
     lines.push('');
 
     lines.push('--- Resource Table (28 entries × 14 bytes) ---');
-    lines.push('Idx  DAT Offset   Size     Type         EntrySize  Checksum');
-    lines.push('---  ----------  ------   -----------  ---------  --------');
+    lines.push('Idx  DAT Offset   Size     Type         Format    EntrySize  Checksum');
+    lines.push('---  ----------  ------   -----------  --------  ---------  --------');
     for (let i = 0; i < lst.resources.length; i++) {
         const r = lst.resources[i];
         const offsetHex = '0x' + r.datOffset.toString(16).toUpperCase().padStart(8, '0');
         const type = getResourceType(r.size).padEnd(11);
+        const format = getResourceFormat(r.size).padEnd(8);
         lines.push(
-            `${i.toString().padStart(3)}  ${offsetHex}  ${r.size.toString().padStart(6)}   ${type}  ${r.entrySize.toString().padStart(9)}  ${r.checksum.toString().padStart(8)}`
+            `${i.toString().padStart(3)}  ${offsetHex}  ${r.size.toString().padStart(6)}   ${type}  ${format}  ${r.entrySize.toString().padStart(9)}  ${r.checksum.toString().padStart(8)}`
         );
     }
 
