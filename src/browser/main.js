@@ -1,10 +1,9 @@
 import * as Scene from './scene.js'
-import * as utils from './utils.js'
 import * as FlyControls from './FlyControls.js';
 import * as extract from '@shared/extract.js';
 import {GetColorMap} from "@shared/color";
 import {LoadObjects, maps} from "@shared/objects.js";
-import {files} from "@shared/files.js";
+import {files, loadFiles} from "@shared/files";
 
 
 let scene = new Scene.Scene();
@@ -207,22 +206,6 @@ function LoadMap(idx) {
     }
 }
 
-function OnLoaded(buffers) {
-    files.scene01 = new Uint8Array(buffers[0]); // SCENE01.DAT
-    files.datab = new Uint8Array(buffers[1]); // DATAB.DAT
-    files.scene02 = new Uint8Array(buffers[2]); // scene02.DAT
-    files.datac = new Uint8Array(buffers[3]); // DATAC.DAT
-    files.ccerv = new Uint8Array(buffers[4]); // CCERV.POB
-    files.ccnsx = new Uint8Array(buffers[5]); // CCNSX.POB
-    files.cdiab = new Uint8Array(buffers[6]); // CDIAB.POB
-    files.cmyth = new Uint8Array(buffers[7]); // CMYTH.POB
-    files.cstel = new Uint8Array(buffers[8]); // CSTEL.POB
-
-    LoadMap(document.getElementById("selector").selectedIndex);
-    scene.Render();
-    animate();
-}
-
 document.getElementById("selector").addEventListener('change', function () {
     LoadMap(this.selectedIndex)
 });
@@ -237,24 +220,15 @@ document.getElementById("selector").addEventListener('keydown', function (e) {
     }
 });
 
-
 document.getElementById("mousenav").addEventListener('change', function () {
     controls.ChangeMouseStatus(this.checked)
 });
 
-utils.DownloadAllAsync([
-        "base/SCENE01.DAT",
-        "base/DATAB.DAT",
-        "base/scene02.dat",
-        "base/DATAC.DAT",
-        "base/CCERV.POB",
-        "base/CCNSX.POB",
-        "base/CDIAB.POB",
-        "base/CMYTH.POB",
-        "base/CSTEL.POB"
-    ],
-    OnLoaded,
-    function () {
-        alert("Cannot download files");
-    });
+loadFiles().then(() => {
+    LoadMap(document.getElementById("selector").selectedIndex);
+    scene.Render();
+    animate();
+}).catch(() => {
+    alert("Cannot download files");
+});
 

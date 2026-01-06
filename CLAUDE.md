@@ -20,12 +20,11 @@ Test-Drive-3-Maps/
 │   ├── browser/        # Browser-only modules
 │   │   ├── main.js     # Browser entry point
 │   │   ├── scene.js    # Three.js scene setup
-│   │   ├── FlyControls.js # Camera controls
-│   │   └── utils.js    # Browser utilities (XHR)
-│   ├── shared/         # Browser + Node shared modules
+│   │   └── FlyControls.js # Camera controls
+│   ├── shared/         # Browser + Node shared modules (TypeScript)
 │   │   ├── extract.js  # Binary parser for TD3 formats
-│   │   ├── color.js    # Color mapping extraction
-│   │   ├── files.js    # File buffer storage
+│   │   ├── color.ts    # Color mapping extraction
+│   │   ├── files.ts    # File loading and storage (universal)
 │   │   ├── objects.js  # Object loading/categorization
 │   │   └── mapgen.js   # Map assembly logic
 │   └── node/           # Node.js-only modules
@@ -39,6 +38,7 @@ Test-Drive-3-Maps/
 │   └── lst-file-format.md
 ├── index.html          # Vite entry point
 ├── vite.config.js      # Vite configuration
+├── tsconfig.json       # TypeScript configuration
 └── package.json
 ```
 
@@ -65,16 +65,15 @@ Original game data files required for extraction:
 | `main.js`        | Browser entry point. Loads data files, builds maps, handles UI. |
 | `scene.js`       | Three.js scene setup (camera, lights, renderer).                |
 | `FlyControls.js` | Camera fly-through controls.                                    |
-| `utils.js`       | XHR-based binary file loading.                                  |
 
 ### Shared (src/shared/)
-| File         | Description                                                     |
-|--------------|-----------------------------------------------------------------|
-| `extract.js` | Binary parser for TD3 file formats. Decodes vertices, polygons. |
-| `objects.js` | Loads and categorizes game objects: tiles1/2/3, objs1/2, cars.  |
-| `color.js`   | Extracts color mapping tables from map data.                    |
-| `files.js`   | File buffer storage for loaded game data.                       |
-| `mapgen.js`  | Map assembly - positions tiles and objects in world space.      |
+| File         | Description                                                                    |
+|--------------|--------------------------------------------------------------------------------|
+| `extract.js` | Binary parser for TD3 file formats. Decodes vertices, polygons.                |
+| `objects.js` | Loads and categorizes game objects: tiles1/2/3, objs1/2, cars.                 |
+| `color.ts`   | Extracts color mapping tables from map data.                                   |
+| `files.ts`   | Universal file loader (browser/Node) and storage. Exports `loadFiles()` async. |
+| `mapgen.js`  | Map assembly - positions tiles and objects in world space.                     |
 
 ### Node.js (src/node/)
 | File                | Description                                         |
@@ -119,8 +118,11 @@ npm install
 # Run development server
 npm run dev
 
-# Build for production
+# Build for production (includes type checking)
 npm run build
+
+# Type check only
+npm run typecheck
 
 # Export OBJ files (Node.js)
 npm run export

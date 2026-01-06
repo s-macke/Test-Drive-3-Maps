@@ -3,13 +3,12 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import {GetColorMap} from "../shared/color";
 import {LoadObjects, maps} from "../shared/objects.js";
-import {files} from "../shared/files.js";
+import {files, loadFiles} from "../shared/files";
 import {StoreObj} from "./toWaveFrontObj.js";
 import {BuildMap} from "../shared/mapgen.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const baseDir = join(__dirname, '../../public/base');
 const objsDir = join(__dirname, '../../objs');
 
 // Ensure objs directory exists
@@ -17,7 +16,7 @@ if (!fs.existsSync(objsDir)) {
     fs.mkdirSync(objsDir, { recursive: true });
 }
 
-let mapoffset =
+const mapoffset =
     [
         0x10240,
         0x1a1cc,
@@ -32,18 +31,11 @@ let mapoffset =
         0x2d87c,
     ];
 
-files.scene01 = fs.readFileSync(join(baseDir, 'SCENE01.DAT'), null);
-files.datab = fs.readFileSync(join(baseDir, 'DATAB.DAT'), null);
-files.scene02 = fs.readFileSync(join(baseDir, 'scene02.dat'), null);
-files.datac = fs.readFileSync(join(baseDir, 'DATAC.DAT'), null);
-files.ccerv = fs.readFileSync(join(baseDir, 'CCERV.POB'), null);
-files.ccnsx = fs.readFileSync(join(baseDir, 'CCNSX.POB'), null);
-files.cdiab = fs.readFileSync(join(baseDir, 'CDIAB.POB'), null);
-files.cmyth = fs.readFileSync(join(baseDir, 'CMYTH.POB'), null);
-files.cstel = fs.readFileSync(join(baseDir, 'CSTEL.POB'), null);
+// Load all game files
+await loadFiles();
 
-let idx = 0;
-let colormap = GetColorMap(files.scene01, mapoffset[idx]);
+const idx = 0;
+const colormap = GetColorMap(files.scene01, mapoffset[idx]);
 LoadObjects(colormap);
 /*
 console.log(maps.tiles1.length)
