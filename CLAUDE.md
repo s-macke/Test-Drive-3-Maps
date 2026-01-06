@@ -27,9 +27,12 @@ Test-Drive-3-Maps/
 │   │   ├── files.ts    # File loading and storage (universal)
 │   │   ├── objects.js  # Object loading/categorization
 │   │   └── mapgen.js   # Map assembly logic
-│   └── node/           # Node.js-only modules
-│       ├── toobj.js    # CLI export script
-│       └── toWaveFrontObj.js # OBJ/MTL writer
+│   └── tools/          # CLI tools (Node.js)
+│       ├── export/     # OBJ exporter tool
+│       │   ├── toobj.js          # CLI export script
+│       │   └── toWaveFrontObj.js # OBJ/MTL writer
+│       └── lstviewer/  # LST file viewer tool
+│           └── lstviewer.ts      # CLI viewer for LST files
 ├── public/
 │   └── base/           # Game data files (DAT/POB)
 ├── objs/               # Exported Wavefront OBJ files
@@ -92,11 +95,18 @@ See [`spec/lst-file-format.md`](spec/lst-file-format.md) for detailed format doc
 | `files.ts`   | Universal file loader (browser/Node) and storage. Exports `loadFiles()` async. |
 | `mapgen.js`  | Map assembly - positions tiles and objects in world space.                     |
 
-### Node.js (src/node/)
+### Tools (src/tools/)
+
+#### Export Tool (src/tools/export/)
 | File                | Description                                         |
 |---------------------|-----------------------------------------------------|
 | `toobj.js`          | CLI script to batch export all maps/objects to OBJ. |
 | `toWaveFrontObj.js` | Wavefront OBJ/MTL file writer.                      |
+
+#### LST Viewer (src/tools/lstviewer/)
+| File            | Description                                              |
+|-----------------|----------------------------------------------------------|
+| `lstviewer.ts`  | CLI tool to view LST file contents in readable format.   |
 
 ### Output (objs/)
 Exported Wavefront OBJ files:
@@ -143,8 +153,7 @@ npm run typecheck
 
 # Export OBJ files (Node.js)
 npm run export
+
+# View LST file contents
+npm run lstview -- public/base/SCENE01.LST
 ```
-
-## References
-
-- File structure documentation: http://www.accursedfarms.com/forums/viewtopic.php?f=63&t=5960

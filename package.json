@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "export": "tsx src/node/toobj.js",
+    "export": "tsx src/tools/export/toobj.js",
+    "lstview": "tsx src/tools/lstviewer/lstviewer.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

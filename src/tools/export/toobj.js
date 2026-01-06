@@ -1,15 +1,15 @@
 import fs from 'node:fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import {GetColorMap} from "../shared/color";
-import {LoadObjects, maps} from "../shared/objects.js";
-import {files, loadFiles} from "../shared/files";
+import {GetColorMap} from "../../shared/color";
+import {LoadObjects, maps} from "../../shared/objects.js";
+import {files, loadFiles} from "../../shared/files";
 import {StoreObj} from "./toWaveFrontObj.js";
-import {BuildMap} from "../shared/mapgen.js";
+import {BuildMap} from "../../shared/mapgen.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const objsDir = join(__dirname, '../../objs');
+const objsDir = join(__dirname, '../../../objs');
 
 // Ensure objs directory exists
 if (!fs.existsSync(objsDir)) {
