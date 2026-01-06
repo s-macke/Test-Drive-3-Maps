@@ -34,6 +34,9 @@ Test-Drive-3-Maps/
 ├── public/
 │   └── base/           # Game data files (DAT/POB)
 ├── objs/               # Exported Wavefront OBJ files
+├── spec/               # File format specifications
+│   ├── 3d-object-format.md
+│   └── lst-file-format.md
 ├── index.html          # Vite entry point
 ├── vite.config.js      # Vite configuration
 └── package.json
@@ -43,38 +46,41 @@ Test-Drive-3-Maps/
 
 Original game data files required for extraction:
 
-| File | Description |
-|------|-------------|
-| `SCENE01.DAT` | Pacific Coast course data (5 maps, tiles, palettes) |
-| `scene02.dat` | Cape Cod course data (5 maps, tiles, objects) |
-| `DATAB.DAT` | Shared tiles, objects, menu graphics |
-| `DATAC.DAT` | Color palettes |
-| `C*.POB` | Player car models (CCERV=Corvette, CCNSX=NSX, CDIAB=Diablo, CMYTH=Mythos, CSTEL=Stealth) |
+| File          | Description                                                                              |
+|---------------|------------------------------------------------------------------------------------------|
+| `SCENE01.DAT` | Pacific Coast course data (5 maps, tiles, palettes)                                      |
+| `SCENE01.LST` | Resource index for SCENE01.DAT                                                           |
+| `scene02.dat` | Cape Cod course data (5 maps, tiles, objects)                                            |
+| `SCENE02.LST` | Resource index for SCENE02.DAT                                                           |
+| `DATAB.DAT`   | Shared tiles, objects, menu graphics                                                     |
+| `DATAC.DAT`   | Color palettes                                                                           |
+| `C*.DAT`      | Car data files (with corresponding C*.LST index files)                                   |
+| `C*.POB`      | Player car models (CCERV=Corvette, CCNSX=NSX, CDIAB=Diablo, CMYTH=Mythos, CSTEL=Stealth) |
 
 ## Source Files
 
 ### Browser (src/browser/)
-| File | Description |
-|------|-------------|
-| `main.js` | Browser entry point. Loads data files, builds maps, handles UI. |
-| `scene.js` | Three.js scene setup (camera, lights, renderer). |
-| `FlyControls.js` | Camera fly-through controls. |
-| `utils.js` | XHR-based binary file loading. |
+| File             | Description                                                     |
+|------------------|-----------------------------------------------------------------|
+| `main.js`        | Browser entry point. Loads data files, builds maps, handles UI. |
+| `scene.js`       | Three.js scene setup (camera, lights, renderer).                |
+| `FlyControls.js` | Camera fly-through controls.                                    |
+| `utils.js`       | XHR-based binary file loading.                                  |
 
 ### Shared (src/shared/)
-| File | Description |
-|------|-------------|
+| File         | Description                                                     |
+|--------------|-----------------------------------------------------------------|
 | `extract.js` | Binary parser for TD3 file formats. Decodes vertices, polygons. |
-| `objects.js` | Loads and categorizes game objects: tiles1/2/3, objs1/2, cars. |
-| `color.js` | Extracts color mapping tables from map data. |
-| `files.js` | File buffer storage for loaded game data. |
-| `mapgen.js` | Map assembly - positions tiles and objects in world space. |
+| `objects.js` | Loads and categorizes game objects: tiles1/2/3, objs1/2, cars.  |
+| `color.js`   | Extracts color mapping tables from map data.                    |
+| `files.js`   | File buffer storage for loaded game data.                       |
+| `mapgen.js`  | Map assembly - positions tiles and objects in world space.      |
 
 ### Node.js (src/node/)
-| File | Description |
-|------|-------------|
-| `toobj.js` | CLI script to batch export all maps/objects to OBJ. |
-| `toWaveFrontObj.js` | Wavefront OBJ/MTL file writer. |
+| File                | Description                                         |
+|---------------------|-----------------------------------------------------|
+| `toobj.js`          | CLI script to batch export all maps/objects to OBJ. |
+| `toWaveFrontObj.js` | Wavefront OBJ/MTL file writer.                      |
 
 ### Output (objs/)
 Exported Wavefront OBJ files:
@@ -87,17 +93,19 @@ Exported Wavefront OBJ files:
 
 ## File Format Notes
 
-From `extract.js` documentation:
+See specifications in `spec/`:
+- [`3d-object-format.md`](spec/3d-object-format.md) - 3D object/polygon format
+- [`lst-file-format.md`](spec/lst-file-format.md) - LST resource index files
 
 ### Map Structure (0x2137 bytes)
 - `0x00DF-0x04DF`: 32x16 tile grid (2 bytes per tile: ID + rotation/height)
 - `0x0EE1`: Object placement header (count, active, LOD, player car)
 - `0x1F27`: Color mapping table
 
-### Object Format
-- 4-byte header: polygon count, point count, sprite count, null
-- Vertex data: Z, X, Y coordinates (16-bit signed)
-- Polygon data: type (point/line/tri/quad), vertex indices, colors
+### Object Format (summary)
+- 4 or 8 byte header (tiles vs objects)
+- Vertex data: 3 arrays of 16-bit signed coordinates
+- Polygon data: type, vertex indices, colors (8 bytes each)
 
 ## Usage
 
