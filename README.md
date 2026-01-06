@@ -35,14 +35,38 @@ npm run export
 ```
 Exports all maps and objects to the `objs/` directory.
 
+### CLI Tools
+```bash
+# View LST file contents
+npm run lstview -- public/base/SCENE01.LST
+
+# Extract VGA image from DAT file
+npm run imgview -- public/base/DATAB.DAT 0x151 12083 320
+```
+
 ## Project Structure
 
 ```
 src/
 ├── browser/     # Browser-only modules (Three.js viewer)
-├── shared/      # Shared modules (extraction logic)
-└── node/        # Node.js CLI tools (OBJ export)
+├── shared/      # Shared modules (extraction logic, LZW/RLE decoders)
+└── tools/       # Node.js CLI tools
+    ├── export/      # OBJ exporter
+    ├── lstviewer/   # LST file viewer
+    └── imgviewer/   # VGA image extractor
 public/
 └── base/        # Game data files (required)
 objs/            # Exported Wavefront OBJ files
+images/          # Extracted VGA images (PPM format)
+spec/            # File format specifications
 ```
+
+## File Format Specifications
+
+The `spec/` directory contains reverse-engineered documentation for Test Drive III file formats:
+
+| File | Description |
+|------|-------------|
+| [3d-object-format.md](spec/3d-object-format.md) | 3D polygon/vertex format used in tiles and objects |
+| [lst-file-format.md](spec/lst-file-format.md) | LST resource index files (scene and car variants) |
+| [vga-image-format.md](spec/vga-image-format.md) | VGA image compression (LZW + RLE pipeline) |

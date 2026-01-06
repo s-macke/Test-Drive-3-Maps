@@ -8,7 +8,7 @@ import * as THREE from 'three';
 /*
 from lst files
 
-scene01.dat
+SCENE01.dat
 0x00000 - 0x00299 (0x0299)   title: when you choose the map (Pacific Yosemite)
 0x0029A - 0x0045A (0x01C0)   icon graphic in main menu  (Pacific Yesomite)
 0x0045B - 0x1023F (0xFDE4)   tiles
@@ -70,7 +70,6 @@ SCENE02.dat
 0x2f9b4 -         (0x150)
 0x2fb05 -         (0x27da)
 0x322e0 -         (0xf6a)
-
 
 DATAA.DAT
 0x0     -        (0x150)     5. item loaded, 112 color palette

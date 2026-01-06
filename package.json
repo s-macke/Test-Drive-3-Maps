@@ -8,6 +8,7 @@
     "preview": "vite preview",
     "export": "tsx src/tools/export/toobj.js",
     "lstview": "tsx src/tools/lstviewer/lstviewer.ts",
+    "imgview": "tsx src/tools/imgviewer/imgviewer.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
