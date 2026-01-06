@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import {GetColorMap} from "../shared/color.js";
+import {GetColorMap} from "../shared/color";
 import {LoadObjects, maps} from "../shared/objects.js";
 import {files} from "../shared/files.js";
 import {StoreObj} from "./toWaveFrontObj.js";

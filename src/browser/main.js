@@ -2,7 +2,7 @@ import * as Scene from './scene.js'
 import * as utils from './utils.js'
 import * as FlyControls from './FlyControls.js';
 import * as extract from '@shared/extract.js';
-import {GetColorMap} from "@shared/color.js";
+import {GetColorMap} from "@shared/color";
 import {LoadObjects, maps} from "@shared/objects.js";
 import {files} from "@shared/files.js";
 
