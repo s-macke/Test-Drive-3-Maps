@@ -6,8 +6,8 @@ File offset tables for Test Drive III data files.
 
 | Offset Range          | Size     | Filename | Format  | Description                              |
 |-----------------------|----------|----------|---------|------------------------------------------|
-| `0x00000 - 0x00299`   | `0x0299` |          | LZW+RLE | Title graphic (Pacific Yosemite)         |
-| `0x0029A - 0x0045A`   | `0x01C0` |          | LZW+RLE | Icon graphic in main menu                |
+| `0x00000 - 0x00299`   | `0x0299` |          | LZW+RLE | Title text "PACIFIC - YOSEMITE" 320×33   |
+| `0x0029A - 0x0045A`   | `0x01C0` |          | LZW+RLE | Icon (same text, different font) 72×40   |
 | `0x0045B - 0x1023F`   | `0xFDE4` |          | 3D      | Tiles                                    |
 | `0x10240 - 0x12377`   | `0x2137` |          | Map     | First map                                |
 | `0x12378 - 0x124C8`   | `0x0150` |          | Palette | 112-color palette                        |
@@ -34,15 +34,15 @@ File offset tables for Test Drive III data files.
 | `0x236AB - 0x236B1`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
 | `0x236B2`             | `0x2137` |          | Map     | Fifth map                                |
 | `0x257EA - 0x2593A`   | `0x0150` |          | Palette | 112-color palette                        |
-| `0x2593B - 0x28591`   | `0x2C56` |          | LZW+RLE | Second image                             |
-| `0x28592 - 0x295E4`   | `0x1052` |          | LZW+RLE | Second image (continued)                 |
+| `0x2593B - 0x28591`   | `0x2C56` |          | LZW+RLE | Landscape 320×50 (palette unknown)       |
+| `0x28592 - 0x295E4`   | `0x1052` |          | LZW+RLE | Landscape 320×19 (palette unknown)       |
 
 ## SCENE02.DAT (Cape Cod)
 
 | Offset Range          | Size     | Filename | Format  | Description                              |
 |-----------------------|----------|----------|---------|------------------------------------------|
-| `0x00000 - 0x002BC`   | `0x02BC` |          | LZW+RLE | Title graphic                            |
-| `0x002BD - 0x00487`   | `0x01CA` |          | LZW+RLE | Icon graphic                             |
+| `0x00000 - 0x002BC`   | `0x02BC` |          | LZW+RLE | Title text "CAPE COD - NIAGARA" 320×33   |
+| `0x002BD - 0x00487`   | `0x01CA` |          | LZW+RLE | Icon (same text, different font) 72×40   |
 | `0x00488 - 0x1014C`   | `0xFCC4` |          | 3D      | Tiles                                    |
 | `0x1014D`             | `0x2137` |          | Map     | First map (at 0x1022C)                   |
 | `0x12285 - 0x1228B`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
@@ -68,34 +68,34 @@ File offset tables for Test Drive III data files.
 | `0x2C962`             | `0x0F19` |          | LZW     | Unknown                                  |
 | `0x2D87C`             | `0x2137` |          | Map     | Fifth map                                |
 | `0x2F9B4`             | `0x0150` |          | Palette | 112-color palette                        |
-| `0x2FB05`             | `0x27DA` |          | LZW     | Unknown                                  |
-| `0x322E0`             | `0x0F6A` |          | LZW     | Unknown                                  |
+| `0x2FB05`             | `0x27DA` |          | LZW+RLE | Landscape 320×50 (palette unknown)       |
+| `0x322E0`             | `0x0F6A` |          | LZW+RLE | Landscape 320×19 (palette unknown)       |
 
 ## DATAA.DAT
 
-| Offset    | Size     | Filename      | Format  | Description                              |
-|-----------|----------|---------------|---------|------------------------------------------|
-| `0x00000` | `0x0150` |               | Palette | 5th item loaded, 112-color palette       |
-| `0x00151` | `0x0980` |               | LZW     | 7th item loaded                          |
-| `0x00AD2` | `0x0E9E` |               |         | 6th item loaded                          |
-| `0x01971` | `0x0150` | TITLCOLR.BIN? | Palette | Intro, 112-color palette                 |
-| `0x01AC2` | `0x2CE7` | TITLE1.LZ?    | LZW+RLE | Intro                                    |
-| `0x047AA` | `0x2556` | TITLE2.LZ?    | LZW+RLE | Intro                                    |
-| `0x06D01` | `0x25AC` | TITLEANI.LZ?  | LZW+RLE | Intro                                    |
-| `0x092AE` | `0x08C2` | TITLELET.LZ?  | LZW+RLE | Intro title                              |
-| `0x09B71` | `0x3BE5` | TITLECAR.LZ?  | LZW+RLE | Intro                                    |
-| `0x0D757` | `0x14A7` | TITLEL2.LZ?   | LZW+RLE | Intro title                              |
-| `0x0EBFF` | `0x0150` | TITL2COL.BIN? | Palette | Intro, 112-color palette                 |
-| `0x0ED50` | `0x0150` | CREDCOLR.BIN? | Palette | Intro credits                            |
-| `0x0EEA1` | `0x33D9` | CREDITA.LZ?   | LZW+RLE | Intro credits                            |
-| `0x1227B` | `0x38F7` | CREDITB.LZ?   | LZW+RLE | Intro credits                            |
-| `0x15B73` | `0x344E` | CREDITC.LZ?   | LZW+RLE | Intro credits                            |
-| `0x18FC2` | `0x0112` |               | LZW     | 1st item loaded                          |
-| `0x190D5` | `0x0373` |               | LZW     | 3rd item loaded                          |
-| `0x19449` | `0x12D1` |               | LZW     | 2nd item loaded                          |
-| `0x1A71B` | `0x0F3D` |               | LZW     | Unknown                                  |
-| `0x1B659` | `0x1CFF` |               | LZW     | 4th item loaded                          |
-| `0x1D359` | `0x136C` |               | LZW     | Unknown                                  |
+| Offset    | Size     | Filename      | Format  | Description                                                  |
+|-----------|----------|---------------|---------|--------------------------------------------------------------|
+| `0x00000` | `0x0150` | ACCOCOLR.BIN  | Palette | 5th item loaded, 112-color palette                           |
+| `0x00151` | `0x0980` | ACCO.LZ       | LZW+RLE | "ACCOLADE PRESENTS" startup screen 320×200 (palette unknown) |
+| `0x00AD2` | `0x0E9E` |               |         | 6th item loaded (not LZW+RLE)                                |
+| `0x01971` | `0x0150` | TITLCOLR.BIN? | Palette | Intro, 112-color palette                                     |
+| `0x01AC2` | `0x2CE7` | TITLE1.LZ?    | LZW+RLE | Building/tunnel 160×100 (palette unknown)                    |
+| `0x047AA` | `0x2556` | TITLE2.LZ?    | LZW+RLE | Building/tunnel 160×100 (palette unknown)                    |
+| `0x06D01` | `0x25AC` | TITLEANI.LZ?  | LZW+RLE | Title text "Test Drive III..." 240×69 (palette unknown)      |
+| `0x092AE` | `0x08C2` | TITLELET.LZ?  | LZW+RLE | Copyright text 256×19 (palette unknown)                      |
+| `0x09B71` | `0x3BE5` | TITLECAR.LZ?  | LZW+RLE | Car animation frames 320×66 (palette unknown)                |
+| `0x0D757` | `0x14A7` | TITLEL2.LZ?   | LZW+RLE | Red car front 128×54                                         |
+| `0x0EBFF` | `0x0150` | TITL2COL.BIN? | Palette | Intro, 112-color palette                                     |
+| `0x0ED50` | `0x0150` | CREDCOLR.BIN? | Palette | Intro credits                                                |
+| `0x0EEA1` | `0x33D9` | CREDITA.LZ?   | LZW+RLE | Credits 320×56 (palette unknown)                             |
+| `0x1227B` | `0x38F7` | CREDITB.LZ?   | LZW+RLE | Credits 320×65 (palette unknown)                             |
+| `0x15B73` | `0x344E` | CREDITC.LZ?   | LZW+RLE | Credits 320×65 (palette unknown)                             |
+| `0x18FC2` | `0x0112` |               | LZW+RLE | Unknown (1216 pixels, resolution unknown)                    |
+| `0x190D5` | `0x0373` |               | LZW+RLE | Camera view arrows 64×248                                    |
+| `0x19449` | `0x12D1` |               | LZW+RLE | Unknown (15360 pixels, resolution unknown)                   |
+| `0x1A71B` | `0x0F3D` |               | LZW+RLE | Unknown (15360 pixels, resolution unknown)                   |
+| `0x1B659` | `0x1CFF` |               | LZW+RLE | Broken windshield 320×96                                     |
+| `0x1D359` | `0x136C` |               | LZW+RLE | Broken windshield (variant) 320×96                           |
 
 ## DATAB.DAT
 
