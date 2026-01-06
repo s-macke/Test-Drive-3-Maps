@@ -99,30 +99,30 @@ File offset tables for Test Drive III data files.
 
 ## DATAB.DAT
 
-| Offset Range          | Size     | Filename      | Format  | Description                              |
-|-----------------------|----------|---------------|---------|------------------------------------------|
-| `0x00000 - 0x00150`   | `0x0150` | COPCOLR.BIN   | Palette | 112-color palette                        |
-| `0x00151 - 0x03084`   | `0x2F33` | COPB.LZ       | LZW+RLE | Police image                             |
-| `0x03085 - 0x05C16`   | `0x2B91` | COPA.LZ       | LZW+RLE | Police image                             |
-| `0x05C17 - 0x06F1D`   | `0x1306` | COPSEQ.LZ     | LZW+RLE | Police light animation                   |
-| `0x06F1E - 0x071E6`   | `0x02C8` |               |         | Unknown                                  |
-| `0x071E7 - 0x07337`   | `0x0150` | KEYCOLR.BIN   | Palette | 112-color palette                        |
-| `0x07338 - 0x08F32`   | `0x1BFA` | KEYS.LZ       | LZW+RLE | Car keys during password check           |
-| `0x08F33 - 0x0A4D0`   | `0x159D` |               |         | Unknown                                  |
-| `0x0A4D1 - 0x0B8BC`   | `0x13EB` | SELECT.LZ?    | LZW+RLE | Background image of menu                 |
-| `0x0B8BD - 0x0EDAC`   | `0x34EF` | DETAIL1.LZ?   | LZW+RLE | Loaded when menu is loaded               |
-| `0x0EDAD - 0x121BE`   | `0x3411` | DIFFLEVA.LZ?  | LZW+RLE | Skill driver option image                |
-| `0x121BF - 0x15413`   | `0x3254` | DIFFLEVB.LZ?  | LZW+RLE | Skill driver option image                |
-| `0x15414 - 0x15514`   | `0x0100` |               | LZW     | Unknown                                  |
-| `0x15515 - 0x15664`   | `0x0150` | DIFFCOLR.BIN? | Palette | 112-color palette                        |
-| `0x15666`             | `0x31E2` | DIFFLEVC.LZ?  | LZW     | Unknown                                  |
-| `0x18849`             | `0x3535` | DETAIL2.LZ?   | LZW     | Unknown                                  |
-| `0x1BD7F`             | `0x2FAC` | SSBJ.LZ?      | LZW     | Unknown                                  |
-| `0x1ED2C - 0x21602`   | `0x28D6` |               |         | Something for maps/tiles                 |
-| `0x21603 - 0x2373A`   | `0x2137` |               | Map     | Title map                                |
-| `0x2373B - 0x32F19`   | `0xF7DE` |               | 3D      | Tiles                                    |
-| `0x32F1A - 0x3AD04`   | `0x7DEA` |               | 3D      | Objects                                  |
-| `0x3AD05 - 0x3CB6C`   | `0x1E67` |               |         | Unknown                                  |
+| Offset Range          | Size     | Filename      | Format  | Description                                     |
+|-----------------------|----------|---------------|---------|-------------------------------------------------|
+| `0x00000 - 0x00150`   | `0x0150` | COPCOLR.BIN   | Palette | 112-color palette                               |
+| `0x00151 - 0x03084`   | `0x2F33` | COPB.LZ       | LZW+RLE | Police image 320×100 (palette unknown)          |
+| `0x03085 - 0x05C16`   | `0x2B91` | COPA.LZ       | LZW+RLE | Police image (bottom) 320×58 (palette unknown)  |
+| `0x05C17 - 0x06F1D`   | `0x1306` | COPSEQ.LZ     | LZW+RLE | Police light animation 128×90 (palette unknown) |
+| `0x06F1E - 0x071E6`   | `0x02C8` |               |         | Unknown                                         |
+| `0x071E7 - 0x07337`   | `0x0150` | KEYCOLR.BIN   | Palette | 112-color palette                               |
+| `0x07338 - 0x08F32`   | `0x1BFA` | KEYS.LZ       | LZW+RLE | Car keys 192×144                                |
+| `0x08F33 - 0x0A4D0`   | `0x159D` |               |         | Unknown                                         |
+| `0x0A4D1 - 0x0B8BC`   | `0x13EB` | SELECT.LZ?    | LZW+RLE | Menu background 320×200                         |
+| `0x0B8BD - 0x0EDAC`   | `0x34EF` | DETAIL1.LZ?   | LZW+RLE | Menu detail 320×56? (palette unknown)           |
+| `0x0EDAD - 0x121BE`   | `0x3411` | DIFFLEVA.LZ?  | LZW+RLE | Skill driver option 320×65? (palette unknown)   |
+| `0x121BF - 0x15413`   | `0x3254` | DIFFLEVB.LZ?  | LZW+RLE | Car bottom 320×65 (palette unknown)             |
+| `0x15414 - 0x15514`   | `0x0100` |               | LZW     | Unknown                                         |
+| `0x15515 - 0x15664`   | `0x0150` | DIFFCOLR.BIN? | Palette | 112-color palette                               |
+| `0x15666`             | `0x31E2` | DIFFLEVC.LZ?  | LZW+RLE | 320×67 (palette unknown)                        |
+| `0x18849`             | `0x3535` | DETAIL2.LZ?   | LZW+RLE | Car top 320×66 (palette unknown)                |
+| `0x1BD7F`             | `0x2FAC` | SSBJ.LZ?      | LZW+RLE | Car bottom 320×67 (palette unknown)             |
+| `0x1ED2C - 0x21602`   | `0x28D6` |               |         | Something for maps/tiles                        |
+| `0x21603 - 0x2373A`   | `0x2137` |               | Map     | Title map                                       |
+| `0x2373B - 0x32F19`   | `0xF7DE` |               | 3D      | Tiles                                           |
+| `0x32F1A - 0x3AD04`   | `0x7DEA` |               | 3D      | Objects                                         |
+| `0x3AD05 - 0x3CB6C`   | `0x1E67` |               |         | Unknown                                         |
 
 ## DATAC.DAT
 
