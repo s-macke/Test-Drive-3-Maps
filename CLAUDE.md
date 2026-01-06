@@ -42,6 +42,7 @@ Test-Drive-3-Maps/
 ├── objs/               # Exported Wavefront OBJ files
 ├── spec/               # File format specifications
 │   ├── 3d-object-format.md
+│   ├── dat-file-layouts.md
 │   ├── lst-file-format.md
 │   └── vga-image-format.md
 ├── index.html          # Vite entry point
@@ -133,6 +134,7 @@ Exported Wavefront OBJ files:
 
 See specifications in `spec/`:
 - [`3d-object-format.md`](spec/3d-object-format.md) - 3D object/polygon format
+- [`dat-file-layouts.md`](spec/dat-file-layouts.md) - DAT file offset tables and resource layouts
 - [`lst-file-format.md`](spec/lst-file-format.md) - LST resource index files
 - [`vga-image-format.md`](spec/vga-image-format.md) - VGA image compression (LZW+RLE)
 

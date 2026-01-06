@@ -68,5 +68,6 @@ The `spec/` directory contains reverse-engineered documentation for Test Drive I
 | File | Description |
 |------|-------------|
 | [3d-object-format.md](spec/3d-object-format.md) | 3D polygon/vertex format used in tiles and objects |
+| [dat-file-layouts.md](spec/dat-file-layouts.md) | DAT file offset tables and resource layouts |
 | [lst-file-format.md](spec/lst-file-format.md) | LST resource index files (scene and car variants) |
 | [vga-image-format.md](spec/vga-image-format.md) | VGA image compression (LZW + RLE pipeline) |
