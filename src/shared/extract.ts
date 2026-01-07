@@ -1,10 +1,8 @@
 import * as THREE from 'three';
-
-"use strict";
+import { ColorRGB, Mesh } from './types';
 
 // more information about the file structures can be found here:
 // http://www.accursedfarms.com/forums/viewtopic.php?f=63&t=5960
-
 
 /*
 map mapping
@@ -41,7 +39,7 @@ object info 7 byte header
 0x12189-0x1218a color of NPC car in map 1 and of lakes
 */
 
-let pal = [
+const pal: number[] = [
     0x00, 0x00, 0x00,
     0x00, 0x00, 0xa0,
     0x00, 0xa0, 0x00,
@@ -301,7 +299,7 @@ let pal = [
 ];
 
 
-let ColorIndex = [
+const ColorIndex: number[] = [
     0,
     1,
     2,
@@ -337,55 +335,15 @@ let ColorIndex = [
     13,
     94,
     29
-]
-
-/*
-let Colors = [
-    0, 0, 0,
-    0, 0, 162,
-    0, 162, 0,
-    0, 162, 162,
-    162, 0, 0,
-    0, 255, 255,
-    162, 81, 0,
-    81, 81, 81,
-
-    0, 0, 0,
-    81, 81, 243,
-    81, 243, 81,
-    0, 255, 255,
-    243, 81, 81,
-    0, 255, 255,
-    243, 243, 81,
-    243, 243, 243,
-
-    40, 40, 40,
-    243, 243, 243,
-    77, 190, 105,
-    255, 0, 255,
-    227, 0, 0,
-    0, 255, 255,
-    190, 89, 0,
-    190, 174, 190,
-
-    89, 85, 89,
-    109, 113, 255,
-    150, 223, 166,
-    255, 0, 255,
-    255, 109, 109,
-    255, 0, 255,
-    231, 239, 174,
-    223, 199, 223
 ];
-*/
 
-function Read16(dat, address) {
-    return dat[address] | (dat[address + 1] << 8)
+export function Read16(dat: Uint8Array, address: number): number {
+    return dat[address] | (dat[address + 1] << 8);
 }
 
-function cylinderMesh(pointX, pointY, radius) {
-    let direction = new THREE.Vector3().subVectors(pointY, pointX);
-    let orientation = new THREE.Matrix4();
+function cylinderMesh(pointX: THREE.Vector3, pointY: THREE.Vector3, radius: number): THREE.CylinderGeometry {
+    const direction = new THREE.Vector3().subVectors(pointY, pointX);
+    const orientation = new THREE.Matrix4();
 
     orientation.lookAt(pointX, pointY, new THREE.Object3D().up);
 
@@ -394,45 +352,37 @@ function cylinderMesh(pointX, pointY, radius) {
         0, 0, 1, 0,
         0, -1, 0, 0,
         0, 0, 0, 1));
-    let edgeGeometry = new THREE.CylinderGeometry(radius, radius, direction.length(), 3, 1, true);
-    //alert(JSON.stringify(edgeGeometry.faceVertexUvs));
-    edgeGeometry.faceVertexUvs = [[]];
-    edgeGeometry.applyMatrix4(orientation)
-    edgeGeometry.translate((pointY.x + pointX.x) / 2, (pointY.y + pointX.y) / 2, (pointY.z + pointX.z) / 2)
+    const edgeGeometry = new THREE.CylinderGeometry(radius, radius, direction.length(), 3, 1, true);
+    // faceVertexUvs is deprecated in newer Three.js, geometry handles UVs internally
+    edgeGeometry.applyMatrix4(orientation);
+    edgeGeometry.translate((pointY.x + pointX.x) / 2, (pointY.y + pointX.y) / 2, (pointY.z + pointX.z) / 2);
     return edgeGeometry;
 }
 
-function BuildObject(name, buf, colormap, offset, isobj) {
+export function BuildObject(name: string, buf: Uint8Array, _colormap: unknown, offset: number, isobj: boolean): Mesh {
     console.log("BuildObject " + name);
-    let geom = new THREE.BufferGeometry();
-    //console.log("BuildObject", buf, colormap, offset, isobj);
+    const geom = new THREE.BufferGeometry();
 
-    let mesh = {
+    const mesh: Mesh = {
         name: name,
         vertices: [],
         lines: [],
         tris: [],
         obj: new THREE.Object3D()
-    }
+    };
 
-    let npoly = buf[offset + 0];
-    let npoints = buf[offset + 1];
-    let nsprites = buf[offset + 2];
-    let nnull = buf[offset + 3];
+    const npoly = buf[offset + 0];
+    const npoints = buf[offset + 1];
+    const nsprites = buf[offset + 2];
 
-    const positionstemp = [];
-    const positions = [];
-    const colors = [];
-    //alert(npoly);
-    //alert(npoints);
-    //alert(nsprites);
-    //alert(nnull);
+    const positionstemp: THREE.Vector3[] = [];
+    const positions: number[] = [];
+    const colors: number[] = [];
 
     offset += isobj ? 8 : 4;
-    //offset += nsprites===0 ? 8 : 4;
 
-    let min = new THREE.Vector3(100000, 100000, 100000);
-    let max = new THREE.Vector3(-100000, -100000, -100000);
+    const min = new THREE.Vector3(100000, 100000, 100000);
+    const max = new THREE.Vector3(-100000, -100000, -100000);
 
     for (let i = 0; i < npoints; i++) {
         let zp = Read16(buf, offset + i * 2 + npoints * 0);
@@ -442,30 +392,20 @@ function BuildObject(name, buf, colormap, offset, isobj) {
         xp = (xp << 16) >> 16;
         yp = (yp << 16) >> 16;
         zp = (zp << 16) >> 16;
-        let v = new THREE.Vector3(xp, yp, zp);
+        const v = new THREE.Vector3(xp, yp, zp);
         mesh.vertices.push(v);
-        //let v = new THREE.Vector3(xp / 1., yp / 1., zp / 1.);
-        positionstemp.push(v)
+        positionstemp.push(v);
         if (v.x < min.x) min.x = v.x;
         if (v.y < min.y) min.y = v.y;
         if (v.z < min.z) min.z = v.z;
         if (v.x > max.x) max.x = v.x;
         if (v.y > max.y) max.y = v.y;
         if (v.z > max.z) max.z = v.z;
-        /*
-                let boxGeometry = new THREE.SphereGeometry(1);
-                boxGeometry.faceVertexUvs = [[]];
-                let array = boxGeometry.toNonIndexed().attributes["position"].array;
-                for (let j = 0; j < array.length / 3; j++) {
-                    positions.push(array[j * 3 + 0] + v.x, array[j * 3 + 1] + v.y, array[j * 3 + 2] + v.z)
-                    colors.push(1., 1., 1.)
-                }
-         */
     }
     offset += npoints * 3 * 2;
 
-    let sizeobj = new THREE.Vector3(max.x - min.x, max.y - min.y, max.z - min.z);
-    let size = Math.max(sizeobj.x, sizeobj.y, sizeobj.z);
+    const sizeobj = new THREE.Vector3(max.x - min.x, max.y - min.y, max.z - min.z);
+    const size = Math.max(sizeobj.x, sizeobj.y, sizeobj.z);
 
     for (let i = 0; i < npoly; i++) {
         let idx1 = Read16(buf, offset + 0 + i * 8);
@@ -473,81 +413,27 @@ function BuildObject(name, buf, colormap, offset, isobj) {
         let idx3 = Read16(buf, offset + 4 + i * 8);
         let idx4 = Read16(buf, offset + 6 + i * 8);
 
-        let type = idx1 >> 13;
-        //let color0 = (idx4 & 0xF800)>>11;
-        //let color1 = (idx4 & 0xF800)>>11;
-        let color0 = idx2 >> 11;
-        let color1 = idx3 >> 11;
-        //alert(type);
-        /*
-        let special1 = idx4 >> 11;
-        switch(special1)
-        {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-                break;
-                
-            case 14: // water
-            case 15: // landscape
-            case 16: // road
-            case 17: // maybe shore (coast)
-            case 18: // rails
-                break;
+        const type = idx1 >> 13;
+        const color0 = idx2 >> 11;
+        const color1 = idx3 >> 11;
 
-            case 20:             
-            case 21: 
-            case 22:
-            case 23:
-            case 24:
-            case 25:
-            case 26:
-            case 27:
-            case 28:
-            case 29:
-            case 30:
-            case 31:
-            
-            break;
-            default:
-            alert(special1);
-        }
-        */
-
-        //let color0idx = colormap[color0].color0;
-        //let color1idx = colormap[color1].color1;
-        let color0idx = ColorIndex[color0];
-        let color1idx = ColorIndex[color1];
-        //let color0idx = color0;
-        //let color1idx = color1;
-        let c0 =
-            {
-                r: pal[color0idx * 3 + 0] / 256.,
-                g: pal[color0idx * 3 + 1] / 256.,
-                b: pal[color0idx * 3 + 2] / 256.
-            }
-        let c1 =
-            {
-                r: pal[color1idx * 3 + 0] / 256.,
-                g: pal[color1idx * 3 + 1] / 256.,
-                b: pal[color1idx * 3 + 2] / 256.
-            }
-        let c =
-            {
-                r: (c0.r + c1.r) * 0.5,
-                g: (c0.g + c1.g) * 0.5,
-                b: (c0.b + c1.b) * 0.5
-            }
+        const color0idx = ColorIndex[color0];
+        const color1idx = ColorIndex[color1];
+        const c0: ColorRGB = {
+            r: pal[color0idx * 3 + 0] / 256.,
+            g: pal[color0idx * 3 + 1] / 256.,
+            b: pal[color0idx * 3 + 2] / 256.
+        };
+        const c1: ColorRGB = {
+            r: pal[color1idx * 3 + 0] / 256.,
+            g: pal[color1idx * 3 + 1] / 256.,
+            b: pal[color1idx * 3 + 2] / 256.
+        };
+        const c: ColorRGB = {
+            r: (c0.r + c1.r) * 0.5,
+            g: (c0.g + c1.g) * 0.5,
+            b: (c0.b + c1.b) * 0.5
+        };
 
         idx1 = idx1 & 0x7FF;
         idx2 = idx2 & 0x7FF;
@@ -559,16 +445,6 @@ function BuildObject(name, buf, colormap, offset, isobj) {
             case 0x01: { // e. g. wheels
                 console.log("type 0/1:", idx1, idx2, idx3, idx4);
                 if (idx1 >= npoints) continue;
-/*
-                let boxGeometry = new THREE.SphereGeometry(10, 4, 4);
-                boxGeometry.faceVertexUvs = [[]];
-                let array = boxGeometry.toNonIndexed().attributes["position"].array;
-                let v = positionstemp[idx1];
-                for (let j = 0; j < array.length / 3; j++) {
-                    positions.push(array[j * 3 + 0] + v.x, array[j * 3 + 1] + v.y, array[j * 3 + 2] + v.z)
-                    colors.push(c0.r, c0.g, c0.b)
-                }
-*/
             }
                 break;
 
@@ -577,18 +453,20 @@ function BuildObject(name, buf, colormap, offset, isobj) {
             case 0x03:
                 if (idx1 >= npoints) continue;
                 if (idx2 >= npoints) continue;
-                let line = cylinderMesh(positionstemp[idx1], positionstemp[idx2], size * 0.002);
+            {
+                const line = cylinderMesh(positionstemp[idx1], positionstemp[idx2], size * 0.002);
                 mesh.lines.push({
                     p1: idx1,
                     p2: idx2,
                     color: c
                 });
 
-                let array = line.toNonIndexed().attributes["position"].array;
+                const array = line.toNonIndexed().attributes["position"].array as Float32Array;
                 for (let j = 0; j < array.length / 3; j++) {
-                    positions.push(array[j * 3 + 0], array[j * 3 + 1], array[j * 3 + 2])
-                    colors.push(c.r, c.g, c.b)
+                    positions.push(array[j * 3 + 0], array[j * 3 + 1], array[j * 3 + 2]);
+                    colors.push(c.r, c.g, c.b);
                 }
+            }
                 break;
 
             // triangles
@@ -600,9 +478,9 @@ function BuildObject(name, buf, colormap, offset, isobj) {
                 positions.push(positionstemp[idx1].x, positionstemp[idx1].y, positionstemp[idx1].z);
                 positions.push(positionstemp[idx2].x, positionstemp[idx2].y, positionstemp[idx2].z);
                 positions.push(positionstemp[idx3].x, positionstemp[idx3].y, positionstemp[idx3].z);
-                colors.push(c.r, c.g, c.b)
-                colors.push(c.r, c.g, c.b)
-                colors.push(c.r, c.g, c.b)
+                colors.push(c.r, c.g, c.b);
+                colors.push(c.r, c.g, c.b);
+                colors.push(c.r, c.g, c.b);
                 mesh.tris.push({
                     p1: idx1,
                     p2: idx2,
@@ -652,46 +530,19 @@ function BuildObject(name, buf, colormap, offset, isobj) {
     }
     offset += npoly * 4 * 2;
 
-    // sprites
-    /*
-        for(let i=0; i<nsprites; i++)
-        {
-            let zp = buf[offset + i*8 + 0] | (buf[offset + i*8 + 1] << 8);
-            let xp = buf[offset + i*8 + 2] | (buf[offset + i*8 + 3] << 8);
-            let yp = buf[offset + i*8 + 4] | (buf[offset + i*8 + 5] << 8);
-            xp = (xp << 16) >> 16;
-            yp = (yp << 16) >> 16;
-            zp = (zp << 16) >> 16;
-            let v = new THREE.Vector3(xp, yp, zp);
-
-            let idx4 = buf[offset + 6 + i*8 + 0] | (buf[offset + 6 + i*8 + 1] << 8);
-            //alert(idx4);
-            //if (idx4 === 2) continue;
-
-            let boxGeometry = new THREE.SphereGeometry(5);
-            boxGeometry.faceVertexUvs = [[]];
-            let array = boxGeometry.toNonIndexed().attributes["position"].array;
-            for (let j = 0; j < array.length / 3; j++) {
-                positions.push(array[j * 3 + 0] + v.x, array[j * 3 + 1] + v.y, array[j * 3 + 2] + v.z)
-                colors.push(1., 1., 1.)
-            }
-
-            //geom.mergeMesh(box);
-            //alert(idx4);
-        }
-*/
+    // sprites (commented out in original)
     offset += nsprites * 4 * 2;
 
-    geom.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
+    geom.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
     geom.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
     geom.computeVertexNormals();
-    let material = new THREE.MeshLambertMaterial({color: 0xffffff, vertexColors: true});
+    const material = new THREE.MeshLambertMaterial({ color: 0xffffff, vertexColors: true });
     material.side = THREE.DoubleSide;
-    mesh.obj.add(new THREE.Mesh(geom, material));
+    mesh.obj!.add(new THREE.Mesh(geom, material));
     return mesh;
 }
 
-function LoadPalette(buf, offset) {
+export function LoadPalette(buf: Uint8Array, offset: number): void {
     for (let i = 0; i < 112; i++) {
         pal[i * 3 + 0 + 144 * 3] = buf[i * 3 + 0 + offset] * 4;
         pal[i * 3 + 1 + 144 * 3] = buf[i * 3 + 1 + offset] * 4;
@@ -699,31 +550,27 @@ function LoadPalette(buf, offset) {
     }
 }
 
-function BuildObjectList(name, buf, colormap, offset, n, isobj) {
-    let objs = [];
+export function BuildObjectList(name: string, buf: Uint8Array, colormap: unknown, offset: number, n: number, isobj: (number | null)[]): Mesh[] {
+    const objs: Mesh[] = [];
     for (let i = 0; i < n; i++) {
         let idx = i;
-        let objectoffset = Read16(buf, offset + i * 2)
+        let objectoffset = Read16(buf, offset + i * 2);
         if (objectoffset <= 0x10) {
             idx--;
-            objectoffset = Read16(buf, offset + (i - 1) * 2)
+            objectoffset = Read16(buf, offset + (i - 1) * 2);
         }
         if (isobj[idx] == null) {
             objs.push({
+                name: name + "_" + i,
                 vertices: [],
+                lines: [],
+                tris: [],
                 obj: new THREE.Object3D()
             });
         } else {
-            let n = name + "_" + i;
+            const n = name + "_" + i;
             objs.push(BuildObject(n, buf, colormap, offset + objectoffset, !!isobj[i]));
         }
     }
     return objs;
 }
-
-export {BuildObjectList, BuildObject, LoadPalette, Read16}
-
-
-
-
-

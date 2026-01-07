@@ -1,27 +1,19 @@
-import * as extract from "./extract.js";
-import {files} from "./files.js";
+import * as extract from "./extract";
+import { files } from "./files";
+import { MapsCollection, ColorMapEntry } from './types';
 
-let maps = {
+export const maps: MapsCollection = {
     tiles1: [],
     tiles2: [],
     tiles3: [],
     objs1: [],
     objs2: [],
     cars: []
-}
+};
 
 
-function LoadObjects(colormap) {
-    //LoadPalette(maps.datab, 0x0);
-    //LoadPalette(maps.datab, 0x71e7);
-    //LoadPalette(maps.datab, 0x15515);
-    //LoadPalette(maps.datac, 0x0);
-    //LoadPalette(maps.datac, 0x151);
-    //LoadPalette(maps.datac, 0x495);
-    //LoadPalette(maps.scene01, 0x12378);
-    //LoadPalette(maps.scene01, 0x1e451);
-    //LoadPalette(maps.scene01, 0x257EA);
-    let isobj = [
+export function LoadObjects(colormap: ColorMapEntry[]): void {
+    const isobj: (number | null)[] = [
         0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0,
@@ -31,11 +23,11 @@ function LoadObjects(colormap) {
         0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0,
     ];
-    maps.tiles1 = extract.BuildObjectList("tiles1",files.scene01, colormap, 0x0045B, 59, isobj);
-    maps.tiles2 = extract.BuildObjectList("tiles2",files.datab,   colormap, 0x2373B, 64, isobj);
-    maps.tiles3 = extract.BuildObjectList("tiles3",files.scene02, colormap, 0x00488, 64, isobj);
+    maps.tiles1 = extract.BuildObjectList("tiles1", files.scene01!, colormap, 0x0045B, 59, isobj);
+    maps.tiles2 = extract.BuildObjectList("tiles2", files.datab!, colormap, 0x2373B, 64, isobj);
+    maps.tiles3 = extract.BuildObjectList("tiles3", files.scene02!, colormap, 0x00488, 64, isobj);
 
-    isobj = [
+    const isobj2: (number | null)[] = [
         0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,
         0,    1,    1,    1,    1, null,    0,    0,
@@ -46,9 +38,9 @@ function LoadObjects(colormap) {
         1,    1,    0,    0,    0,    0,    0,    0,
     ];
 
-    maps.objs1 = extract.BuildObjectList("objs1",files.datab, colormap, 0x32F1A, 64, isobj);
-    //maps.objs4 = extract.BuildObjectList(maps.datab,  colormap, 0x1ED2C, 64);
-    isobj = [
+    maps.objs1 = extract.BuildObjectList("objs1", files.datab!, colormap, 0x32F1A, 64, isobj2);
+
+    const isobj3: (number | null)[] = [
         null, null, null, null, null, 0,    0,    0,
         0,    0,    0,    0,    0,    1,    null, null,
         0,    1,    1,    1,    1,    null,  0,    0,
@@ -59,15 +51,15 @@ function LoadObjects(colormap) {
         1,    1,    0,    0,    0,    0,    0,    0,
     ];
 
-    maps.objs2 = extract.BuildObjectList("objs2",files.scene02, colormap, 0x1534D, 64, isobj);
+    maps.objs2 = extract.BuildObjectList("objs2", files.scene02!, colormap, 0x1534D, 64, isobj3);
 
     maps.cars = [
-        extract.BuildObject("car1", files.cmyth, colormap, 0, true),
-        extract.BuildObject("car2", files.cdiab, colormap, 0, true),
-        extract.BuildObject("car3", files.ccerv, colormap, 0, true),
-        extract.BuildObject("car4", files.cstel, colormap, 0, true),
-        extract.BuildObject("car5", files.ccnsx, colormap, 0, true)
-    ];
+        extract.BuildObject("car1", files.cmyth!, colormap, 0, true),
+    extract.BuildObject("car2", files.cdiab!, colormap, 0, true),
+    extract.BuildObject("car3", files.ccerv!, colormap, 0, true),
+    extract.BuildObject("car4", files.cstel!, colormap, 0, true),
+    extract.BuildObject("car5", files.ccnsx!, colormap, 0, true)
+];
 
     // datab  0x32F1A
     //  0 false sign
@@ -216,12 +208,4 @@ function LoadObjects(colormap) {
     // 61 false sign
     // 62 false sign
     // 63 false sign
-    /*
-        let offset = 0x32F1A; // datab
-        //let offset = 0x1534D; // scene02
-        let objectoffset = extract.Read16(files.datab, offset + 41 * 2);
-        maps.cars = [extract.BuildObject(files.datab, colormap, offset + objectoffset, false)];
-    */
 }
-
-export { LoadObjects, maps };
