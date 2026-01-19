@@ -13,6 +13,5 @@
 - When adding notes, prefer creating new Markdown files (for example, `notes/*.md`) over embedding long commentary in `td3.asm`.
 
 ## Workflow
-- Prefer ripgrep (`rg`) for searches.
-- If you need to reference or derive new information, document the source and reasoning in a note file.
+- If you need to reference or derive new information, document it in a file with the same name but with the markdown ending. See [seg031_001A_sub.md](functions/seg031_001A_sub.md) 
 - Chunk manifest lives at `functions/manifest.md`.

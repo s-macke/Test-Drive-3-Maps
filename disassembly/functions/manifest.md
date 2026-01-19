@@ -1,513 +1,514 @@
 # Functions Manifest
 
-- Total chunks: 505
+- Total chunks: 506
 - Subroutine chunks: 504
-- Data chunks: 1
+- Data chunks: 2
 
-| File | Kind | Bytes | Lines |
-| --- | --- | --- | --- |
-| dseg_0000_dat.asm | dat | 2121903 | 59025 |
-| seg000_0000_sub.asm | sub | 45058 | 941 |
-| seg000_07BC_sub.asm | sub | 3436 | 75 |
-| seg000_084C_sub.asm | sub | 4187 | 87 |
-| seg000_08DC_sub.asm | sub | 16783 | 361 |
-| seg000_0C34_sub.asm | sub | 1044 | 26 |
-| seg000_0C58_sub.asm | sub | 1046 | 26 |
-| seg000_0C7C_sub.asm | sub | 1468 | 34 |
-| seg000_0CA8_sub.asm | sub | 3962 | 86 |
-| seg000_0D3C_sub.asm | sub | 3442 | 76 |
-| seg000_0DBA_sub.asm | sub | 3157 | 69 |
-| seg000_0E26_sub.asm | sub | 3345 | 73 |
-| seg000_0E9E_sub.asm | sub | 1006 | 22 |
-| seg000_0EC6_sub.asm | sub | 12283 | 259 |
-| seg000_10D4_sub.asm | sub | 12762 | 277 |
-| seg000_1344_sub.asm | sub | 3066 | 66 |
-| seg000_141E_sub.asm | sub | 10591 | 222 |
-| seg000_15BC_sub.asm | sub | 2340 | 52 |
-| seg000_1606_sub.asm | sub | 2200 | 49 |
-| seg000_164C_sub.asm | sub | 1933 | 44 |
-| seg000_1688_sub.asm | sub | 34650 | 705 |
-| seg000_1C3E_sub.asm | sub | 2517 | 54 |
-| seg000_1C9E_sub.asm | sub | 4591 | 94 |
-| seg001_0008_sub.asm | sub | 1551 | 35 |
-| seg001_0038_sub.asm | sub | 1404 | 33 |
-| seg001_006A_sub.asm | sub | 49157 | 1093 |
-| seg001_0A90_sub.asm | sub | 26791 | 554 |
-| seg001_0F48_sub.asm | sub | 18322 | 403 |
-| seg001_12CE_sub.asm | sub | 8255 | 184 |
-| seg001_1446_sub.asm | sub | 20468 | 441 |
-| seg001_185E_sub.asm | sub | 1808 | 41 |
-| seg001_18AA_sub.asm | sub | 8996 | 190 |
-| seg001_19EE_sub.asm | sub | 3738 | 82 |
-| seg001_1A7C_sub.asm | sub | 2639 | 57 |
-| seg001_1AD0_sub.asm | sub | 5230 | 112 |
-| seg001_1B88_sub.asm | sub | 2699 | 58 |
-| seg001_1BDC_sub.asm | sub | 1061 | 23 |
-| seg001_1BFA_sub.asm | sub | 1635 | 36 |
-| seg001_1C2E_sub.asm | sub | 790 | 17 |
-| seg001_1C42_sub.asm | sub | 781 | 16 |
-| seg001_1C50_sub.asm | sub | 783 | 16 |
-| seg001_1C5E_sub.asm | sub | 709 | 15 |
-| seg001_1C6C_sub.asm | sub | 783 | 16 |
-| seg001_1C7A_sub.asm | sub | 709 | 15 |
-| seg001_1C88_sub.asm | sub | 709 | 15 |
-| seg001_1C96_sub.asm | sub | 2393 | 55 |
-| seg001_1CEA_sub.asm | sub | 1039 | 23 |
-| seg001_1D1C_sub.asm | sub | 8324 | 169 |
-| seg001_1E42_sub.asm | sub | 1704 | 38 |
-| seg001_1E94_sub.asm | sub | 1030 | 23 |
-| seg001_1EBC_sub.asm | sub | 37470 | 809 |
-| seg001_2624_sub.asm | sub | 2390 | 55 |
-| seg001_267C_sub.asm | sub | 2959 | 67 |
-| seg001_26F8_sub.asm | sub | 1684 | 39 |
-| seg001_2730_sub.asm | sub | 4304 | 97 |
-| seg001_27F4_sub.asm | sub | 3820 | 84 |
-| seg001_2890_sub.asm | sub | 6823 | 148 |
-| seg001_29BA_sub.asm | sub | 10486 | 226 |
-| seg001_2B90_sub.asm | sub | 14706 | 312 |
-| seg001_2E30_sub.asm | sub | 3542 | 79 |
-| seg001_2ED8_sub.asm | sub | 10171 | 228 |
-| seg001_30D6_sub.asm | sub | 14479 | 307 |
-| seg001_32FC_sub.asm | sub | 3149 | 68 |
-| seg001_3360_sub.asm | sub | 3213 | 70 |
-| seg001_33C2_sub.asm | sub | 9946 | 226 |
-| seg001_3600_sub.asm | sub | 4928 | 102 |
-| seg001_36A8_sub.asm | sub | 3063 | 66 |
-| seg001_3708_sub.asm | sub | 3127 | 68 |
-| seg001_3766_sub.asm | sub | 16444 | 372 |
-| seg001_3AF8_sub.asm | sub | 26342 | 547 |
-| seg001_3F38_sub.asm | sub | 5953 | 135 |
-| seg001_4078_sub.asm | sub | 34132 | 718 |
-| seg001_46B8_sub.asm | sub | 11449 | 257 |
-| seg001_48FE_sub.asm | sub | 22411 | 491 |
-| seg001_4D28_sub.asm | sub | 22697 | 503 |
-| seg001_518C_sub.asm | sub | 10562 | 231 |
-| seg001_536E_sub.asm | sub | 10433 | 232 |
-| seg001_559A_sub.asm | sub | 21020 | 445 |
-| seg001_5956_sub.asm | sub | 2365 | 53 |
-| seg002_0006_sub.asm | sub | 24793 | 500 |
-| seg002_040E_sub.asm | sub | 4525 | 92 |
-| seg002_04BC_sub.asm | sub | 4164 | 94 |
-| seg002_058C_sub.asm | sub | 2244 | 52 |
-| seg002_05F4_sub.asm | sub | 10827 | 241 |
-| seg002_082E_sub.asm | sub | 4312 | 90 |
-| seg002_0904_sub.asm | sub | 16967 | 381 |
-| seg002_0CCE_sub.asm | sub | 1381 | 31 |
-| seg002_0D10_sub.asm | sub | 12943 | 282 |
-| seg002_0FB0_sub.asm | sub | 5614 | 116 |
-| seg002_1088_sub.asm | sub | 1070 | 22 |
-| seg002_10AA_sub.asm | sub | 3743 | 76 |
-| seg002_1138_sub.asm | sub | 8614 | 193 |
-| seg002_12F2_sub.asm | sub | 8930 | 190 |
-| seg002_1466_sub.asm | sub | 4658 | 105 |
-| seg002_153C_sub.asm | sub | 2544 | 57 |
-| seg002_15B0_sub.asm | sub | 5163 | 112 |
-| seg002_16A0_sub.asm | sub | 11078 | 239 |
-| seg002_18B6_sub.asm | sub | 2549 | 57 |
-| seg002_192E_sub.asm | sub | 3175 | 67 |
-| seg002_19A6_sub.asm | sub | 3706 | 83 |
-| seg002_1A4E_sub.asm | sub | 8918 | 204 |
-| seg002_1BDC_sub.asm | sub | 2256 | 49 |
-| seg002_1C42_sub.asm | sub | 7215 | 166 |
-| seg002_1DCA_sub.asm | sub | 2449 | 53 |
-| seg003_0004_sub.asm | sub | 140620 | 2749 |
-| seg004_0002_sub.asm | sub | 500 | 12 |
-| seg004_0007_sub.asm | sub | 1382 | 30 |
-| seg004_002C_sub.asm | sub | 996 | 22 |
-| seg004_003F_sub.asm | sub | 6048 | 125 |
-| seg004_0138_sub.asm | sub | 1021 | 24 |
-| seg004_0154_sub.asm | sub | 2828 | 63 |
-| seg004_01C2_sub.asm | sub | 495 | 11 |
-| seg004_01D5_sub.asm | sub | 634 | 14 |
-| seg004_01E1_sub.asm | sub | 536 | 12 |
-| seg004_01E8_sub.asm | sub | 945 | 20 |
-| seg004_1207_sub.asm | sub | 13630 | 284 |
-| seg004_1458_sub.asm | sub | 1553 | 33 |
-| seg004_14B1_sub.asm | sub | 2932 | 65 |
-| seg004_153C_sub.asm | sub | 5346 | 113 |
-| seg004_15FC_sub.asm | sub | 8360 | 135 |
-| seg005_066A_sub.asm | sub | 374 | 9 |
-| seg005_066C_sub.asm | sub | 5042 | 93 |
-| seg005_06E0_sub.asm | sub | 1225 | 26 |
-| seg005_070A_sub.asm | sub | 1771 | 39 |
-| seg005_073B_sub.asm | sub | 1061 | 25 |
-| seg005_0754_sub.asm | sub | 1184 | 28 |
-| seg005_0773_sub.asm | sub | 1057 | 25 |
-| seg005_078C_sub.asm | sub | 5008 | 114 |
-| seg005_0856_sub.asm | sub | 1281 | 28 |
-| seg005_0870_sub.asm | sub | 1230 | 26 |
-| seg005_0882_sub.asm | sub | 1529 | 31 |
-| seg005_08A8_sub.asm | sub | 1401 | 30 |
-| seg005_08C1_sub.asm | sub | 895 | 20 |
-| seg005_08CD_sub.asm | sub | 15022 | 304 |
-| seg005_0AAD_sub.asm | sub | 1840 | 41 |
-| seg005_0AE8_sub.asm | sub | 3314 | 64 |
-| seg005_0B25_sub.asm | sub | 3241 | 63 |
-| seg005_0B63_sub.asm | sub | 1462 | 34 |
-| seg005_0B91_sub.asm | sub | 1678 | 39 |
-| seg005_0BBF_sub.asm | sub | 1462 | 34 |
-| seg005_0BED_sub.asm | sub | 1504 | 35 |
-| seg005_0C1E_sub.asm | sub | 817 | 19 |
-| seg005_0C32_sub.asm | sub | 1055 | 24 |
-| seg005_0C4D_sub.asm | sub | 6353 | 117 |
-| seg005_0E35_sub.asm | sub | 3688 | 63 |
-| seg005_0E85_sub.asm | sub | 12820 | 222 |
-| seg005_10A7_sub.asm | sub | 1884 | 34 |
-| seg005_10D7_sub.asm | sub | 1683 | 30 |
-| seg005_1118_sub.asm | sub | 737 | 18 |
-| seg005_1125_sub.asm | sub | 6259 | 133 |
-| seg005_11FF_sub.asm | sub | 8583 | 181 |
-| seg005_130B_sub.asm | sub | 6414 | 143 |
-| seg005_13E0_sub.asm | sub | 13509 | 291 |
-| seg005_15CF_sub.asm | sub | 10454 | 206 |
-| seg005_1700_sub.asm | sub | 821 | 19 |
-| seg005_1712_sub.asm | sub | 4068 | 69 |
-| seg005_1761_sub.asm | sub | 3929 | 89 |
-| seg005_17D5_sub.asm | sub | 9047 | 192 |
-| seg005_1938_sub.asm | sub | 4783 | 106 |
-| seg005_19EC_sub.asm | sub | 14099 | 285 |
-| seg005_1B77_sub.asm | sub | 2252 | 36 |
-| seg005_1B92_sub.asm | sub | 22119 | 469 |
-| seg005_1E8F_sub.asm | sub | 5672 | 105 |
-| seg006_008A_sub.asm | sub | 390 | 9 |
-| seg006_008E_sub.asm | sub | 3335 | 68 |
-| seg006_010C_sub.asm | sub | 1471 | 30 |
-| seg006_013E_sub.asm | sub | 1901 | 40 |
-| seg006_017B_sub.asm | sub | 665 | 14 |
-| seg006_018E_sub.asm | sub | 2026 | 41 |
-| seg006_01DF_sub.asm | sub | 8968 | 184 |
-| seg006_038A_sub.asm | sub | 3476 | 72 |
-| seg006_0404_sub.asm | sub | 4054 | 86 |
-| seg006_04A7_sub.asm | sub | 15797 | 305 |
-| seg006_0834_sub.asm | sub | 10272 | 207 |
-| seg006_0999_sub.asm | sub | 2444 | 51 |
-| seg006_0A01_sub.asm | sub | 6196 | 139 |
-| seg006_0B3A_sub.asm | sub | 5213 | 117 |
-| seg006_0C30_sub.asm | sub | 4534 | 98 |
-| seg006_0CF0_sub.asm | sub | 2130 | 44 |
-| seg006_0D41_sub.asm | sub | 667 | 14 |
-| seg006_0D57_sub.asm | sub | 2513 | 52 |
-| seg006_0DAD_sub.asm | sub | 2437 | 48 |
-| seg006_0E1D_sub.asm | sub | 1547 | 33 |
-| seg006_0E52_sub.asm | sub | 39861 | 485 |
-| seg006_217A_sub.asm | sub | 2295 | 50 |
-| seg006_21C7_sub.asm | sub | 2763 | 62 |
-| seg006_222D_sub.asm | sub | 1537 | 35 |
-| seg006_225B_sub.asm | sub | 3407 | 72 |
-| seg006_22E1_sub.asm | sub | 4334 | 90 |
-| seg006_23B3_sub.asm | sub | 1056 | 24 |
-| seg006_23DA_sub.asm | sub | 3350 | 69 |
-| seg006_2470_sub.asm | sub | 1167 | 26 |
-| seg006_2498_sub.asm | sub | 4979 | 86 |
-| seg006_25EA_sub.asm | sub | 1275 | 27 |
-| seg006_2605_sub.asm | sub | 3553 | 78 |
-| seg006_268C_sub.asm | sub | 3464 | 74 |
-| seg006_2716_sub.asm | sub | 1954 | 41 |
-| seg006_2767_sub.asm | sub | 4121 | 89 |
-| seg006_2815_sub.asm | sub | 7121 | 149 |
-| seg006_291A_sub.asm | sub | 8041 | 165 |
-| seg006_29F0_sub.asm | sub | 7245 | 151 |
-| seg006_2AF8_sub.asm | sub | 8043 | 165 |
-| seg006_2BD0_sub.asm | sub | 3094 | 65 |
-| seg006_2C42_sub.asm | sub | 3212 | 69 |
-| seg006_2CC5_sub.asm | sub | 2625 | 57 |
-| seg006_2D32_sub.asm | sub | 3910 | 83 |
-| seg006_2E00_sub.asm | sub | 4960 | 102 |
-| seg006_2E80_sub.asm | sub | 5073 | 104 |
-| seg006_2F01_sub.asm | sub | 3935 | 83 |
-| seg006_2FAA_sub.asm | sub | 1113 | 23 |
-| seg006_2FC3_sub.asm | sub | 1062 | 24 |
-| seg006_2FE8_sub.asm | sub | 5180 | 109 |
-| seg006_30BA_sub.asm | sub | 7273 | 150 |
-| seg006_31CE_sub.asm | sub | 4004 | 83 |
-| seg006_3273_sub.asm | sub | 5650 | 110 |
-| seg006_333F_sub.asm | sub | 1274 | 29 |
-| seg006_336D_sub.asm | sub | 7343 | 151 |
-| seg006_3475_sub.asm | sub | 1075 | 25 |
-| seg006_3498_sub.asm | sub | 7365 | 154 |
-| seg006_35B8_sub.asm | sub | 13094 | 274 |
-| seg006_37C8_sub.asm | sub | 4333 | 92 |
-| seg006_3879_sub.asm | sub | 3712 | 79 |
-| seg006_38F8_sub.asm | sub | 1562 | 30 |
-| seg006_391A_sub.asm | sub | 28816 | 580 |
-| seg006_3D3B_sub.asm | sub | 4230 | 85 |
-| seg006_3DE8_sub.asm | sub | 3031 | 64 |
-| seg006_3E61_sub.asm | sub | 4600 | 96 |
-| seg006_3F18_sub.asm | sub | 5706 | 121 |
-| seg006_4050_sub.asm | sub | 14800 | 301 |
-| seg006_4257_sub.asm | sub | 6871 | 143 |
-| seg006_433E_sub.asm | sub | 6275 | 129 |
-| seg006_440C_sub.asm | sub | 2656 | 58 |
-| seg006_44AD_sub.asm | sub | 3442 | 72 |
-| seg006_453C_sub.asm | sub | 1038 | 24 |
-| seg006_4558_sub.asm | sub | 3451 | 71 |
-| seg006_45F8_sub.asm | sub | 1555 | 35 |
-| seg006_4626_sub.asm | sub | 1395 | 31 |
-| seg006_464D_sub.asm | sub | 1360 | 29 |
-| seg006_4678_sub.asm | sub | 3797 | 82 |
-| seg006_46FA_sub.asm | sub | 3526 | 71 |
-| seg006_4771_sub.asm | sub | 2459 | 53 |
-| seg006_47D8_sub.asm | sub | 6254 | 134 |
-| seg006_48D8_sub.asm | sub | 5171 | 110 |
-| seg006_49B3_sub.asm | sub | 3840 | 81 |
-| seg006_4A6F_sub.asm | sub | 2314 | 50 |
-| seg006_4ACD_sub.asm | sub | 1957 | 40 |
-| seg006_4B2C_sub.asm | sub | 3346 | 74 |
-| seg006_4BDC_sub.asm | sub | 523 | 12 |
-| seg006_4BE9_sub.asm | sub | 2152 | 44 |
-| seg006_4C32_sub.asm | sub | 14265 | 290 |
-| seg006_4E43_sub.asm | sub | 5198 | 105 |
-| seg006_4F17_sub.asm | sub | 12758 | 258 |
-| seg006_511F_sub.asm | sub | 5336 | 112 |
-| seg006_5219_sub.asm | sub | 4274 | 90 |
-| seg006_52E2_sub.asm | sub | 40158 | 837 |
-| seg006_5920_sub.asm | sub | 1121 | 24 |
-| seg006_5950_sub.asm | sub | 13036 | 267 |
-| seg006_5B6E_sub.asm | sub | 7216 | 153 |
-| seg006_5C75_sub.asm | sub | 2580 | 56 |
-| seg006_5CEC_sub.asm | sub | 5849 | 118 |
-| seg006_5DD3_sub.asm | sub | 3672 | 80 |
-| seg006_5E7A_sub.asm | sub | 11566 | 228 |
-| seg006_604E_sub.asm | sub | 1581 | 32 |
-| seg006_6079_sub.asm | sub | 1494 | 32 |
-| seg006_60C6_sub.asm | sub | 5926 | 122 |
-| seg006_6192_sub.asm | sub | 6297 | 131 |
-| seg006_629D_sub.asm | sub | 11998 | 244 |
-| seg006_6480_sub.asm | sub | 3082 | 66 |
-| seg006_64E2_sub.asm | sub | 1153 | 26 |
-| seg006_6502_sub.asm | sub | 1495 | 35 |
-| seg006_6529_sub.asm | sub | 6511 | 140 |
-| seg006_662B_sub.asm | sub | 3162 | 69 |
-| seg006_66AA_sub.asm | sub | 1556 | 33 |
-| seg006_66D8_sub.asm | sub | 3082 | 61 |
-| seg006_672C_sub.asm | sub | 2173 | 47 |
-| seg006_6785_sub.asm | sub | 4245 | 93 |
-| seg006_6856_sub.asm | sub | 28418 | 580 |
-| seg006_6D0E_sub.asm | sub | 6009 | 121 |
-| seg006_6E18_sub.asm | sub | 4327 | 81 |
-| seg006_6F34_sub.asm | sub | 796 | 18 |
-| seg006_6F49_sub.asm | sub | 11903 | 251 |
-| seg006_7174_sub.asm | sub | 10217 | 214 |
-| seg006_7303_sub.asm | sub | 7538 | 158 |
-| seg006_743D_sub.asm | sub | 3367 | 71 |
-| seg006_74CF_sub.asm | sub | 4775 | 102 |
-| seg006_7568_sub.asm | sub | 5320 | 111 |
-| seg006_7651_sub.asm | sub | 5037 | 103 |
-| seg006_7723_sub.asm | sub | 1054 | 24 |
-| seg006_7748_sub.asm | sub | 4942 | 102 |
-| seg006_77C7_sub.asm | sub | 1348 | 30 |
-| seg006_77F7_sub.asm | sub | 5800 | 125 |
-| seg006_7894_sub.asm | sub | 832 | 19 |
-| seg006_78B1_sub.asm | sub | 6326 | 132 |
-| seg006_7982_sub.asm | sub | 5685 | 123 |
-| seg006_7A17_sub.asm | sub | 3057 | 66 |
-| seg006_7A9D_sub.asm | sub | 4597 | 98 |
-| seg006_7B55_sub.asm | sub | 4608 | 97 |
-| seg006_7C10_sub.asm | sub | 3025 | 65 |
-| seg006_7C8D_sub.asm | sub | 14784 | 301 |
-| seg006_7E92_sub.asm | sub | 6857 | 143 |
-| seg006_7F77_sub.asm | sub | 6260 | 129 |
-| seg006_8043_sub.asm | sub | 6724 | 145 |
-| seg006_8152_sub.asm | sub | 3486 | 77 |
-| seg006_81EA_sub.asm | sub | 1556 | 33 |
-| seg006_8218_sub.asm | sub | 3617 | 73 |
-| seg006_828F_sub.asm | sub | 2708 | 59 |
-| seg006_830C_sub.asm | sub | 5315 | 117 |
-| seg006_8425_sub.asm | sub | 32207 | 667 |
-| seg006_89DB_sub.asm | sub | 3741 | 80 |
-| seg007_0002_sub.asm | sub | 7204 | 135 |
-| seg008_000E_sub.asm | sub | 6364 | 134 |
-| seg009_0003_sub.asm | sub | 460 | 10 |
-| seg009_0007_sub.asm | sub | 1729 | 35 |
-| seg010_000A_sub.asm | sub | 1351 | 31 |
-| seg011_000D_sub.asm | sub | 2392 | 47 |
-| seg012_000D_sub.asm | sub | 3494 | 70 |
-| seg013_0003_sub.asm | sub | 5623 | 113 |
-| seg014_0004_sub.asm | sub | 2825 | 57 |
-| seg015_0000_sub.asm | sub | 2850 | 58 |
-| seg016_000C_sub.asm | sub | 5381 | 94 |
-| seg017_0000_sub.asm | sub | 2271 | 41 |
-| seg018_0006_sub.asm | sub | 1725 | 31 |
-| seg019_0007_sub.asm | sub | 20672 | 404 |
-| seg020_000A_sub.asm | sub | 6504 | 138 |
-| seg021_000D_sub.asm | sub | 21941 | 469 |
-| seg022_000B_sub.asm | sub | 18694 | 393 |
-| seg023_0008_sub.asm | sub | 18642 | 392 |
-| seg024_0005_sub.asm | sub | 27357 | 588 |
-| seg025_000D_sub.asm | sub | 33484 | 717 |
-| seg026_0006_sub.asm | sub | 27213 | 580 |
-| seg027_0004_sub.asm | sub | 6827 | 128 |
-| seg028_000D_sub.asm | sub | 15066 | 280 |
-| seg029_0007_sub.asm | sub | 3931 | 80 |
-| seg030_0005_sub.asm | sub | 5084 | 99 |
-| seg031_001A_sub.asm | sub | 10617 | 214 |
-| seg031_01A4_sub.asm | sub | 833 | 18 |
-| seg031_01BB_sub.asm | sub | 2355 | 48 |
-| seg031_0202_sub.asm | sub | 1764 | 33 |
-| seg031_022F_sub.asm | sub | 983 | 20 |
-| seg031_0242_sub.asm | sub | 5097 | 110 |
-| seg031_030A_sub.asm | sub | 1785 | 40 |
-| seg031_0336_sub.asm | sub | 15354 | 306 |
-| seg031_0528_sub.asm | sub | 9331 | 195 |
-| seg031_066E_sub.asm | sub | 1857 | 44 |
-| seg031_06B0_sub.asm | sub | 1070 | 25 |
-| seg031_06C5_sub.asm | sub | 2138 | 47 |
-| seg031_0704_sub.asm | sub | 2852 | 62 |
-| seg031_0772_sub.asm | sub | 989 | 21 |
-| seg031_078A_sub.asm | sub | 1714 | 41 |
-| seg031_07BC_sub.asm | sub | 1653 | 38 |
-| seg031_07E8_sub.asm | sub | 1333 | 31 |
-| seg031_0808_sub.asm | sub | 1351 | 27 |
-| seg031_0820_sub.asm | sub | 1044 | 25 |
-| seg031_0836_sub.asm | sub | 5138 | 111 |
-| seg031_08EA_sub.asm | sub | 2949 | 66 |
-| seg031_0937_sub.asm | sub | 800 | 19 |
-| seg031_0940_sub.asm | sub | 4908 | 108 |
-| seg031_09DC_sub.asm | sub | 1812 | 41 |
-| seg031_0A10_sub.asm | sub | 1212 | 28 |
-| seg031_0A34_sub.asm | sub | 1138 | 27 |
-| seg031_0A58_sub.asm | sub | 3561 | 77 |
-| seg031_0ABA_sub.asm | sub | 3511 | 76 |
-| seg031_0B26_sub.asm | sub | 1130 | 25 |
-| seg031_0B4A_sub.asm | sub | 469 | 10 |
-| seg031_0B50_sub.asm | sub | 1207 | 28 |
-| seg031_0B76_sub.asm | sub | 1913 | 44 |
-| seg031_0BA1_sub.asm | sub | 1632 | 36 |
-| seg031_0BCC_sub.asm | sub | 5754 | 119 |
-| seg031_0C8E_sub.asm | sub | 9296 | 194 |
-| seg031_0DEC_sub.asm | sub | 1583 | 35 |
-| seg031_0E1C_sub.asm | sub | 7746 | 161 |
-| seg031_0F16_sub.asm | sub | 3616 | 78 |
-| seg031_0F9A_sub.asm | sub | 3796 | 83 |
-| seg031_1038_sub.asm | sub | 2961 | 66 |
-| seg031_10A8_sub.asm | sub | 24388 | 475 |
-| seg031_13D4_sub.asm | sub | 8800 | 180 |
-| seg031_150E_sub.asm | sub | 6876 | 141 |
-| seg031_15FA_sub.asm | sub | 4847 | 100 |
-| seg031_16B8_sub.asm | sub | 2509 | 53 |
-| seg031_16F8_sub.asm | sub | 3130 | 66 |
-| seg031_1758_sub.asm | sub | 3370 | 72 |
-| seg031_17C2_sub.asm | sub | 6164 | 129 |
-| seg031_18AE_sub.asm | sub | 1116 | 23 |
-| seg031_18C6_sub.asm | sub | 1544 | 32 |
-| seg031_18F0_sub.asm | sub | 3905 | 82 |
-| seg031_1970_sub.asm | sub | 2012 | 44 |
-| seg031_1998_sub.asm | sub | 1884 | 41 |
-| seg031_19D2_sub.asm | sub | 1565 | 33 |
-| seg031_19F2_sub.asm | sub | 8834 | 164 |
-| seg031_1AD0_sub.asm | sub | 6241 | 129 |
-| seg031_1B78_sub.asm | sub | 5821 | 109 |
-| seg031_1BFA_sub.asm | sub | 905 | 22 |
-| seg031_1C0C_sub.asm | sub | 2729 | 59 |
-| seg031_1C55_sub.asm | sub | 7807 | 162 |
-| seg031_1D38_sub.asm | sub | 2238 | 49 |
-| seg031_1D72_sub.asm | sub | 1248 | 28 |
-| seg031_1D94_sub.asm | sub | 1416 | 32 |
-| seg031_1DB6_sub.asm | sub | 4047 | 85 |
-| seg031_1E24_sub.asm | sub | 3196 | 64 |
-| seg031_1E7A_sub.asm | sub | 2001 | 47 |
-| seg031_1EBA_sub.asm | sub | 1368 | 32 |
-| seg031_1ED6_sub.asm | sub | 910 | 22 |
-| seg031_1EE8_sub.asm | sub | 2312 | 51 |
-| seg031_1F32_sub.asm | sub | 1749 | 41 |
-| seg031_1F5E_sub.asm | sub | 970 | 20 |
-| seg031_1F6C_sub.asm | sub | 3499 | 71 |
-| seg031_1FB0_sub.asm | sub | 436 | 10 |
-| seg031_1FB6_sub.asm | sub | 2280 | 45 |
-| seg031_1FE4_sub.asm | sub | 2780 | 61 |
-| seg031_2052_sub.asm | sub | 4602 | 85 |
-| seg031_20CC_sub.asm | sub | 15098 | 270 |
-| seg031_225F_sub.asm | sub | 750 | 17 |
-| seg031_2270_sub.asm | sub | 1096 | 24 |
-| seg031_2284_sub.asm | sub | 868 | 22 |
-| seg031_228E_sub.asm | sub | 9332 | 197 |
-| seg032_005C_sub.asm | sub | 6164 | 134 |
-| seg032_0146_sub.asm | sub | 1184 | 22 |
-| seg032_015C_sub.asm | sub | 1060 | 23 |
-| seg032_0185_sub.asm | sub | 3853 | 71 |
-| seg032_024C_sub.asm | sub | 992 | 21 |
-| seg032_026A_sub.asm | sub | 1145 | 24 |
-| seg032_028B_sub.asm | sub | 4507 | 90 |
-| seg032_0323_sub.asm | sub | 531 | 12 |
-| seg032_032F_sub.asm | sub | 5543 | 110 |
-| seg032_03D9_sub.asm | sub | 1382 | 30 |
-| seg032_03FD_sub.asm | sub | 1723 | 35 |
-| seg032_0437_sub.asm | sub | 4299 | 91 |
-| seg032_04B5_sub.asm | sub | 1435 | 30 |
-| seg032_04E1_sub.asm | sub | 682 | 15 |
-| seg032_04EE_sub.asm | sub | 5900 | 130 |
-| seg032_05BC_sub.asm | sub | 8237 | 149 |
-| seg032_069E_sub.asm | sub | 711 | 16 |
-| seg032_06A7_sub.asm | sub | 420 | 9 |
-| seg032_06AC_sub.asm | sub | 2099 | 42 |
-| seg032_06F4_sub.asm | sub | 446 | 10 |
-| seg032_06F6_sub.asm | sub | 4587 | 97 |
-| seg032_0799_sub.asm | sub | 2124 | 41 |
-| seg032_07C8_sub.asm | sub | 2788 | 57 |
-| seg032_081B_sub.asm | sub | 6333 | 135 |
-| seg032_0907_sub.asm | sub | 3282 | 63 |
-| seg032_09C2_sub.asm | sub | 2023 | 42 |
-| seg032_0A04_sub.asm | sub | 6529 | 127 |
-| seg032_0AEC_sub.asm | sub | 1871 | 42 |
-| seg032_0B31_sub.asm | sub | 908 | 22 |
-| seg032_0B47_sub.asm | sub | 1175 | 24 |
-| seg032_0B74_sub.asm | sub | 4487 | 86 |
-| seg032_0C73_sub.asm | sub | 1237 | 26 |
-| seg032_0C83_sub.asm | sub | 483 | 10 |
-| seg032_0C88_sub.asm | sub | 619 | 13 |
-| seg032_0C90_sub.asm | sub | 483 | 10 |
-| seg032_0C95_sub.asm | sub | 3527 | 50 |
-| seg032_0DFC_sub.asm | sub | 483 | 10 |
-| seg032_0E01_sub.asm | sub | 1793 | 36 |
-| seg032_0E3B_sub.asm | sub | 9613 | 140 |
-| seg032_1210_sub.asm | sub | 484 | 10 |
-| seg032_1215_sub.asm | sub | 692 | 14 |
-| seg032_1221_sub.asm | sub | 1328 | 27 |
-| seg032_1250_sub.asm | sub | 23124 | 346 |
-| seg032_1AF7_sub.asm | sub | 989 | 19 |
-| seg032_1B1D_sub.asm | sub | 974 | 20 |
-| seg032_1B36_sub.asm | sub | 7497 | 98 |
-| seg032_1E7E_sub.asm | sub | 2301 | 40 |
-| seg032_1F10_sub.asm | sub | 527 | 12 |
-| seg032_1F1B_sub.asm | sub | 33150 | 422 |
-| seg033_0002_sub.asm | sub | 1864 | 40 |
-| seg033_0047_sub.asm | sub | 2957 | 64 |
-| seg033_00B0_sub.asm | sub | 2220 | 48 |
-| seg033_00E8_sub.asm | sub | 2495 | 56 |
-| seg033_014D_sub.asm | sub | 3354 | 70 |
-| seg033_01C8_sub.asm | sub | 4509 | 96 |
-| seg033_026E_sub.asm | sub | 726 | 16 |
-| seg033_0279_sub.asm | sub | 1413 | 33 |
-| seg033_02A1_sub.asm | sub | 1838 | 38 |
-| seg033_02F6_sub.asm | sub | 11929 | 235 |
-| seg033_0489_sub.asm | sub | 9713 | 191 |
-| seg033_05DB_sub.asm | sub | 2379 | 49 |
-| seg033_0628_sub.asm | sub | 1165 | 25 |
-| seg033_064B_sub.asm | sub | 4069 | 88 |
-| seg033_06FF_sub.asm | sub | 1757 | 37 |
-| seg033_0739_sub.asm | sub | 2472 | 53 |
-| seg033_0769_sub.asm | sub | 1753 | 37 |
-| seg033_078E_sub.asm | sub | 1033 | 22 |
-| seg033_07A9_sub.asm | sub | 1601 | 32 |
-| seg033_07DB_sub.asm | sub | 3463 | 72 |
-| seg033_0869_sub.asm | sub | 1283 | 25 |
-| seg033_0880_sub.asm | sub | 1619 | 36 |
-| seg033_08BD_sub.asm | sub | 3119 | 63 |
-| seg033_0926_sub.asm | sub | 4896 | 106 |
-| seg033_09E9_sub.asm | sub | 1513 | 34 |
-| seg033_0A14_sub.asm | sub | 5342 | 115 |
-| seg033_0ABB_sub.asm | sub | 4618 | 101 |
-| seg033_0B5B_sub.asm | sub | 4797 | 92 |
-| seg033_0BC5_sub.asm | sub | 7559 | 131 |
-| seg033_0C62_sub.asm | sub | 4773 | 95 |
-| seg033_0CE5_sub.asm | sub | 1543 | 34 |
-| seg033_0D18_sub.asm | sub | 3001 | 63 |
-| seg033_0D82_sub.asm | sub | 1782 | 39 |
-| seg033_0DB5_sub.asm | sub | 4209 | 91 |
-| seg033_0E51_sub.asm | sub | 8542 | 172 |
-| seg033_0F89_sub.asm | sub | 2835 | 59 |
-| seg033_0FFA_sub.asm | sub | 3289 | 70 |
-| seg033_106E_sub.asm | sub | 1873 | 43 |
-| seg034_0008_sub.asm | sub | 1521 | 34 |
-| seg035_000A_sub.asm | sub | 1280 | 29 |
-| seg035_0024_sub.asm | sub | 3271 | 71 |
+| File                | Kind | Bytes   | Lines | Description |
+|---------------------|------|---------|-------| --- |
+| dseg_0000_dat.asm   | dat  | 2121903 | 59025 |  |
+| seg000_0000_sub.asm | sub  | 45058   | 941   |  |
+| seg000_07BC_sub.asm | sub  | 3436    | 75    |  |
+| seg000_084C_sub.asm | sub  | 4187    | 87    |  |
+| seg000_08DC_sub.asm | sub  | 16783   | 361   |  |
+| seg000_0C34_sub.asm | sub  | 1044    | 26    |  |
+| seg000_0C58_sub.asm | sub  | 1046    | 26    |  |
+| seg000_0C7C_sub.asm | sub  | 1468    | 34    |  |
+| seg000_0CA8_sub.asm | sub  | 3962    | 86    |  |
+| seg000_0D3C_sub.asm | sub  | 3442    | 76    |  |
+| seg000_0DBA_sub.asm | sub  | 3157    | 69    |  |
+| seg000_0E26_sub.asm | sub  | 3345    | 73    |  |
+| seg000_0E9E_sub.asm | sub  | 1006    | 22    |  |
+| seg000_0EC6_sub.asm | sub  | 12283   | 259   |  |
+| seg000_10D4_sub.asm | sub  | 12762   | 277   |  |
+| seg000_1344_sub.asm | sub  | 3066    | 66    |  |
+| seg000_141E_sub.asm | sub  | 10591   | 222   |  |
+| seg000_15BC_sub.asm | sub  | 2340    | 52    |  |
+| seg000_1606_sub.asm | sub  | 2200    | 49    |  |
+| seg000_164C_sub.asm | sub  | 1933    | 44    |  |
+| seg000_1688_sub.asm | sub  | 34650   | 705   |  |
+| seg000_1C3E_sub.asm | sub  | 2517    | 54    |  |
+| seg000_1C9E_sub.asm | sub  | 4591    | 94    |  |
+| seg001_0008_sub.asm | sub  | 1551    | 35    |  |
+| seg001_0038_sub.asm | sub  | 1404    | 33    |  |
+| seg001_006A_sub.asm | sub  | 49157   | 1093  | Title/menu screen controller: loads LZW assets, draws UI, then runs the input/update loop. |
+| seg001_0A90_sub.asm | sub  | 26791   | 554   |  |
+| seg001_0F48_sub.asm | sub  | 18322   | 403   |  |
+| seg001_12CE_sub.asm | sub  | 8255    | 184   |  |
+| seg001_1446_sub.asm | sub  | 20468   | 441   |  |
+| seg001_185E_sub.asm | sub  | 1808    | 41    |  |
+| seg001_18AA_sub.asm | sub  | 8996    | 190   |  |
+| seg001_19EE_sub.asm | sub  | 3738    | 82    |  |
+| seg001_1A7C_sub.asm | sub  | 2639    | 57    |  |
+| seg001_1AD0_sub.asm | sub  | 5230    | 112   |  |
+| seg001_1B88_sub.asm | sub  | 2699    | 58    |  |
+| seg001_1BDC_sub.asm | sub  | 1061    | 23    |  |
+| seg001_1BFA_sub.asm | sub  | 1635    | 36    |  |
+| seg001_1C2E_sub.asm | sub  | 790     | 17    |  |
+| seg001_1C42_sub.asm | sub  | 781     | 16    |  |
+| seg001_1C50_sub.asm | sub  | 783     | 16    |  |
+| seg001_1C5E_sub.asm | sub  | 709     | 15    |  |
+| seg001_1C6C_sub.asm | sub  | 783     | 16    |  |
+| seg001_1C7A_sub.asm | sub  | 709     | 15    |  |
+| seg001_1C88_sub.asm | sub  | 709     | 15    |  |
+| seg001_1C96_sub.asm | sub  | 2393    | 55    |  |
+| seg001_1CEA_sub.asm | sub  | 1039    | 23    |  |
+| seg001_1D1C_sub.asm | sub  | 8324    | 169   |  |
+| seg001_1E42_sub.asm | sub  | 1704    | 38    |  |
+| seg001_1E94_sub.asm | sub  | 1030    | 23    |  |
+| seg001_1EBC_sub.asm | sub  | 37470   | 809   |  |
+| seg001_2624_sub.asm | sub  | 2390    | 55    |  |
+| seg001_267C_sub.asm | sub  | 2959    | 67    |  |
+| seg001_26F8_sub.asm | sub  | 1684    | 39    |  |
+| seg001_2730_sub.asm | sub  | 4304    | 97    |  |
+| seg001_27F4_sub.asm | sub  | 3820    | 84    |  |
+| seg001_2890_sub.asm | sub  | 6823    | 148   |  |
+| seg001_29BA_sub.asm | sub  | 10486   | 226   |  |
+| seg001_2B90_sub.asm | sub  | 14706   | 312   |  |
+| seg001_2E30_sub.asm | sub  | 3542    | 79    |  |
+| seg001_2ED8_sub.asm | sub  | 10171   | 228   |  |
+| seg001_30D6_sub.asm | sub  | 14479   | 307   |  |
+| seg001_32FC_sub.asm | sub  | 3149    | 68    |  |
+| seg001_3360_sub.asm | sub  | 3213    | 70    |  |
+| seg001_33C2_sub.asm | sub  | 9946    | 226   |  |
+| seg001_3600_sub.asm | sub  | 4928    | 102   |  |
+| seg001_36A8_sub.asm | sub  | 3063    | 66    |  |
+| seg001_3708_sub.asm | sub  | 3127    | 68    |  |
+| seg001_3766_sub.asm | sub  | 16444   | 372   |  |
+| seg001_3AF8_sub.asm | sub  | 26342   | 547   |  |
+| seg001_3F38_sub.asm | sub  | 5953    | 135   |  |
+| seg001_4078_sub.asm | sub  | 34132   | 718   |  |
+| seg001_46B8_sub.asm | sub  | 11449   | 257   |  |
+| seg001_48FE_sub.asm | sub  | 22411   | 491   |  |
+| seg001_4D28_sub.asm | sub  | 22697   | 503   |  |
+| seg001_518C_sub.asm | sub  | 10562   | 231   |  |
+| seg001_536E_sub.asm | sub  | 10433   | 232   |  |
+| seg001_559A_sub.asm | sub  | 21020   | 445   |  |
+| seg001_5956_sub.asm | sub  | 2365    | 53    |  |
+| seg002_0006_sub.asm | sub  | 24793   | 500   |  |
+| seg002_040E_sub.asm | sub  | 4525    | 92    |  |
+| seg002_04BC_sub.asm | sub  | 4164    | 94    |  |
+| seg002_058C_sub.asm | sub  | 2244    | 52    |  |
+| seg002_05F4_sub.asm | sub  | 10827   | 241   |  |
+| seg002_082E_sub.asm | sub  | 4312    | 90    |  |
+| seg002_0904_sub.asm | sub  | 16967   | 381   |  |
+| seg002_0CCE_sub.asm | sub  | 1381    | 31    |  |
+| seg002_0D10_sub.asm | sub  | 12943   | 282   |  |
+| seg002_0FB0_sub.asm | sub  | 5614    | 116   |  |
+| seg002_1088_sub.asm | sub  | 1070    | 22    |  |
+| seg002_10AA_sub.asm | sub  | 3743    | 76    |  |
+| seg002_1138_sub.asm | sub  | 8614    | 193   |  |
+| seg002_12F2_sub.asm | sub  | 8930    | 190   |  |
+| seg002_1466_sub.asm | sub  | 4658    | 105   |  |
+| seg002_153C_sub.asm | sub  | 2544    | 57    |  |
+| seg002_15B0_sub.asm | sub  | 5163    | 112   |  |
+| seg002_16A0_sub.asm | sub  | 11078   | 239   |  |
+| seg002_18B6_sub.asm | sub  | 2549    | 57    |  |
+| seg002_192E_sub.asm | sub  | 3175    | 67    |  |
+| seg002_19A6_sub.asm | sub  | 3706    | 83    |  |
+| seg002_1A4E_sub.asm | sub  | 8918    | 204   |  |
+| seg002_1BDC_sub.asm | sub  | 2256    | 49    |  |
+| seg002_1C42_sub.asm | sub  | 7215    | 166   |  |
+| seg002_1DCA_sub.asm | sub  | 2449    | 53    |  |
+| seg003_0004_sub.asm | sub  | 140620  | 2749  |  |
+| seg004_0002_sub.asm | sub  | 500     | 12    |  |
+| seg004_0007_sub.asm | sub  | 1382    | 30    |  |
+| seg004_002C_sub.asm | sub  | 996     | 22    |  |
+| seg004_003F_sub.asm | sub  | 6048    | 125   | LZW decode main loop (clear/end codes, variable code size, dictionary growth). |
+| seg004_0138_sub.asm | sub  | 1021    | 24    |  |
+| seg004_0154_sub.asm | sub  | 2828    | 63    | LZW bitreader for variable-width codes. |
+| seg004_01C2_sub.asm | sub  | 495     | 11    | LZW dictionary reset (code size/counters). |
+| seg004_01D5_sub.asm | sub  | 634     | 14    | LZW output byte writer. |
+| seg004_01E1_sub.asm | sub  | 536     | 12    | LZW dictionary index helper (3-byte entry offset). |
+| seg004_01E8_sub.asm | sub  | 945     | 20    | LZW dictionary insert into table at seg004:0207. |
+| seg004_1207_sub.asm | sub  | 13630   | 284   |  |
+| seg004_1458_sub.asm | sub  | 1553    | 33    |  |
+| seg004_14B1_sub.asm | sub  | 2932    | 65    |  |
+| seg004_153C_sub.asm | sub  | 5346    | 113   |  |
+| seg004_15FC_sub.asm | sub  | 8360    | 135   |  |
+| seg005_066A_sub.asm | sub  | 374     | 9     |  |
+| seg005_066C_sub.asm | sub  | 5042    | 93    |  |
+| seg005_06E0_sub.asm | sub  | 1225    | 26    |  |
+| seg005_070A_sub.asm | sub  | 1771    | 39    |  |
+| seg005_073B_sub.asm | sub  | 1061    | 25    |  |
+| seg005_0754_sub.asm | sub  | 1184    | 28    |  |
+| seg005_0773_sub.asm | sub  | 1057    | 25    |  |
+| seg005_078C_sub.asm | sub  | 5008    | 114   |  |
+| seg005_0856_sub.asm | sub  | 1281    | 28    |  |
+| seg005_0870_sub.asm | sub  | 1230    | 26    |  |
+| seg005_0882_sub.asm | sub  | 1529    | 31    |  |
+| seg005_08A8_sub.asm | sub  | 1401    | 30    |  |
+| seg005_08C1_sub.asm | sub  | 895     | 20    |  |
+| seg005_08CD_sub.asm | sub  | 15022   | 304   |  |
+| seg005_0AAD_sub.asm | sub  | 1840    | 41    |  |
+| seg005_0AE8_sub.asm | sub  | 3314    | 64    |  |
+| seg005_0B25_sub.asm | sub  | 3241    | 63    |  |
+| seg005_0B63_sub.asm | sub  | 1462    | 34    |  |
+| seg005_0B91_sub.asm | sub  | 1678    | 39    |  |
+| seg005_0BBF_sub.asm | sub  | 1462    | 34    |  |
+| seg005_0BED_sub.asm | sub  | 1504    | 35    |  |
+| seg005_0C1E_sub.asm | sub  | 817     | 19    |  |
+| seg005_0C32_sub.asm | sub  | 1055    | 24    |  |
+| seg005_0C4D_sub.asm | sub  | 6353    | 117   |  |
+| seg005_0E35_sub.asm | sub  | 3688    | 63    |  |
+| seg005_0E85_sub.asm | sub  | 12820   | 222   |  |
+| seg005_10A7_sub.asm | sub  | 1884    | 34    |  |
+| seg005_10D7_sub.asm | sub  | 1683    | 30    |  |
+| seg005_1118_sub.asm | sub  | 737     | 18    |  |
+| seg005_1125_sub.asm | sub  | 6259    | 133   |  |
+| seg005_11FF_sub.asm | sub  | 8583    | 181   |  |
+| seg005_130B_sub.asm | sub  | 6414    | 143   |  |
+| seg005_13E0_sub.asm | sub  | 13509   | 291   |  |
+| seg005_15CF_sub.asm | sub  | 10454   | 206   |  |
+| seg005_1700_sub.asm | sub  | 821     | 19    |  |
+| seg005_1712_sub.asm | sub  | 4068    | 69    |  |
+| seg005_1761_sub.asm | sub  | 3929    | 89    |  |
+| seg005_17D5_sub.asm | sub  | 9047    | 192   |  |
+| seg005_1938_sub.asm | sub  | 4783    | 106   |  |
+| seg005_19EC_sub.asm | sub  | 14099   | 285   |  |
+| seg005_1B77_sub.asm | sub  | 2252    | 36    |  |
+| seg005_1B92_sub.asm | sub  | 22119   | 469   |  |
+| seg005_1E8F_sub.asm | sub  | 5672    | 105   |  |
+| seg006_008A_sub.asm | sub  | 390     | 9     |  |
+| seg006_008E_sub.asm | sub  | 3335    | 68    |  |
+| seg006_010C_sub.asm | sub  | 1471    | 30    |  |
+| seg006_013E_sub.asm | sub  | 1901    | 40    |  |
+| seg006_017B_sub.asm | sub  | 665     | 14    |  |
+| seg006_018E_sub.asm | sub  | 2026    | 41    |  |
+| seg006_01DF_sub.asm | sub  | 8968    | 184   |  |
+| seg006_038A_sub.asm | sub  | 3476    | 72    |  |
+| seg006_0404_sub.asm | sub  | 4054    | 86    |  |
+| seg006_04A7_sub.asm | sub  | 15797   | 305   |  |
+| seg006_0834_sub.asm | sub  | 10272   | 207   |  |
+| seg006_0999_sub.asm | sub  | 2444    | 51    |  |
+| seg006_0A01_sub.asm | sub  | 6196    | 139   |  |
+| seg006_0B3A_sub.asm | sub  | 5213    | 117   |  |
+| seg006_0C30_sub.asm | sub  | 4534    | 98    |  |
+| seg006_0CF0_sub.asm | sub  | 2130    | 44    |  |
+| seg006_0D41_sub.asm | sub  | 667     | 14    |  |
+| seg006_0D57_sub.asm | sub  | 2513    | 52    |  |
+| seg006_0DAD_sub.asm | sub  | 2437    | 48    |  |
+| seg006_0E1D_sub.asm | sub  | 1547    | 33    |  |
+| seg006_0E52_sub.asm | sub  | 39861   | 485   |  |
+| seg006_0E6D_dat.asm | dat  | 38885   | 464   | 16-bit fixed-point sine lookup table (128 entries for 0-90°), used by sin_cos_multiply at seg006:21C7. |
+| seg006_217A_sub.asm | sub  | 2295    | 50    |  |
+| seg006_21C7_sub.asm | sub  | 2763    | 62    | Sine/cosine multiply: computes sin(θ)×mag and cos(θ)×mag using 128-entry lookup table at cs:0E6Eh. |
+| seg006_222D_sub.asm | sub  | 1537    | 35    |  |
+| seg006_225B_sub.asm | sub  | 3407    | 72    |  |
+| seg006_22E1_sub.asm | sub  | 4334    | 90    |  |
+| seg006_23B3_sub.asm | sub  | 1056    | 24    |  |
+| seg006_23DA_sub.asm | sub  | 3350    | 69    |  |
+| seg006_2470_sub.asm | sub  | 1167    | 26    |  |
+| seg006_2498_sub.asm | sub  | 4979    | 86    |  |
+| seg006_25EA_sub.asm | sub  | 1275    | 27    |  |
+| seg006_2605_sub.asm | sub  | 3553    | 78    |  |
+| seg006_268C_sub.asm | sub  | 3464    | 74    |  |
+| seg006_2716_sub.asm | sub  | 1954    | 41    |  |
+| seg006_2767_sub.asm | sub  | 4121    | 89    |  |
+| seg006_2815_sub.asm | sub  | 7121    | 149   |  |
+| seg006_291A_sub.asm | sub  | 8041    | 165   |  |
+| seg006_29F0_sub.asm | sub  | 7245    | 151   |  |
+| seg006_2AF8_sub.asm | sub  | 8043    | 165   |  |
+| seg006_2BD0_sub.asm | sub  | 3094    | 65    |  |
+| seg006_2C42_sub.asm | sub  | 3212    | 69    |  |
+| seg006_2CC5_sub.asm | sub  | 2625    | 57    |  |
+| seg006_2D32_sub.asm | sub  | 3910    | 83    |  |
+| seg006_2E00_sub.asm | sub  | 4960    | 102   |  |
+| seg006_2E80_sub.asm | sub  | 5073    | 104   |  |
+| seg006_2F01_sub.asm | sub  | 3935    | 83    |  |
+| seg006_2FAA_sub.asm | sub  | 1113    | 23    |  |
+| seg006_2FC3_sub.asm | sub  | 1062    | 24    |  |
+| seg006_2FE8_sub.asm | sub  | 5180    | 109   |  |
+| seg006_30BA_sub.asm | sub  | 7273    | 150   |  |
+| seg006_31CE_sub.asm | sub  | 4004    | 83    |  |
+| seg006_3273_sub.asm | sub  | 5650    | 110   |  |
+| seg006_333F_sub.asm | sub  | 1274    | 29    |  |
+| seg006_336D_sub.asm | sub  | 7343    | 151   |  |
+| seg006_3475_sub.asm | sub  | 1075    | 25    |  |
+| seg006_3498_sub.asm | sub  | 7365    | 154   |  |
+| seg006_35B8_sub.asm | sub  | 13094   | 274   |  |
+| seg006_37C8_sub.asm | sub  | 4333    | 92    |  |
+| seg006_3879_sub.asm | sub  | 3712    | 79    |  |
+| seg006_38F8_sub.asm | sub  | 1562    | 30    |  |
+| seg006_391A_sub.asm | sub  | 28816   | 580   |  |
+| seg006_3D3B_sub.asm | sub  | 4230    | 85    |  |
+| seg006_3DE8_sub.asm | sub  | 3031    | 64    |  |
+| seg006_3E61_sub.asm | sub  | 4600    | 96    |  |
+| seg006_3F18_sub.asm | sub  | 5706    | 121   |  |
+| seg006_4050_sub.asm | sub  | 14800   | 301   |  |
+| seg006_4257_sub.asm | sub  | 6871    | 143   |  |
+| seg006_433E_sub.asm | sub  | 6275    | 129   |  |
+| seg006_440C_sub.asm | sub  | 2656    | 58    |  |
+| seg006_44AD_sub.asm | sub  | 3442    | 72    |  |
+| seg006_453C_sub.asm | sub  | 1038    | 24    |  |
+| seg006_4558_sub.asm | sub  | 3451    | 71    |  |
+| seg006_45F8_sub.asm | sub  | 1555    | 35    |  |
+| seg006_4626_sub.asm | sub  | 1395    | 31    |  |
+| seg006_464D_sub.asm | sub  | 1360    | 29    |  |
+| seg006_4678_sub.asm | sub  | 3797    | 82    |  |
+| seg006_46FA_sub.asm | sub  | 3526    | 71    |  |
+| seg006_4771_sub.asm | sub  | 2459    | 53    |  |
+| seg006_47D8_sub.asm | sub  | 6254    | 134   |  |
+| seg006_48D8_sub.asm | sub  | 5171    | 110   |  |
+| seg006_49B3_sub.asm | sub  | 3840    | 81    |  |
+| seg006_4A6F_sub.asm | sub  | 2314    | 50    |  |
+| seg006_4ACD_sub.asm | sub  | 1957    | 40    |  |
+| seg006_4B2C_sub.asm | sub  | 3346    | 74    |  |
+| seg006_4BDC_sub.asm | sub  | 523     | 12    |  |
+| seg006_4BE9_sub.asm | sub  | 2152    | 44    |  |
+| seg006_4C32_sub.asm | sub  | 14265   | 290   |  |
+| seg006_4E43_sub.asm | sub  | 5198    | 105   |  |
+| seg006_4F17_sub.asm | sub  | 12758   | 258   |  |
+| seg006_511F_sub.asm | sub  | 5336    | 112   |  |
+| seg006_5219_sub.asm | sub  | 4274    | 90    |  |
+| seg006_52E2_sub.asm | sub  | 40158   | 837   |  |
+| seg006_5920_sub.asm | sub  | 1121    | 24    |  |
+| seg006_5950_sub.asm | sub  | 13036   | 267   |  |
+| seg006_5B6E_sub.asm | sub  | 7216    | 153   |  |
+| seg006_5C75_sub.asm | sub  | 2580    | 56    |  |
+| seg006_5CEC_sub.asm | sub  | 5849    | 118   |  |
+| seg006_5DD3_sub.asm | sub  | 3672    | 80    |  |
+| seg006_5E7A_sub.asm | sub  | 11566   | 228   |  |
+| seg006_604E_sub.asm | sub  | 1581    | 32    |  |
+| seg006_6079_sub.asm | sub  | 1494    | 32    |  |
+| seg006_60C6_sub.asm | sub  | 5926    | 122   |  |
+| seg006_6192_sub.asm | sub  | 6297    | 131   |  |
+| seg006_629D_sub.asm | sub  | 11998   | 244   |  |
+| seg006_6480_sub.asm | sub  | 3082    | 66    |  |
+| seg006_64E2_sub.asm | sub  | 1153    | 26    |  |
+| seg006_6502_sub.asm | sub  | 1495    | 35    |  |
+| seg006_6529_sub.asm | sub  | 6511    | 140   |  |
+| seg006_662B_sub.asm | sub  | 3162    | 69    |  |
+| seg006_66AA_sub.asm | sub  | 1556    | 33    |  |
+| seg006_66D8_sub.asm | sub  | 3082    | 61    |  |
+| seg006_672C_sub.asm | sub  | 2173    | 47    |  |
+| seg006_6785_sub.asm | sub  | 4245    | 93    |  |
+| seg006_6856_sub.asm | sub  | 28418   | 580   |  |
+| seg006_6D0E_sub.asm | sub  | 6009    | 121   |  |
+| seg006_6E18_sub.asm | sub  | 4327    | 81    |  |
+| seg006_6F34_sub.asm | sub  | 796     | 18    |  |
+| seg006_6F49_sub.asm | sub  | 11903   | 251   |  |
+| seg006_7174_sub.asm | sub  | 10217   | 214   |  |
+| seg006_7303_sub.asm | sub  | 7538    | 158   |  |
+| seg006_743D_sub.asm | sub  | 3367    | 71    |  |
+| seg006_74CF_sub.asm | sub  | 4775    | 102   |  |
+| seg006_7568_sub.asm | sub  | 5320    | 111   |  |
+| seg006_7651_sub.asm | sub  | 5037    | 103   |  |
+| seg006_7723_sub.asm | sub  | 1054    | 24    |  |
+| seg006_7748_sub.asm | sub  | 4942    | 102   |  |
+| seg006_77C7_sub.asm | sub  | 1348    | 30    |  |
+| seg006_77F7_sub.asm | sub  | 5800    | 125   |  |
+| seg006_7894_sub.asm | sub  | 832     | 19    |  |
+| seg006_78B1_sub.asm | sub  | 6326    | 132   |  |
+| seg006_7982_sub.asm | sub  | 5685    | 123   |  |
+| seg006_7A17_sub.asm | sub  | 3057    | 66    |  |
+| seg006_7A9D_sub.asm | sub  | 4597    | 98    |  |
+| seg006_7B55_sub.asm | sub  | 4608    | 97    |  |
+| seg006_7C10_sub.asm | sub  | 3025    | 65    |  |
+| seg006_7C8D_sub.asm | sub  | 14784   | 301   |  |
+| seg006_7E92_sub.asm | sub  | 6857    | 143   |  |
+| seg006_7F77_sub.asm | sub  | 6260    | 129   |  |
+| seg006_8043_sub.asm | sub  | 6724    | 145   |  |
+| seg006_8152_sub.asm | sub  | 3486    | 77    |  |
+| seg006_81EA_sub.asm | sub  | 1556    | 33    |  |
+| seg006_8218_sub.asm | sub  | 3617    | 73    |  |
+| seg006_828F_sub.asm | sub  | 2708    | 59    |  |
+| seg006_830C_sub.asm | sub  | 5315    | 117   |  |
+| seg006_8425_sub.asm | sub  | 32207   | 667   |  |
+| seg006_89DB_sub.asm | sub  | 3741    | 80    |  |
+| seg007_0002_sub.asm | sub  | 7204    | 135   |  |
+| seg008_000E_sub.asm | sub  | 6364    | 134   |  |
+| seg009_0003_sub.asm | sub  | 460     | 10    |  |
+| seg009_0007_sub.asm | sub  | 1729    | 35    |  |
+| seg010_000A_sub.asm | sub  | 1351    | 31    |  |
+| seg011_000D_sub.asm | sub  | 2392    | 47    |  |
+| seg012_000D_sub.asm | sub  | 3494    | 70    |  |
+| seg013_0003_sub.asm | sub  | 5623    | 113   |  |
+| seg014_0004_sub.asm | sub  | 2825    | 57    |  |
+| seg015_0000_sub.asm | sub  | 2850    | 58    |  |
+| seg016_000C_sub.asm | sub  | 5381    | 94    |  |
+| seg017_0000_sub.asm | sub  | 2271    | 41    |  |
+| seg018_0006_sub.asm | sub  | 1725    | 31    |  |
+| seg019_0007_sub.asm | sub  | 20672   | 404   |  |
+| seg020_000A_sub.asm | sub  | 6504    | 138   |  |
+| seg021_000D_sub.asm | sub  | 21941   | 469   |  |
+| seg022_000B_sub.asm | sub  | 18694   | 393   |  |
+| seg023_0008_sub.asm | sub  | 18642   | 392   |  |
+| seg024_0005_sub.asm | sub  | 27357   | 588   |  |
+| seg025_000D_sub.asm | sub  | 33484   | 717   |  |
+| seg026_0006_sub.asm | sub  | 27213   | 580   |  |
+| seg027_0004_sub.asm | sub  | 6827    | 128   |  |
+| seg028_000D_sub.asm | sub  | 15066   | 280   |  |
+| seg029_0007_sub.asm | sub  | 3931    | 80    |  |
+| seg030_0005_sub.asm | sub  | 5084    | 99    |  |
+| seg031_001A_sub.asm | sub  | 10850   | 218   | DOS entry stub that validates DOS version, sets up stack/memory/BSS, installs interrupts/env state, then calls main and exit handlers. |
+| seg031_01A4_sub.asm | sub  | 833     | 18    |  |
+| seg031_01BB_sub.asm | sub  | 2355    | 48    |  |
+| seg031_0202_sub.asm | sub  | 1764    | 33    |  |
+| seg031_022F_sub.asm | sub  | 983     | 20    |  |
+| seg031_0242_sub.asm | sub  | 5097    | 110   |  |
+| seg031_030A_sub.asm | sub  | 1785    | 40    |  |
+| seg031_0336_sub.asm | sub  | 15354   | 306   |  |
+| seg031_0528_sub.asm | sub  | 9331    | 195   |  |
+| seg031_066E_sub.asm | sub  | 1857    | 44    |  |
+| seg031_06B0_sub.asm | sub  | 1070    | 25    |  |
+| seg031_06C5_sub.asm | sub  | 2138    | 47    |  |
+| seg031_0704_sub.asm | sub  | 2852    | 62    |  |
+| seg031_0772_sub.asm | sub  | 989     | 21    |  |
+| seg031_078A_sub.asm | sub  | 1714    | 41    |  |
+| seg031_07BC_sub.asm | sub  | 1653    | 38    |  |
+| seg031_07E8_sub.asm | sub  | 1333    | 31    |  |
+| seg031_0808_sub.asm | sub  | 1351    | 27    |  |
+| seg031_0820_sub.asm | sub  | 1044    | 25    |  |
+| seg031_0836_sub.asm | sub  | 5138    | 111   |  |
+| seg031_08EA_sub.asm | sub  | 2949    | 66    |  |
+| seg031_0937_sub.asm | sub  | 800     | 19    |  |
+| seg031_0940_sub.asm | sub  | 4908    | 108   |  |
+| seg031_09DC_sub.asm | sub  | 1812    | 41    |  |
+| seg031_0A10_sub.asm | sub  | 1212    | 28    |  |
+| seg031_0A34_sub.asm | sub  | 1138    | 27    |  |
+| seg031_0A58_sub.asm | sub  | 3561    | 77    |  |
+| seg031_0ABA_sub.asm | sub  | 3511    | 76    |  |
+| seg031_0B26_sub.asm | sub  | 1130    | 25    | Wraps sub_19A01 for codes 0xFC/0xFF and optionally calls a callback at unk_2B476. |
+| seg031_0B4A_sub.asm | sub  | 469     | 10    |  |
+| seg031_0B50_sub.asm | sub  | 1207    | 28    |  |
+| seg031_0B76_sub.asm | sub  | 1913    | 44    |  |
+| seg031_0BA1_sub.asm | sub  | 1632    | 36    | Looks up a message by id and writes it to DOS handle 2 via int 21h/40h. |
+| seg031_0BCC_sub.asm | sub  | 5754    | 119   |  |
+| seg031_0C8E_sub.asm | sub  | 9296    | 194   |  |
+| seg031_0DEC_sub.asm | sub  | 1583    | 35    |  |
+| seg031_0E1C_sub.asm | sub  | 7746    | 161   |  |
+| seg031_0F16_sub.asm | sub  | 3616    | 78    |  |
+| seg031_0F9A_sub.asm | sub  | 3796    | 83    |  |
+| seg031_1038_sub.asm | sub  | 2961    | 66    |  |
+| seg031_10A8_sub.asm | sub  | 24388   | 475   |  |
+| seg031_13D4_sub.asm | sub  | 8800    | 180   |  |
+| seg031_150E_sub.asm | sub  | 6876    | 141   |  |
+| seg031_15FA_sub.asm | sub  | 4847    | 100   |  |
+| seg031_16B8_sub.asm | sub  | 2509    | 53    |  |
+| seg031_16F8_sub.asm | sub  | 3130    | 66    |  |
+| seg031_1758_sub.asm | sub  | 3370    | 72    |  |
+| seg031_17C2_sub.asm | sub  | 6164    | 129   |  |
+| seg031_18AE_sub.asm | sub  | 1116    | 23    |  |
+| seg031_18C6_sub.asm | sub  | 1544    | 32    |  |
+| seg031_18F0_sub.asm | sub  | 3905    | 82    |  |
+| seg031_1970_sub.asm | sub  | 2012    | 44    |  |
+| seg031_1998_sub.asm | sub  | 1884    | 41    |  |
+| seg031_19D2_sub.asm | sub  | 1565    | 33    |  |
+| seg031_19F2_sub.asm | sub  | 8834    | 164   |  |
+| seg031_1AD0_sub.asm | sub  | 6241    | 129   |  |
+| seg031_1B78_sub.asm | sub  | 5821    | 109   |  |
+| seg031_1BFA_sub.asm | sub  | 905     | 22    |  |
+| seg031_1C0C_sub.asm | sub  | 2729    | 59    |  |
+| seg031_1C55_sub.asm | sub  | 7807    | 162   |  |
+| seg031_1D38_sub.asm | sub  | 2238    | 49    |  |
+| seg031_1D72_sub.asm | sub  | 1248    | 28    |  |
+| seg031_1D94_sub.asm | sub  | 1416    | 32    |  |
+| seg031_1DB6_sub.asm | sub  | 4047    | 85    |  |
+| seg031_1E24_sub.asm | sub  | 3196    | 64    |  |
+| seg031_1E7A_sub.asm | sub  | 2001    | 47    |  |
+| seg031_1EBA_sub.asm | sub  | 1368    | 32    |  |
+| seg031_1ED6_sub.asm | sub  | 910     | 22    |  |
+| seg031_1EE8_sub.asm | sub  | 2312    | 51    |  |
+| seg031_1F32_sub.asm | sub  | 1749    | 41    |  |
+| seg031_1F5E_sub.asm | sub  | 970     | 20    |  |
+| seg031_1F6C_sub.asm | sub  | 3499    | 71    |  |
+| seg031_1FB0_sub.asm | sub  | 436     | 10    |  |
+| seg031_1FB6_sub.asm | sub  | 2280    | 45    |  |
+| seg031_1FE4_sub.asm | sub  | 2780    | 61    |  |
+| seg031_2052_sub.asm | sub  | 4602    | 85    |  |
+| seg031_20CC_sub.asm | sub  | 15098   | 270   |  |
+| seg031_225F_sub.asm | sub  | 750     | 17    |  |
+| seg031_2270_sub.asm | sub  | 1096    | 24    |  |
+| seg031_2284_sub.asm | sub  | 868     | 22    |  |
+| seg031_228E_sub.asm | sub  | 9332    | 197   |  |
+| seg032_005C_sub.asm | sub  | 6164    | 134   |  |
+| seg032_0146_sub.asm | sub  | 1184    | 22    |  |
+| seg032_015C_sub.asm | sub  | 1060    | 23    |  |
+| seg032_0185_sub.asm | sub  | 3853    | 71    |  |
+| seg032_024C_sub.asm | sub  | 992     | 21    |  |
+| seg032_026A_sub.asm | sub  | 1145    | 24    |  |
+| seg032_028B_sub.asm | sub  | 4507    | 90    |  |
+| seg032_0323_sub.asm | sub  | 531     | 12    |  |
+| seg032_032F_sub.asm | sub  | 5543    | 110   |  |
+| seg032_03D9_sub.asm | sub  | 1382    | 30    |  |
+| seg032_03FD_sub.asm | sub  | 1723    | 35    |  |
+| seg032_0437_sub.asm | sub  | 4299    | 91    |  |
+| seg032_04B5_sub.asm | sub  | 1435    | 30    |  |
+| seg032_04E1_sub.asm | sub  | 682     | 15    |  |
+| seg032_04EE_sub.asm | sub  | 5900    | 130   |  |
+| seg032_05BC_sub.asm | sub  | 8237    | 149   |  |
+| seg032_069E_sub.asm | sub  | 711     | 16    |  |
+| seg032_06A7_sub.asm | sub  | 420     | 9     |  |
+| seg032_06AC_sub.asm | sub  | 2099    | 42    |  |
+| seg032_06F4_sub.asm | sub  | 446     | 10    |  |
+| seg032_06F6_sub.asm | sub  | 4587    | 97    |  |
+| seg032_0799_sub.asm | sub  | 2124    | 41    |  |
+| seg032_07C8_sub.asm | sub  | 2788    | 57    |  |
+| seg032_081B_sub.asm | sub  | 6333    | 135   |  |
+| seg032_0907_sub.asm | sub  | 3282    | 63    |  |
+| seg032_09C2_sub.asm | sub  | 2023    | 42    |  |
+| seg032_0A04_sub.asm | sub  | 6529    | 127   |  |
+| seg032_0AEC_sub.asm | sub  | 1871    | 42    |  |
+| seg032_0B31_sub.asm | sub  | 908     | 22    |  |
+| seg032_0B47_sub.asm | sub  | 1175    | 24    |  |
+| seg032_0B74_sub.asm | sub  | 4487    | 86    |  |
+| seg032_0C73_sub.asm | sub  | 1237    | 26    |  |
+| seg032_0C83_sub.asm | sub  | 483     | 10    |  |
+| seg032_0C88_sub.asm | sub  | 619     | 13    |  |
+| seg032_0C90_sub.asm | sub  | 483     | 10    |  |
+| seg032_0C95_sub.asm | sub  | 3527    | 50    |  |
+| seg032_0DFC_sub.asm | sub  | 483     | 10    |  |
+| seg032_0E01_sub.asm | sub  | 1793    | 36    |  |
+| seg032_0E3B_sub.asm | sub  | 9613    | 140   |  |
+| seg032_1210_sub.asm | sub  | 484     | 10    |  |
+| seg032_1215_sub.asm | sub  | 692     | 14    |  |
+| seg032_1221_sub.asm | sub  | 1328    | 27    |  |
+| seg032_1250_sub.asm | sub  | 23124   | 346   |  |
+| seg032_1AF7_sub.asm | sub  | 989     | 19    |  |
+| seg032_1B1D_sub.asm | sub  | 974     | 20    |  |
+| seg032_1B36_sub.asm | sub  | 7497    | 98    |  |
+| seg032_1E7E_sub.asm | sub  | 2301    | 40    |  |
+| seg032_1F10_sub.asm | sub  | 527     | 12    |  |
+| seg032_1F1B_sub.asm | sub  | 33150   | 422   |  |
+| seg033_0002_sub.asm | sub  | 1864    | 40    |  |
+| seg033_0047_sub.asm | sub  | 2957    | 64    |  |
+| seg033_00B0_sub.asm | sub  | 2220    | 48    |  |
+| seg033_00E8_sub.asm | sub  | 2495    | 56    |  |
+| seg033_014D_sub.asm | sub  | 3354    | 70    |  |
+| seg033_01C8_sub.asm | sub  | 4509    | 96    |  |
+| seg033_026E_sub.asm | sub  | 726     | 16    |  |
+| seg033_0279_sub.asm | sub  | 1413    | 33    |  |
+| seg033_02A1_sub.asm | sub  | 1838    | 38    |  |
+| seg033_02F6_sub.asm | sub  | 11929   | 235   |  |
+| seg033_0489_sub.asm | sub  | 9713    | 191   |  |
+| seg033_05DB_sub.asm | sub  | 2379    | 49    |  |
+| seg033_0628_sub.asm | sub  | 1165    | 25    |  |
+| seg033_064B_sub.asm | sub  | 4069    | 88    |  |
+| seg033_06FF_sub.asm | sub  | 1757    | 37    |  |
+| seg033_0739_sub.asm | sub  | 2472    | 53    |  |
+| seg033_0769_sub.asm | sub  | 1753    | 37    |  |
+| seg033_078E_sub.asm | sub  | 1033    | 22    |  |
+| seg033_07A9_sub.asm | sub  | 1601    | 32    |  |
+| seg033_07DB_sub.asm | sub  | 3463    | 72    |  |
+| seg033_0869_sub.asm | sub  | 1283    | 25    |  |
+| seg033_0880_sub.asm | sub  | 1619    | 36    |  |
+| seg033_08BD_sub.asm | sub  | 3119    | 63    |  |
+| seg033_0926_sub.asm | sub  | 4896    | 106   |  |
+| seg033_09E9_sub.asm | sub  | 1513    | 34    |  |
+| seg033_0A14_sub.asm | sub  | 5342    | 115   |  |
+| seg033_0ABB_sub.asm | sub  | 4618    | 101   |  |
+| seg033_0B5B_sub.asm | sub  | 4797    | 92    |  |
+| seg033_0BC5_sub.asm | sub  | 7559    | 131   |  |
+| seg033_0C62_sub.asm | sub  | 4773    | 95    |  |
+| seg033_0CE5_sub.asm | sub  | 1543    | 34    |  |
+| seg033_0D18_sub.asm | sub  | 3001    | 63    |  |
+| seg033_0D82_sub.asm | sub  | 1782    | 39    |  |
+| seg033_0DB5_sub.asm | sub  | 4209    | 91    |  |
+| seg033_0E51_sub.asm | sub  | 8542    | 172   |  |
+| seg033_0F89_sub.asm | sub  | 2835    | 59    |  |
+| seg033_0FFA_sub.asm | sub  | 3289    | 70    |  |
+| seg033_106E_sub.asm | sub  | 1873    | 43    |  |
+| seg034_0008_sub.asm | sub  | 1521    | 34    |  |
+| seg035_000A_sub.asm | sub  | 1280    | 29    |  |
+| seg035_0024_sub.asm | sub  | 3271    | 71    |  |

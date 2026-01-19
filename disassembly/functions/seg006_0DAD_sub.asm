@@ -41,8 +41,3 @@ seg006:0DFC locret_EC4C:                            ; CODE XREF: sub_EBFD+5␘j
 seg006:0DFC                 retn
 seg006:0DFC sub_EBFD        endp
 seg006:0DFC
-seg006:0DFC ; ---------------------------------------------------------------------------
-seg006:0DFD                 db 2 dup(0), 3 dup(1), 2, 3, 2 dup(0), 4, 2 dup(2), 4
-seg006:0DFD                 db 1, 2 dup(5), 1, 4, 7, 2, 3, 6, 4, 3, 0, 7, 6, 1, 2
-seg006:0DFD                 db 5, 2 dup(8)
-seg006:0E1D

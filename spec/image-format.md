@@ -99,13 +99,13 @@ Total:  5 pixels of value 0x42
 
 ### Known Widths by File Type
 
-| Width (px) | File Extensions | Purpose |
-|------------|-----------------|---------|
-| 320 | .TOP, .BOT | Dashboard/HUD, full-width graphics |
-| 208 | .FL1.LZ, .FL2.LZ, .ICN | Statistics display, car selection |
-| 168 | *L.BOT, *R.BOT | Steering wheel (rotated views) |
-| 112 | .BIC, .SID | Car selection UI elements |
-| 72 | .ETC, .SIC | Gear selector, menu icons |
+| Width (px) | File Extensions        | Purpose                            |
+|------------|------------------------|------------------------------------|
+| 320        | .TOP, .BOT             | Dashboard/HUD, full-width graphics |
+| 208        | .FL1.LZ, .FL2.LZ, .ICN | Statistics display, car selection  |
+| 168        | *L.BOT, *R.BOT         | Steering wheel (rotated views)     |
+| 112        | .BIC, .SID             | Car selection UI elements          |
+| 72         | .ETC, .SIC             | Gear selector, menu icons          |
 
 ### Calculating Height
 ```

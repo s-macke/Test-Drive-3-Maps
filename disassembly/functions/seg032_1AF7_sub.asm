@@ -14,6 +14,3 @@ seg032:1B14                 mov     word_2BEFA, 0
 seg032:1B1A                 jmp     short loc_1CCCE
 seg032:1B1A sub_1CC97       endp
 seg032:1B1A
-seg032:1B1A ; ---------------------------------------------------------------------------
-seg032:1B1C                 db 90h
-seg032:1B1D
