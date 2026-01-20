@@ -9,6 +9,7 @@ This project parses the binary data files from Test Drive 3 to extract:
 - 3D tile geometry (terrain, roads, scenery)
 - 3D objects (signs, vehicles, buildings, trains, etc.)
 - Player cars (Corvette, Diablo, NSX, Stealth, Mythos)
+- The game was written in Microsoft C 5.1
 
 Includes a Three.js-based online viewer and exports to Wavefront OBJ format.
 
@@ -17,22 +18,23 @@ Includes a Three.js-based online viewer and exports to Wavefront OBJ format.
 ```
 Test-Drive-3-Maps/
 ├── src/
-│   ├── browser/        # Browser-only modules
-│   │   ├── main.js     # Browser entry point
-│   │   ├── scene.js    # Three.js scene setup
-│   │   └── FlyControls.js # Camera controls
+│   ├── browser/        # Browser-only modules (TypeScript)
+│   │   ├── main.ts     # Browser entry point
+│   │   ├── scene.ts    # Three.js scene setup
+│   │   └── FlyControls.ts # Camera controls
 │   ├── shared/         # Browser + Node shared modules (TypeScript)
-│   │   ├── extract.js  # Binary parser for TD3 formats
+│   │   ├── extract.ts  # Binary parser for TD3 formats
+│   │   ├── mapgen.ts   # Map assembly logic
+│   │   ├── objects.ts  # Object loading/categorization
 │   │   ├── color.ts    # Color mapping extraction
 │   │   ├── files.ts    # File loading and storage (universal)
+│   │   ├── types.ts    # Shared type definitions
 │   │   ├── lzw.ts      # LZW decompression for VGA images
-│   │   ├── rle.ts      # RLE unpacking for VGA images
-│   │   ├── objects.js  # Object loading/categorization
-│   │   └── mapgen.js   # Map assembly logic
-│   └── tools/          # CLI tools (Node.js)
+│   │   └── rle.ts      # RLE unpacking for VGA images
+│   └── tools/          # CLI tools (Node.js, TypeScript)
 │       ├── export/     # OBJ exporter tool
-│       │   ├── toobj.js          # CLI export script
-│       │   └── toWaveFrontObj.js # OBJ/MTL writer
+│       │   ├── toobj.ts          # CLI export script
+│       │   └── toWaveFrontObj.ts # OBJ/MTL writer
 │       ├── imgviewer/  # VGA image extractor tool
 │       │   └── imgviewer.ts      # CLI tool to extract images from DAT files
 │       └── lstviewer/  # LST file viewer tool
@@ -44,6 +46,7 @@ Test-Drive-3-Maps/
 │   ├── 3d-object-format.md
 │   ├── dat-file-layouts.md
 │   ├── lst-file-format.md
+│   ├── map-format.md
 │   └── vga-image-format.md
 ├── index.html          # Vite entry point
 ├── vite.config.js      # Vite configuration
@@ -88,28 +91,29 @@ See [`spec/lst-file-format.md`](spec/lst-file-format.md) for detailed format doc
 ### Browser (src/browser/)
 | File             | Description                                                     |
 |------------------|-----------------------------------------------------------------|
-| `main.js`        | Browser entry point. Loads data files, builds maps, handles UI. |
-| `scene.js`       | Three.js scene setup (camera, lights, renderer).                |
-| `FlyControls.js` | Camera fly-through controls.                                    |
+| `main.ts`        | Browser entry point. Loads data files, builds maps, handles UI. |
+| `scene.ts`       | Three.js scene setup (camera, lights, renderer).                |
+| `FlyControls.ts` | Camera fly-through controls.                                    |
 
 ### Shared (src/shared/)
 | File         | Description                                                                    |
 |--------------|--------------------------------------------------------------------------------|
-| `extract.js` | Binary parser for TD3 file formats. Decodes vertices, polygons.                |
-| `objects.js` | Loads and categorizes game objects: tiles1/2/3, objs1/2, cars.                 |
+| `extract.ts` | Binary parser for TD3 file formats. Decodes vertices, polygons.                |
+| `mapgen.ts`  | Map assembly - positions tiles and objects in world space.                     |
+| `objects.ts` | Loads and categorizes game objects: tiles1/2/3, objs1/2, cars.                 |
 | `color.ts`   | Extracts color mapping tables from map data.                                   |
 | `files.ts`   | Universal file loader (browser/Node) and storage. Exports `loadFiles()` async. |
+| `types.ts`   | Shared type definitions (Mesh, ColorRGB, etc.).                                |
 | `lzw.ts`     | LZW decompression for VGA images (9-12 bit variable codes).                    |
 | `rle.ts`     | RLE unpacking for VGA images (pixel+length pairs).                             |
-| `mapgen.js`  | Map assembly - positions tiles and objects in world space.                     |
 
 ### Tools (src/tools/)
 
 #### Export Tool (src/tools/export/)
 | File                | Description                                         |
 |---------------------|-----------------------------------------------------|
-| `toobj.js`          | CLI script to batch export all maps/objects to OBJ. |
-| `toWaveFrontObj.js` | Wavefront OBJ/MTL file writer.                      |
+| `toobj.ts`          | CLI script to batch export all maps/objects to OBJ. |
+| `toWaveFrontObj.ts` | Wavefront OBJ/MTL file writer.                      |
 
 #### LST Viewer (src/tools/lstviewer/)
 | File            | Description                                              |
@@ -136,7 +140,8 @@ See specifications in `spec/`:
 - [`3d-object-format.md`](spec/3d-object-format.md) - 3D object/polygon format
 - [`dat-file-layouts.md`](spec/dat-file-layouts.md) - DAT file offset tables and resource layouts
 - [`lst-file-format.md`](spec/lst-file-format.md) - LST resource index files
-- [`vga-image-format.md`](spec/vga-image-format.md) - VGA image compression (LZW+RLE)
+- [`map-format.md`](spec/map-format.md) - Map structure (tile grid, object placement, colors)
+- [`image-format.md`](spec/image-format.md) - VGA image compression (LZW+RLE)
 
 ### Map Structure (0x2137 bytes)
 - `0x00DF-0x04DF`: 32x16 tile grid (2 bytes per tile: ID + rotation/height)

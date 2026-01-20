@@ -198,4 +198,4 @@ Player car models start at offset 0 with `isobj=true`:
 ## References
 
 - Forum discussion: http://www.accursedfarms.com/forums/viewtopic.php?f=63&t=5960
-- Implementation: `src/shared/extract.js`
+- Implementation: `src/shared/extract.ts`
