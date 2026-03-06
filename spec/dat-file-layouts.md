@@ -139,8 +139,8 @@ File offset tables for Test Drive III data files.
 
 | Offset    | Size      | Filename     | Format  | Description                                  |
 |-----------|-----------|--------------|---------|----------------------------------------------|
-| `0x00000` | `0x00151` | CCERVSC.BIN  | Palette | 112-color palette for stats/selection images |
-| `0x00151` | `0x00151` | CCERVCOL.BIN | Palette | 112-color palette for cockpit/detail images  |
+| `0x00000` | `0x00151` | CCERVCOL.BIN | Palette | 112-color palette for cockpit/detail images  |
+| `0x00151` | `0x00151` | CCERVSC.BIN  | Palette | 112-color palette for stats/selection images |
 | `0x002A2` | `0x00061` | CCERVSIC.BIN | Palette | 32-color subpalette for `CCERV.SIC`          |
 | `0x00303` | `0x01B92` | CCERV.ICN    | Image   | 208×83                                       |
 | `0x01E95` | `0x00491` | CCERV.SIC    | Image   | 72×40                                        |
@@ -159,8 +159,8 @@ File offset tables for Test Drive III data files.
 
 | Offset    | Size      | Filename     | Format  | Description                                  |
 |-----------|-----------|--------------|---------|----------------------------------------------|
-| `0x00000` | `0x00151` | CCNSXSC.BIN  | Palette | 112-color palette for stats/selection images |
-| `0x00151` | `0x00151` | CCNSXCOL.BIN | Palette | 112-color palette for cockpit/detail images  |
+| `0x00000` | `0x00151` | CCNSXCOL.BIN | Palette | 112-color palette for cockpit/detail images  |
+| `0x00151` | `0x00151` | CCNSXSC.BIN  | Palette | 112-color palette for stats/selection images |
 | `0x002A2` | `0x00061` | CCNSXSIC.BIN | Palette | 32-color subpalette for `CCNSX.SIC`          |
 | `0x00303` | `0x01E9F` | CCNSX.ICN    | Image   | 208×83                                       |
 | `0x021A2` | `0x00446` | CCNSX.SIC    | Image   | 72×40                                        |
@@ -179,8 +179,8 @@ File offset tables for Test Drive III data files.
 
 | Offset    | Size      | Filename     | Format  | Description                                   |
 |-----------|-----------|--------------|---------|-----------------------------------------------|
-| `0x00000` | `0x00151` | CDIABSC.BIN  | Palette | 112-color palette for stats/selection images  |
-| `0x00151` | `0x00151` | CDIABCOL.BIN | Palette | 112-color palette for cockpit/detail images   |
+| `0x00000` | `0x00151` | CDIABCOL.BIN | Palette | 112-color palette for cockpit/detail images   |
+| `0x00151` | `0x00151` | CDIABSC.BIN  | Palette | 112-color palette for stats/selection images  |
 | `0x002A2` | `0x00061` | CDIABSIC.BIN | Palette | 32-color subpalette for `CDIAB.SIC`           |
 | `0x00303` | `0x02533` | CDIAB.ICN    | Image   | 208×83                                        |
 | `0x02836` | `0x00363` | CDIAB.SIC    | Image   | 72×40                                         |
@@ -199,8 +199,8 @@ File offset tables for Test Drive III data files.
 
 | Offset    | Size      | Filename     | Format   | Description                                   |
 |-----------|-----------|--------------|----------|-----------------------------------------------|
-| `0x00000` | `0x00151` | CMYTHSC.BIN  | Palette  | 112-color palette for stats/selection images  |
-| `0x00151` | `0x00151` | CMYTHCOL.BIN | Palette  | 112-color palette for cockpit/detail images   |
+| `0x00000` | `0x00151` | CMYTHCOL.BIN | Palette  | 112-color palette for cockpit/detail images   |
+| `0x00151` | `0x00151` | CMYTHSC.BIN  | Palette  | 112-color palette for stats/selection images  |
 | `0x002A2` | `0x00061` | CMYTHSIC.BIN | Palette  | 32-color subpalette for `CMYTH.SIC`           |
 | `0x00303` | `0x02472` | CMYTH.ICN    | Image    | 208×83                                        |
 | `0x02775` | `0x00463` | CMYTH.SIC    | Image    | 72×47                                         |
@@ -219,8 +219,8 @@ File offset tables for Test Drive III data files.
 
 | Offset    | Size      | Filename     | Format    | Description                                   |
 |-----------|-----------|--------------|-----------|-----------------------------------------------|
-| `0x00000` | `0x00151` | CSTELSC.BIN  | Palette   | 112-color palette for stats/selection images  |
-| `0x00151` | `0x00151` | CSTELCOL.BIN | Palette   | 112-color palette for cockpit/detail images   |
+| `0x00000` | `0x00151` | CSTELCOL.BIN | Palette   | 112-color palette for cockpit/detail images   |
+| `0x00151` | `0x00151` | CSTELSC.BIN  | Palette   | 112-color palette for stats/selection images  |
 | `0x002A2` | `0x00061` | CSTELSIC.BIN | Palette   | 32-color subpalette for `CSTEL.SIC`           |
 | `0x00303` | `0x01D4A` | CSTEL.ICN    | Image     | 208×83                                        |
 | `0x0204D` | `0x004E5` | CSTEL.SIC    | Image     | 72×40                                         |

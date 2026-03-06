@@ -93,10 +93,10 @@ function carEntries(datFile: string, sicHeight: number, entries: readonly [numbe
                 filename,
                 description,
                 paletteStrategy: 'single',
-                paletteRefs: [`${datFile}@0x00000 (${datFile.replace('.DAT', 'SC.BIN')})`],
-                paletteLayers: sameFile112(datFile, 0x00000, HIGH_BANK_BASE, `${datFile} SC palette`),
-                paletteBase: HIGH_BANK_BASE,
-                pixelBase: HIGH_BANK_PIXEL_BASE,
+                paletteRefs: [`${datFile}@0x00151 (${datFile.replace('.DAT', 'SC.BIN')})`],
+                paletteLayers: sameFile112(datFile, 0x00151, LOW_BANK_BASE, `${datFile} SC palette`),
+                paletteBase: LOW_BANK_BASE,
+                pixelBase: LOW_BANK_PIXEL_BASE,
             });
         }
 
@@ -110,10 +110,10 @@ function carEntries(datFile: string, sicHeight: number, entries: readonly [numbe
                 filename,
                 description,
                 paletteStrategy: 'single',
-                paletteRefs: [`${datFile}@0x00151 (${datFile.replace('.DAT', 'COL.BIN')})`],
-                paletteLayers: sameFile112(datFile, 0x00151, HIGH_BANK_BASE, `${datFile} COL palette`),
-                paletteBase: HIGH_BANK_BASE,
-                pixelBase: HIGH_BANK_PIXEL_BASE,
+                paletteRefs: [`${datFile}@0x00000 (${datFile.replace('.DAT', 'COL.BIN')})`],
+                paletteLayers: sameFile112(datFile, 0x00000, LOW_BANK_BASE, `${datFile} COL palette`),
+                paletteBase: LOW_BANK_BASE,
+                pixelBase: LOW_BANK_PIXEL_BASE,
             });
         }
 
