@@ -187,6 +187,7 @@ export function generateIndexedPng(
     width: number,
     height: number,
     flipVertical: boolean = true,
+    transparentIndex?: number,
 ): Uint8Array {
     if (palette.length < 256 * 3) {
         throw new Error(`Palette must contain 256 RGB entries, got ${palette.length / 3}.`);
@@ -220,10 +221,21 @@ export function generateIndexedPng(
     const paletteBytes = Uint8Array.from(palette.slice(0, 256 * 3));
     const compressed = zlib.deflateSync(raw);
     const signature = Uint8Array.from([137, 80, 78, 71, 13, 10, 26, 10]);
-    const png = [
-        signature,
+    const chunks = [
         makeChunk('IHDR', ihdr),
         makeChunk('PLTE', paletteBytes),
+    ];
+
+    if (transparentIndex !== undefined) {
+        const alpha = new Uint8Array(transparentIndex + 1);
+        alpha.fill(0xFF);
+        alpha[transparentIndex] = 0x00;
+        chunks.push(makeChunk('tRNS', alpha));
+    }
+
+    const png = [
+        signature,
+        ...chunks,
         makeChunk('IDAT', compressed),
         makeChunk('IEND', new Uint8Array(0)),
     ];

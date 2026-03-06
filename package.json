@@ -10,6 +10,7 @@
     "lstview": "node --import tsx src/tools/lstviewer/lstviewer.ts",
     "imgview": "node --import tsx src/tools/imgviewer/imgviewer.ts",
     "imgextract": "node --import tsx src/tools/imgextract/extract-all-images.ts",
+    "spriteextract": "node --import tsx src/tools/spriteextract/extract-scene-sprites.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
