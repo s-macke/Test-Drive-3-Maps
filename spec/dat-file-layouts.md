@@ -4,38 +4,38 @@ File offset tables for Test Drive III data files.
 
 ## SCENE01.DAT (Pacific Coast)
 
-| Offset Range          | Size     | Filename | Format  | Description                                          |
-|-----------------------|----------|----------|---------|------------------------------------------------------|
-| `0x00000 - 0x00299`   | `0x0299` |          | Image   | Title text "PACIFIC - YOSEMITE" 320×33               |
-| `0x0029A - 0x0045A`   | `0x01C0` |          | Image   | Icon (same text, different font) 72×40               |
-| `0x0045B - 0x1023F`   | `0xFDE4` |          | 3D      | Tiles                                                |
-| `0x10240 - 0x12377`   | `0x2137` |          | Map     | First map                                            |
-| `0x12378 - 0x124C8`   | `0x0150` |          | Palette | 112-color palette                                    |
-| `0x124C9 - 0x14233`   | `0x1D6A` |          | Image   | Unknown (16000 pixels; likely 320×50)                |
-| `0x14234 - 0x1548F`   | `0x125B` |          | Image   | Unknown (6080 pixels; likely 320×19)                 |
-| `0x15490 - 0x17D66`   | `0x28D6` |          |         | Same unidentified non-image format as `SCENETT1.DAT` |
-| `0x17D67 - 0x17D6D`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                         |
-| `0x17D6E - 0x17D74`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                         |
-| `0x17D75 - 0x18B9E`   | `0x0E29` |          |         | Unknown                                              |
-| `0x18B9F - 0x257E9`   | `0xCC4A` |          |         | Unknown (not loaded)                                 |
-| `0x18B9F`             | `0x09A0` |          |         | Unknown                                              |
-| `0x19540`             | `0x0C8B` |          |         | Unknown                                              |
-| `0x1A1CC`             | `0x2137` |          | Map     | Second map                                           |
-| `0x1C304 - 0x1C30A`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                         |
-| `0x1C30B - 0x1C311`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                         |
-| `0x1C312 - 0x1C318`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                         |
-| `0x1C319`             | `0x2137` |          | Map     | Third map                                            |
-| `0x1E451`             | `0x0150` |          | Palette | 112-color palette                                    |
-| `0x1E5A2`             | `0x1C09` |          | Image   | Unknown (16000 pixels; likely 320×50)                |
-| `0x201AC`             | `0x13B8` |          | Image   | Unknown (6080 pixels; likely 320×19)                 |
-| `0x21565`             | `0x2137` |          | Map     | Fourth map                                           |
-| `0x2369D - 0x236A3`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                         |
-| `0x236A4 - 0x236AA`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                         |
-| `0x236AB - 0x236B1`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                         |
-| `0x236B2`             | `0x2137` |          | Map     | Fifth map                                            |
-| `0x257EA - 0x2593A`   | `0x0150` |          | Palette | 112-color palette                                    |
-| `0x2593B - 0x28591`   | `0x2C56` |          | Image   | Landscape 320×50                                     |
-| `0x28592 - 0x295E4`   | `0x1052` |          | Image   | Landscape 320×19                                     |
+| Offset Range          | Size     | Filename | Format  | Description                                                  |
+|-----------------------|----------|----------|---------|--------------------------------------------------------------|
+| `0x00000 - 0x00299`   | `0x0299` |          | Image   | Title text "PACIFIC - YOSEMITE" 320×33                       |
+| `0x0029A - 0x0045A`   | `0x01C0` |          | Image   | Icon (same text, different font) 72×40                       |
+| `0x0045B - 0x1023F`   | `0xFDE4` |          | 3D      | Tiles                                                        |
+| `0x10240 - 0x12377`   | `0x2137` |          | Map     | First map                                                    |
+| `0x12378 - 0x124C8`   | `0x0150` |          | Palette | 112-color palette                                            |
+| `0x124C9 - 0x14233`   | `0x1D6A` |          | Image   | Unknown (16000 pixels; likely 320×50)                        |
+| `0x14234 - 0x1548F`   | `0x125B` |          | Image   | Unknown (6080 pixels; likely 320×19)                         |
+| `0x15490 - 0x17D66`   | `0x28D6` |          | Sprites | Scene render descriptor bank (same format as `SCENETT1.DAT`) |
+| `0x17D67 - 0x17D6D`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
+| `0x17D6E - 0x17D74`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
+| `0x17D75 - 0x18B9E`   | `0x0E29` |          |         | Unknown                                                      |
+| `0x18B9F - 0x257E9`   | `0xCC4A` |          |         | Unknown (not loaded)                                         |
+| `0x18B9F`             | `0x09A0` |          |         | Unknown                                                      |
+| `0x19540`             | `0x0C8B` |          |         | Unknown                                                      |
+| `0x1A1CC`             | `0x2137` |          | Map     | Second map                                                   |
+| `0x1C304 - 0x1C30A`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
+| `0x1C30B - 0x1C311`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
+| `0x1C312 - 0x1C318`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
+| `0x1C319`             | `0x2137` |          | Map     | Third map                                                    |
+| `0x1E451`             | `0x0150` |          | Palette | 112-color palette                                            |
+| `0x1E5A2`             | `0x1C09` |          | Image   | Unknown (16000 pixels; likely 320×50)                        |
+| `0x201AC`             | `0x13B8` |          | Image   | Unknown (6080 pixels; likely 320×19)                         |
+| `0x21565`             | `0x2137` |          | Map     | Fourth map                                                   |
+| `0x2369D - 0x236A3`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
+| `0x236A4 - 0x236AA`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
+| `0x236AB - 0x236B1`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
+| `0x236B2`             | `0x2137` |          | Map     | Fifth map                                                    |
+| `0x257EA - 0x2593A`   | `0x0150` |          | Palette | 112-color palette                                            |
+| `0x2593B - 0x28591`   | `0x2C56` |          | Image   | Landscape 320×50                                             |
+| `0x28592 - 0x295E4`   | `0x1052` |          | Image   | Landscape 320×19                                             |
 
 ## SCENE02.DAT (Cape Cod)
 
@@ -48,7 +48,7 @@ File offset tables for Test Drive III data files.
 | `0x12285 - 0x1228B`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
 | `0x1228C - 0x12292`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
 | `0x12293 - 0x12299`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
-| `0x1229A`             | `0x30B2` |          |         | Unknown                                  |
+| `0x1229A - 0x1534C`   | `0x30B2` |          | Sprites | Scene render descriptor bank variant     |
 | `0x1534D`             | `0x7DCC` |          | 3D      | More objects                             |
 | `0x1D11A`             | `0x1E6E` |          |         | Unknown                                  |
 | `0x1EF89`             | `0x0AE0` |          |         | Unknown                                  |
@@ -99,30 +99,30 @@ File offset tables for Test Drive III data files.
 
 ## DATAB.DAT
 
-| Offset Range          | Size     | Filename     | Format  | Description                                                     |
-|-----------------------|----------|--------------|---------|-----------------------------------------------------------------|
-| `0x00000 - 0x00150`   | `0x0150` | COPCOLR.BIN  | Palette | 112-color palette                                               |
-| `0x00151 - 0x03084`   | `0x2F33` | COPA.LZ      | Image   | Police image 320×100                                            |
-| `0x03085 - 0x05C16`   | `0x2B91` | COPB.LZ      | Image   | Police image (bottom) 320×58                                    |
-| `0x05C17 - 0x06F1D`   | `0x1306` | COPSEQ.LZ    | Image   | Police light animation 128×90                                   |
-| `0x06F1E - 0x071E6`   | `0x02C8` | MASTERQ.BIN  |         | Unknown                                                         |
-| `0x071E7 - 0x07337`   | `0x0150` | KEYCOLR.BIN  | Palette | 112-color palette                                               |
-| `0x07338 - 0x08F32`   | `0x1BFA` | KEYS.LZ      | Image   | Car keys 192×144                                                |
-| `0x08F33 - 0x0A4D0`   | `0x159D` | NEWWAVE.MUS  | Music   | Music resource                                                  |
-| `0x0A4D1 - 0x0B8BC`   | `0x13EB` | SELECT.LZ    | Image   | Menu background 320×200                                         |
-| `0x0B8BD - 0x0EDAC`   | `0x34EF` | DIFFLEVA.LZ  | Image   | Menu detail 320×56                                              |
-| `0x0EDAD - 0x121BE`   | `0x3411` | DIFFLEVB.LZ  | Image   | Skill driver option 320×65                                      |
-| `0x121BF - 0x15413`   | `0x3254` | DIFFLEVC.LZ  | Image   | Car bottom 320×65                                               |
-| `0x15414 - 0x15514`   | `0x0100` | SSBJ.LZ      | Image   | Unknown 112×10                                                   |
-| `0x15515 - 0x15664`   | `0x0150` | TOPCOLR.BIN  | Palette | 112-color palette                                               |
-| `0x15666`             | `0x31E2` | TOPSCORA.LZ  | Image   | 320×67                                                          |
-| `0x18849`             | `0x3535` | TOPSCORB.LZ  | Image   | Car top 320×66                                                  |
-| `0x1BD7F`             | `0x2FAC` | TOPSCORC.LZ  | Image   | Car bottom 320×67                                               |
-| `0x1ED2C - 0x21602`   | `0x28D6` | SCENETT1.DAT |         | Same unidentified non-image format as `SCENE01` `0x15490` chunk |
-| `0x21603 - 0x2373A`   | `0x2137` | SCENETTA.DAT | Map     | Title map                                                       |
-| `0x2373B - 0x32F19`   | `0xF7DE` | SCENETTT.BIN | 3D      | Tiles                                                           |
-| `0x32F1A - 0x3AD04`   | `0x7DEA` | SCENETT0.BIN | 3D      | Objects                                                         |
-| `0x3AD05 - 0x3CB6C`   | `0x1E67` | SCENETTP.BIN |         | Unknown                                                         |
+| Offset Range          | Size     | Filename     | Format  | Description                                                             |
+|-----------------------|----------|--------------|---------|-------------------------------------------------------------------------|
+| `0x00000 - 0x00150`   | `0x0150` | COPCOLR.BIN  | Palette | 112-color palette                                                       |
+| `0x00151 - 0x03084`   | `0x2F33` | COPA.LZ      | Image   | Police image 320×100                                                    |
+| `0x03085 - 0x05C16`   | `0x2B91` | COPB.LZ      | Image   | Police image (bottom) 320×58                                            |
+| `0x05C17 - 0x06F1D`   | `0x1306` | COPSEQ.LZ    | Image   | Police light animation 128×90                                           |
+| `0x06F1E - 0x071E6`   | `0x02C8` | MASTERQ.BIN  |         | Unknown                                                                 |
+| `0x071E7 - 0x07337`   | `0x0150` | KEYCOLR.BIN  | Palette | 112-color palette                                                       |
+| `0x07338 - 0x08F32`   | `0x1BFA` | KEYS.LZ      | Image   | Car keys 192×144                                                        |
+| `0x08F33 - 0x0A4D0`   | `0x159D` | NEWWAVE.MUS  | Music   | Music resource                                                          |
+| `0x0A4D1 - 0x0B8BC`   | `0x13EB` | SELECT.LZ    | Image   | Menu background 320×200                                                 |
+| `0x0B8BD - 0x0EDAC`   | `0x34EF` | DIFFLEVA.LZ  | Image   | Menu detail 320×56                                                      |
+| `0x0EDAD - 0x121BE`   | `0x3411` | DIFFLEVB.LZ  | Image   | Skill driver option 320×65                                              |
+| `0x121BF - 0x15413`   | `0x3254` | DIFFLEVC.LZ  | Image   | Car bottom 320×65                                                       |
+| `0x15414 - 0x15514`   | `0x0100` | SSBJ.LZ      | Image   | Unknown 112×10                                                          |
+| `0x15515 - 0x15664`   | `0x0150` | TOPCOLR.BIN  | Palette | 112-color palette                                                       |
+| `0x15666`             | `0x31E2` | TOPSCORA.LZ  | Image   | 320×67                                                                  |
+| `0x18849`             | `0x3535` | TOPSCORB.LZ  | Image   | Car top 320×66                                                          |
+| `0x1BD7F`             | `0x2FAC` | TOPSCORC.LZ  | Image   | Car bottom 320×67                                                       |
+| `0x1ED2C - 0x21602`   | `0x28D6` | SCENETT1.DAT | Sprites | Scene render descriptor bank (same format as `SCENE01` `0x15490` chunk) |
+| `0x21603 - 0x2373A`   | `0x2137` | SCENETTA.DAT | Map     | Title map                                                               |
+| `0x2373B - 0x32F19`   | `0xF7DE` | SCENETTT.BIN | 3D      | Tiles                                                                   |
+| `0x32F1A - 0x3AD04`   | `0x7DEA` | SCENETT0.BIN | 3D      | Objects                                                                 |
+| `0x3AD05 - 0x3CB6C`   | `0x1E67` | SCENETTP.BIN |         | Unknown                                                                 |
 
 ## DATAC.DAT
 
