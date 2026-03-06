@@ -113,7 +113,7 @@ File offset tables for Test Drive III data files.
 | `0x0B8BD - 0x0EDAC`   | `0x34EF` | DIFFLEVA.LZ  | Image   | Menu detail 320×56? (palette unknown)           |
 | `0x0EDAD - 0x121BE`   | `0x3411` | DIFFLEVB.LZ  | Image   | Skill driver option 320×65? (palette unknown)   |
 | `0x121BF - 0x15413`   | `0x3254` | DIFFLEVC.LZ  | Image   | Car bottom 320×65 (palette unknown)             |
-| `0x15414 - 0x15514`   | `0x0100` | SSBJ.LZ      | Image   | Unknown                                         |
+| `0x15414 - 0x15514`   | `0x0100` | SSBJ.LZ      | Image   | Unknown (decompresses to 1120 pixels; width unresolved) |
 | `0x15515 - 0x15664`   | `0x0150` | TOPCOLR.BIN  | Palette | 112-color palette                               |
 | `0x15666`             | `0x31E2` | TOPSCORA.LZ  | Image   | 320×67 (palette unknown)                        |
 | `0x18849`             | `0x3535` | TOPSCORB.LZ  | Image   | Car top 320×66 (palette unknown)                |
@@ -137,17 +137,17 @@ File offset tables for Test Drive III data files.
 
 ## CCERV.DAT
 
-| Offset    | Size      | Filename    | Description |
-|-----------|-----------|-------------|-------------|
-| `0x00303` | `0x01B92` | CCERV.ICN   |             |
-| `0x01E95` | `0x00491` | CCERV.SIC   |             |
-| `0x02326` | `0x014C9` | CCERV.BIC   |             |
-| `0x037EF` | `0x02296` | CCERV.SID   |             |
-| `0x05A85` | `0x0059D` | CCERV.ETC   |             |
-| `0x06022` | `0x0054E` | CCERV.TOP   |             |
-| `0x06570` | `0x015AE` | CCERV1.BOT  |             |
-| `0x07B1E` | `0x027B7` | CCERV2.BOT  |             |
-| `0x0A2D5` | `0x015CC` | CCERVL.BOT  |             |
-| `0x0B8A1` | `0x016C4` | CCERVR.BOT  |             |
-| `0x0CF65` | `0x00862` | CCERVFL1.LZ |             |
-| `0x0D7C7` | `0x00A8E` | CCERVFL2.LZ |             |
+| Offset    | Size      | Filename    | Format | Description |
+|-----------|-----------|-------------|--------|-------------|
+| `0x00303` | `0x01B92` | CCERV.ICN   | Image  | 208×83      |
+| `0x01E95` | `0x00491` | CCERV.SIC   | Image  | 72×40       |
+| `0x02326` | `0x014C9` | CCERV.BIC   | Image  | 112×83      |
+| `0x037EF` | `0x02296` | CCERV.SID   | Image  | 112×117     |
+| `0x05A85` | `0x0059D` | CCERV.ETC   | Image  | 56×72       |
+| `0x06022` | `0x0054E` | CCERV.TOP   | Image  | 320×16      |
+| `0x06570` | `0x015AE` | CCERV1.BOT  | Image  | 320×44      |
+| `0x07B1E` | `0x027B7` | CCERV2.BOT  | Image  | 320×44      |
+| `0x0A2D5` | `0x015CC` | CCERVL.BOT  | Image  | 168×48      |
+| `0x0B8A1` | `0x016C4` | CCERVR.BOT  | Image  | 168×48      |
+| `0x0CF65` | `0x00862` | CCERVFL1.LZ | Image  | 208×117     |
+| `0x0D7C7` | `0x00A8E` | CCERVFL2.LZ | Image  | 208×200     |
