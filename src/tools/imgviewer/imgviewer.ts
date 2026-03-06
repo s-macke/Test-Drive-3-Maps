@@ -4,114 +4,24 @@
  *
  * Extracts VGA images from DAT files using LZW + RLE decompression.
  *
- * Usage: tsx src/tools/imgviewer/imgviewer.ts <dat-file> <offset> <size> <width> [palette-file] [palette-offset]
+ * Usage: tsx src/tools/imgviewer/imgviewer.ts <dat-file> <offset> <size> <width> [palette-file] [palette-offset] [palette-base] [pixel-base]
  *
  * Example:
  *   npm run imgview -- public/base/DATAB.DAT 0x151 12083 320 public/base/DATAB.DAT 0x0
+ *   npm run imgview -- public/base/CSTEL.DAT 0x303 0x1D4A 208 public/base/CSTEL.DAT 0x0 144 128
  */
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { lzwDecode } from '../../shared/lzw.js';
-import { rleUnpack } from '../../shared/rle.js';
-
-// Default VGA palette (first 16 colors)
-const DEFAULT_PALETTE: number[] = [
-    0x00, 0x00, 0x00,  // 0: Black
-    0x00, 0x00, 0xA0,  // 1: Blue
-    0x00, 0xA0, 0x00,  // 2: Green
-    0x00, 0xA0, 0xA0,  // 3: Cyan
-    0xA0, 0x00, 0x00,  // 4: Red
-    0xA0, 0x00, 0xA0,  // 5: Magenta
-    0xA0, 0x50, 0x00,  // 6: Brown
-    0xA0, 0xA0, 0xA0,  // 7: Light Gray
-    0x50, 0x50, 0x50,  // 8: Dark Gray
-    0x50, 0x50, 0xF0,  // 9: Light Blue
-    0x50, 0xF0, 0x50,  // 10: Light Green
-    0x50, 0xF0, 0xF0,  // 11: Light Cyan
-    0xF0, 0x50, 0x50,  // 12: Light Red
-    0xF0, 0x50, 0xF0,  // 13: Light Magenta
-    0xF0, 0xF0, 0x50,  // 14: Yellow
-    0xF0, 0xF0, 0xF0,  // 15: White
-];
-
-// Fill rest of default palette with grays
-for (let i = 16; i < 256; i++) {
-    const gray = Math.floor((i - 16) * 255 / 240);
-    DEFAULT_PALETTE.push(gray, gray, gray);
-}
-
-/**
- * Load palette from DAT file
- * TD3 palettes are 112 colors, 6-bit VGA values (multiply by 4)
- */
-function loadPalette(data: Uint8Array, offset: number): number[] {
-    const palette = [...DEFAULT_PALETTE];  // Start with default
-
-    // Load 112 colors at palette indices 144-255
-    for (let i = 0; i < 112; i++) {
-        const r = data[offset + i * 3 + 0] * 4;
-        const g = data[offset + i * 3 + 1] * 4;
-        const b = data[offset + i * 3 + 2] * 4;
-        const idx = (i + 144) * 3;
-        palette[idx] = Math.min(255, r);
-        palette[idx + 1] = Math.min(255, g);
-        palette[idx + 2] = Math.min(255, b);
-    }
-
-    return palette;
-}
-
-/**
- * Convert indexed pixels to RGB using palette
- */
-function applyPalette(pixels: Uint8Array, palette: number[]): Uint8Array {
-    const rgb = new Uint8Array(pixels.length * 3);
-
-    for (let i = 0; i < pixels.length; i++) {
-        const idx = pixels[i] * 3;
-        rgb[i * 3 + 0] = palette[idx] ?? 0;
-        rgb[i * 3 + 1] = palette[idx + 1] ?? 0;
-        rgb[i * 3 + 2] = palette[idx + 2] ?? 0;
-    }
-
-    return rgb;
-}
-
-/**
- * Generate PPM image (simple, no dependencies)
- */
-function generatePPM(rgb: Uint8Array, width: number, height: number, flipVertical: boolean = true): Uint8Array {
-    const header = `P6\n${width} ${height}\n255\n`;
-    const headerBytes = new TextEncoder().encode(header);
-
-    const output = new Uint8Array(headerBytes.length + rgb.length);
-    output.set(headerBytes, 0);
-
-    if (flipVertical) {
-        // TD3 images are stored bottom-to-top
-        const rowSize = width * 3;
-        for (let y = 0; y < height; y++) {
-            const srcRow = (height - 1 - y) * rowSize;
-            const dstRow = headerBytes.length + y * rowSize;
-            output.set(rgb.subarray(srcRow, srcRow + rowSize), dstRow);
-        }
-    } else {
-        output.set(rgb, headerBytes.length);
-    }
-
-    return output;
-}
-
-/**
- * Parse hex or decimal number from string
- */
-function parseNumber(str: string): number {
-    if (str.toLowerCase().startsWith('0x')) {
-        return parseInt(str, 16);
-    }
-    return parseInt(str, 10);
-}
+import {
+    applyPalette,
+    applyPaletteLayer,
+    applyPixelBase,
+    createDefaultPalette,
+    decodeTd3Image,
+    generatePpm,
+    parseNumber,
+} from '../../shared/td3-image.js';
 
 async function main(): Promise<void> {
     const args = process.argv.slice(2);
@@ -119,7 +29,7 @@ async function main(): Promise<void> {
     if (args.length < 4) {
         console.log('Test Drive III Image Extractor');
         console.log('');
-        console.log('Usage: tsx src/tools/imgviewer/imgviewer.ts <dat-file> <offset> <size> <width> [palette-file] [palette-offset]');
+        console.log('Usage: tsx src/tools/imgviewer/imgviewer.ts <dat-file> <offset> <size> <width> [palette-file] [palette-offset] [palette-base] [pixel-base]');
         console.log('');
         console.log('Arguments:');
         console.log('  dat-file       Path to DAT file containing the image');
@@ -128,10 +38,13 @@ async function main(): Promise<void> {
         console.log('  width          Image width in pixels');
         console.log('  palette-file   Optional: DAT file containing palette (default: same as dat-file)');
         console.log('  palette-offset Optional: Offset of palette data (default: 0x0)');
+        console.log('  palette-base   Optional: Starting palette index for 112-color block (default: 144)');
+        console.log('  pixel-base     Optional: Value added to each pixel index before palette lookup (default: 0)');
         console.log('');
         console.log('Examples:');
         console.log('  npm run imgview -- public/base/DATAB.DAT 0x151 12083 320');
         console.log('  npm run imgview -- public/base/SCENE01.DAT 0x0 666 320 public/base/SCENE01.DAT 0x12378');
+        console.log('  npm run imgview -- public/base/CSTEL.DAT 0x303 0x1D4A 208 public/base/CSTEL.DAT 0x0 144 128');
         console.log('');
         console.log('Known image widths:');
         console.log('  320 - Dashboard/HUD graphics (.TOP, .BOT)');
@@ -148,6 +61,18 @@ async function main(): Promise<void> {
     const width = parseNumber(args[3]);
     const paletteFile = args[4] ?? datFile;
     const paletteOffset = args[5] ? parseNumber(args[5]) : 0;
+    const paletteBase = args[6] ? parseNumber(args[6]) : 144;
+    const pixelBase = args[7] ? parseNumber(args[7]) : 0;
+
+    if (paletteBase < 0 || paletteBase > 144) {
+        console.error('Error: palette-base must be between 0 and 144.');
+        process.exit(1);
+    }
+
+    if (pixelBase < 0 || pixelBase > 255) {
+        console.error('Error: pixel-base must be between 0 and 255.');
+        process.exit(1);
+    }
 
     console.log(`Reading image from ${datFile} @ 0x${offset.toString(16)} (${size} bytes)`);
     console.log(`Width: ${width} pixels`);
@@ -164,42 +89,34 @@ async function main(): Promise<void> {
 
         // Step 1: LZW decompress
         console.log('LZW decompressing...');
-        const lzwDecoded = lzwDecode(compressedData);
-        console.log(`After LZW: ${lzwDecoded.length} bytes`);
-
-        // Step 2: RLE unpack
-        console.log('RLE unpacking...');
-        const pixels = rleUnpack(lzwDecoded);
-        console.log(`After RLE: ${pixels.length} pixels`);
-
-        // Calculate height
-        const height = Math.floor(pixels.length / width);
+        const decoded = decodeTd3Image(compressedData, width);
+        console.log(`After RLE: ${decoded.pixelCount} pixels`);
+        const height = decoded.height;
         console.log(`Dimensions: ${width} x ${height}`);
 
-        if (height === 0) {
-            console.error('Error: Calculated height is 0. Check width parameter or compression.');
-            process.exit(1);
-        }
-
         // Load palette
-        console.log(`Loading palette from ${paletteFile} @ 0x${paletteOffset.toString(16)}`);
+        console.log(`Loading palette from ${paletteFile} @ 0x${paletteOffset.toString(16)} into indices ${paletteBase}-${paletteBase + 111}`);
         const paletteBuffer = await fs.readFile(paletteFile);
         const paletteData = new Uint8Array(paletteBuffer);
-        const palette = loadPalette(paletteData, paletteOffset);
+        const palette = createDefaultPalette();
+        applyPaletteLayer(palette, paletteData, paletteOffset, paletteBase, 112);
 
         // Show pixel value distribution
         const pixelCounts = new Map<number, number>();
-        for (const p of pixels) {
+        for (const p of decoded.indexedPixels) {
             pixelCounts.set(p, (pixelCounts.get(p) ?? 0) + 1);
         }
         const topPixels = [...pixelCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
         console.log('Top 5 pixel values:', topPixels.map(([v, c]) => `${v}(${c})`).join(', '));
 
+        // TD3 can bias image pixels into a palette bank before writing them.
+        const indexedPixels = applyPixelBase(decoded.indexedPixels, pixelBase);
+
         // Apply palette
-        const rgb = applyPalette(pixels.slice(0, width * height), palette);
+        const rgb = applyPalette(indexedPixels, palette);
 
         // Generate PPM
-        const ppm = generatePPM(rgb, width, height);
+        const ppm = generatePpm(rgb, width, height);
 
         // Output filename
         const baseName = path.basename(datFile, path.extname(datFile));

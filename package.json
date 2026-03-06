@@ -6,9 +6,10 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "export": "tsx src/tools/export/toobj.ts",
-    "lstview": "tsx src/tools/lstviewer/lstviewer.ts",
-    "imgview": "tsx src/tools/imgviewer/imgviewer.ts",
+    "export": "node --import tsx src/tools/export/toobj.ts",
+    "lstview": "node --import tsx src/tools/lstviewer/lstviewer.ts",
+    "imgview": "node --import tsx src/tools/imgviewer/imgviewer.ts",
+    "imgextract": "node --import tsx src/tools/imgextract/extract-all-images.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
