@@ -34,8 +34,8 @@ File offset tables for Test Drive III data files.
 | `0x236AB - 0x236B1`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                         |
 | `0x236B2`             | `0x2137` |          | Map     | Fifth map                                            |
 | `0x257EA - 0x2593A`   | `0x0150` |          | Palette | 112-color palette                                    |
-| `0x2593B - 0x28591`   | `0x2C56` |          | Image   | Landscape 320×50 (palette unknown)                   |
-| `0x28592 - 0x295E4`   | `0x1052` |          | Image   | Landscape 320×19 (palette unknown)                   |
+| `0x2593B - 0x28591`   | `0x2C56` |          | Image   | Landscape 320×50                                     |
+| `0x28592 - 0x295E4`   | `0x1052` |          | Image   | Landscape 320×19                                     |
 
 ## SCENE02.DAT (Cape Cod)
 
@@ -68,8 +68,8 @@ File offset tables for Test Drive III data files.
 | `0x2C962`             | `0x0F19` |          | Image   | Unknown (6080 pixels; likely 320×19)     |
 | `0x2D87C`             | `0x2137` |          | Map     | Fifth map                                |
 | `0x2F9B4`             | `0x0150` |          | Palette | 112-color palette                        |
-| `0x2FB05`             | `0x27DA` |          | Image   | Landscape 320×50 (palette unknown)       |
-| `0x322E0`             | `0x0F6A` |          | Image   | Landscape 320×19 (palette unknown)       |
+| `0x2FB05`             | `0x27DA` |          | Image   | Landscape 320×50                         |
+| `0x322E0`             | `0x0F6A` |          | Image   | Landscape 320×19                         |
 
 ## DATAA.DAT
 
@@ -102,22 +102,22 @@ File offset tables for Test Drive III data files.
 | Offset Range          | Size     | Filename     | Format  | Description                                                     |
 |-----------------------|----------|--------------|---------|-----------------------------------------------------------------|
 | `0x00000 - 0x00150`   | `0x0150` | COPCOLR.BIN  | Palette | 112-color palette                                               |
-| `0x00151 - 0x03084`   | `0x2F33` | COPA.LZ      | Image   | Police image 320×100 (palette unknown)                          |
-| `0x03085 - 0x05C16`   | `0x2B91` | COPB.LZ      | Image   | Police image (bottom) 320×58 (palette unknown)                  |
-| `0x05C17 - 0x06F1D`   | `0x1306` | COPSEQ.LZ    | Image   | Police light animation 128×90 (palette unknown)                 |
+| `0x00151 - 0x03084`   | `0x2F33` | COPA.LZ      | Image   | Police image 320×100                                            |
+| `0x03085 - 0x05C16`   | `0x2B91` | COPB.LZ      | Image   | Police image (bottom) 320×58                                    |
+| `0x05C17 - 0x06F1D`   | `0x1306` | COPSEQ.LZ    | Image   | Police light animation 128×90                                   |
 | `0x06F1E - 0x071E6`   | `0x02C8` | MASTERQ.BIN  |         | Unknown                                                         |
 | `0x071E7 - 0x07337`   | `0x0150` | KEYCOLR.BIN  | Palette | 112-color palette                                               |
 | `0x07338 - 0x08F32`   | `0x1BFA` | KEYS.LZ      | Image   | Car keys 192×144                                                |
 | `0x08F33 - 0x0A4D0`   | `0x159D` | NEWWAVE.MUS  | Music   | Music resource                                                  |
 | `0x0A4D1 - 0x0B8BC`   | `0x13EB` | SELECT.LZ    | Image   | Menu background 320×200                                         |
-| `0x0B8BD - 0x0EDAC`   | `0x34EF` | DIFFLEVA.LZ  | Image   | Menu detail 320×56 (palette unknown)                            |
-| `0x0EDAD - 0x121BE`   | `0x3411` | DIFFLEVB.LZ  | Image   | Skill driver option 320×65 (palette unknown)                    |
-| `0x121BF - 0x15413`   | `0x3254` | DIFFLEVC.LZ  | Image   | Car bottom 320×65 (palette unknown)                             |
+| `0x0B8BD - 0x0EDAC`   | `0x34EF` | DIFFLEVA.LZ  | Image   | Menu detail 320×56                                              |
+| `0x0EDAD - 0x121BE`   | `0x3411` | DIFFLEVB.LZ  | Image   | Skill driver option 320×65                                      |
+| `0x121BF - 0x15413`   | `0x3254` | DIFFLEVC.LZ  | Image   | Car bottom 320×65                                               |
 | `0x15414 - 0x15514`   | `0x0100` | SSBJ.LZ      | Image   | Unknown 112×10                                                   |
 | `0x15515 - 0x15664`   | `0x0150` | TOPCOLR.BIN  | Palette | 112-color palette                                               |
-| `0x15666`             | `0x31E2` | TOPSCORA.LZ  | Image   | 320×67 (palette unknown)                                        |
-| `0x18849`             | `0x3535` | TOPSCORB.LZ  | Image   | Car top 320×66 (palette unknown)                                |
-| `0x1BD7F`             | `0x2FAC` | TOPSCORC.LZ  | Image   | Car bottom 320×67 (palette unknown)                             |
+| `0x15666`             | `0x31E2` | TOPSCORA.LZ  | Image   | 320×67                                                          |
+| `0x18849`             | `0x3535` | TOPSCORB.LZ  | Image   | Car top 320×66                                                  |
+| `0x1BD7F`             | `0x2FAC` | TOPSCORC.LZ  | Image   | Car bottom 320×67                                               |
 | `0x1ED2C - 0x21602`   | `0x28D6` | SCENETT1.DAT |         | Same unidentified non-image format as `SCENE01` `0x15490` chunk |
 | `0x21603 - 0x2373A`   | `0x2137` | SCENETTA.DAT | Map     | Title map                                                       |
 | `0x2373B - 0x32F19`   | `0xF7DE` | SCENETTT.BIN | 3D      | Tiles                                                           |
