@@ -4,6 +4,7 @@ Reverse engineered and extracted maps of the DOS Game *Test Drive III: The Passi
 
 
 # **[Online Viewer](https://s-macke.github.io/Test-Drive-3-Maps/)**
+# **[Extracted Images](images/)**
 
 Wavefront Object files are available in the objs directory.
 
@@ -35,6 +36,12 @@ npm run export
 ```
 Exports all maps and objects to the `objs/` directory.
 
+### Exporting PNG Images
+```bash
+npm run imgextract
+```
+Exports the currently documented DAT images as indexed-color PNGs to the `images/` directory.
+
 ### CLI Tools
 ```bash
 # View LST file contents
@@ -57,9 +64,15 @@ src/
 public/
 └── base/        # Game data files (required)
 objs/            # Exported Wavefront OBJ files
-images/          # Extracted VGA images (PPM format)
+images/          # Extracted VGA images (PNG format)
 spec/            # File format specifications
 ```
+
+Example extracted images:
+
+- [images/SCENE01/SCENE01_0x0_320x33.png](images/SCENE01/SCENE01_0x0_320x33.png)
+- [images/DATAA/TITLELET.LZ.png](images/DATAA/TITLELET.LZ.png)
+- [images/DATAB/COPA.LZ.png](images/DATAB/COPA.LZ.png)
 
 ## File Format Specifications
 
