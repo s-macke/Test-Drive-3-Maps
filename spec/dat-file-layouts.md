@@ -91,9 +91,9 @@ File offset tables for Test Drive III data files.
 | `0x1227B` | `0x38F7` | CREDITB.LZ   | Image   | Credits 320×65 (palette unknown)                             |
 | `0x15B73` | `0x344E` | CREDITC.LZ   | Image   | Credits 320×65 (palette unknown)                             |
 | `0x18FC2` | `0x0112` | COMPASS.LZ   | Image   | Compass strip 152×8                                          |
-| `0x190D5` | `0x0373` | CHASE.LZ     | Image   | Camera view arrows 64×248                                    |
-| `0x19449` | `0x12D1` | WATER.LZ     | Image   | Unknown (15360 pixels; resolution unresolved)                |
-| `0x1A71B` | `0x0F3D` | WATEREGA.LZ  | Image   | Unknown (15360 pixels; resolution unresolved)                |
+| `0x190D5` | `0x0373` | CHASE.LZ     | Image   | Camera view arrows 496×32                                    |
+| `0x19449` | `0x12D1` | WATER.LZ     | Image   | Water effect 320×48                                          |
+| `0x1A71B` | `0x0F3D` | WATEREGA.LZ  | Image   | Water effect (variant) 320×48                                |
 | `0x1B659` | `0x1CFF` | BROKE.LZ     | Image   | Broken windshield 320×96                                     |
 | `0x1D359` | `0x136C` | BROKEGA.LZ   | Image   | Broken windshield (variant) 320×96                           |
 
@@ -113,7 +113,7 @@ File offset tables for Test Drive III data files.
 | `0x0B8BD - 0x0EDAC`   | `0x34EF` | DIFFLEVA.LZ  | Image   | Menu detail 320×56 (palette unknown)                            |
 | `0x0EDAD - 0x121BE`   | `0x3411` | DIFFLEVB.LZ  | Image   | Skill driver option 320×65 (palette unknown)                    |
 | `0x121BF - 0x15413`   | `0x3254` | DIFFLEVC.LZ  | Image   | Car bottom 320×65 (palette unknown)                             |
-| `0x15414 - 0x15514`   | `0x0100` | SSBJ.LZ      | Image   | Unknown (decompresses to 1120 pixels; width unresolved)         |
+| `0x15414 - 0x15514`   | `0x0100` | SSBJ.LZ      | Image   | Unknown 112×10                                                   |
 | `0x15515 - 0x15664`   | `0x0150` | TOPCOLR.BIN  | Palette | 112-color palette                                               |
 | `0x15666`             | `0x31E2` | TOPSCORA.LZ  | Image   | 320×67 (palette unknown)                                        |
 | `0x18849`             | `0x3535` | TOPSCORB.LZ  | Image   | Car top 320×66 (palette unknown)                                |

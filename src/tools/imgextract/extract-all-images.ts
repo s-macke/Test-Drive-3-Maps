@@ -18,12 +18,16 @@ function replaceWithPng(filename: string): string {
 
 function buildOutputPath(entry: Td3ImageManifestEntry, width: number, height: number): string {
     const datDir = sanitizeFileComponent(path.basename(entry.datFile, path.extname(entry.datFile)));
+    const isGuessed = entry.status === 'guessed';
     if (entry.filename) {
-        return path.join('images', datDir, sanitizeFileComponent(replaceWithPng(entry.filename)));
+        const filename = isGuessed ? `${entry.filename}.guessed.png` : replaceWithPng(entry.filename);
+        return path.join('images', datDir, sanitizeFileComponent(filename));
     }
 
     const hexOffset = entry.offset.toString(16).toLowerCase();
-    const fallback = `${datDir}_0x${hexOffset}_${width}x${height}.png`;
+    const fallback = isGuessed
+        ? `${datDir}_0x${hexOffset}_${width}x${height}.guessed.png`
+        : `${datDir}_0x${hexOffset}_${width}x${height}.png`;
     return path.join('images', datDir, sanitizeFileComponent(fallback));
 }
 
@@ -48,7 +52,7 @@ async function readDatFiles(manifest: readonly Td3ImageManifestEntry[]): Promise
 async function exportEntry(
     entry: Td3ImageManifestEntry,
     fileData: ReadonlyMap<string, Uint8Array>,
-): Promise<'exported' | 'skipped' | 'failed'> {
+): Promise<'ready' | 'guessed' | 'skipped' | 'failed'> {
     if (entry.status === 'skipped') {
         return 'skipped';
     }
@@ -81,7 +85,7 @@ async function exportEntry(
         await fs.mkdir(path.dirname(absoluteOutputPath), { recursive: true });
         await fs.writeFile(absoluteOutputPath, png);
 
-        return 'exported';
+        return entry.status;
     } catch (error) {
         const message = error instanceof Error ? error.message : 'Unknown export error';
         console.error(`Failed ${entry.id}: ${message}`);
@@ -91,14 +95,17 @@ async function exportEntry(
 
 async function main(): Promise<void> {
     const fileData = await readDatFiles(td3ImageManifest);
-    let exported = 0;
+    let exportedReady = 0;
+    let exportedGuessed = 0;
     let skipped = 0;
     let failed = 0;
 
     for (const image of td3ImageManifest) {
         const result = await exportEntry(image, fileData);
-        if (result === 'exported') {
-            exported++;
+        if (result === 'ready') {
+            exportedReady++;
+        } else if (result === 'guessed') {
+            exportedGuessed++;
         } else if (result === 'skipped') {
             skipped++;
         } else {
@@ -106,7 +113,8 @@ async function main(): Promise<void> {
         }
     }
 
-    console.log(`Exported ${exported} images.`);
+    console.log(`Exported ${exportedReady} ready images.`);
+    console.log(`Exported ${exportedGuessed} guessed images.`);
     console.log(`Skipped ${skipped} manifest rows.`);
     console.log(`Failed ${failed} rows.`);
 }
