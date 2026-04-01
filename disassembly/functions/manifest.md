@@ -11,10 +11,10 @@
 | seg000_07BC_sub.asm | sub  | 3436    | 75    |  |
 | seg000_084C_sub.asm | sub  | 4187    | 87    |  |
 | seg000_08DC_sub.asm | sub  | 16783   | 361   |  |
-| seg000_0C34_sub.asm | sub  | 1044    | 26    |  |
-| seg000_0C58_sub.asm | sub  | 1046    | 26    |  |
-| seg000_0C7C_sub.asm | sub  | 1468    | 34    |  |
-| seg000_0CA8_sub.asm | sub  | 3962    | 86    |  |
+| seg000_0C34_sub.asm | sub  | 1044    | 26    | Positions cursor and prints a 1-digit value via %1d. |
+| seg000_0C58_sub.asm | sub  | 1046    | 26    | Positions cursor and prints a 1-digit value via %1d. |
+| seg000_0C7C_sub.asm | sub  | 1468    | 34    | Positions cursor and prints NY via sub_194CE. |
+| seg000_0CA8_sub.asm | sub  | 3962    | 86    | Loads 112 palette entries (0x150 bytes) into dseg:0B9A. |
 | seg000_0D3C_sub.asm | sub  | 3442    | 76    |  |
 | seg000_0DBA_sub.asm | sub  | 3157    | 69    |  |
 | seg000_0E26_sub.asm | sub  | 3345    | 73    |  |
@@ -22,13 +22,13 @@
 | seg000_0EC6_sub.asm | sub  | 12283   | 259   |  |
 | seg000_10D4_sub.asm | sub  | 12762   | 277   |  |
 | seg000_1344_sub.asm | sub  | 3066    | 66    |  |
-| seg000_141E_sub.asm | sub  | 10591   | 222   |  |
-| seg000_15BC_sub.asm | sub  | 2340    | 52    |  |
-| seg000_1606_sub.asm | sub  | 2200    | 49    |  |
-| seg000_164C_sub.asm | sub  | 1933    | 44    |  |
+| seg000_141E_sub.asm | sub  | 10591   | 222   | Looks up a data file table entry, builds the path, and opens it (disk prompt on fail). |
+| seg000_15BC_sub.asm | sub  | 2340    | 52    | 16-bit rolling hash over a string (base 0x101 in sub_164C). |
+| seg000_1606_sub.asm | sub  | 2200    | 49    | 16-bit sum of index*byte over a string (skips last byte). |
+| seg000_164C_sub.asm | sub  | 1933    | 44    | Returns hash pair (AX sum, DX rolling hash) for table lookup. |
 | seg000_1688_sub.asm | sub  | 34650   | 705   |  |
-| seg000_1C3E_sub.asm | sub  | 2517    | 54    |  |
-| seg000_1C9E_sub.asm | sub  | 4591    | 94    |  |
+| seg000_1C3E_sub.asm | sub  | 2517    | 54    | Polls joystick state and returns a mapped direction/button code. |
+| seg000_1C9E_sub.asm | sub  | 4591    | 94    | Joystick calibration thresholds; sets direction bits in byte_28467. |
 | seg001_0008_sub.asm | sub  | 1551    | 35    |  |
 | seg001_0038_sub.asm | sub  | 1404    | 33    |  |
 | seg001_006A_sub.asm | sub  | 49157   | 1093  | Title/menu screen controller: loads LZW assets, draws UI, then runs the input/update loop. |
@@ -112,8 +112,8 @@
 | seg002_1DCA_sub.asm | sub  | 2449    | 53    |  |
 | seg003_0004_sub.asm | sub  | 140620  | 2749  |  |
 | seg004_0002_sub.asm | sub  | 500     | 12    |  |
-| seg004_0007_sub.asm | sub  | 1382    | 30    |  |
-| seg004_002C_sub.asm | sub  | 996     | 22    |  |
+| seg004_0007_sub.asm | sub  | 1382    | 30    | Allocates 0x300 paragraphs via int 21h AH=48h and stores the segment. |
+| seg004_002C_sub.asm | sub  | 996     | 22    | Frees the DOS block at word_20798 via int 21h AH=49h. |
 | seg004_003F_sub.asm | sub  | 6048    | 125   | LZW decode main loop (clear/end codes, variable code size, dictionary growth). |
 | seg004_0138_sub.asm | sub  | 1021    | 24    |  |
 | seg004_0154_sub.asm | sub  | 2828    | 63    | LZW bitreader for variable-width codes. |
@@ -127,33 +127,33 @@
 | seg004_153C_sub.asm | sub  | 5346    | 113   |  |
 | seg004_15FC_sub.asm | sub  | 8360    | 135   |  |
 | seg005_066A_sub.asm | sub  | 374     | 9     |  |
-| seg005_066C_sub.asm | sub  | 5042    | 93    |  |
-| seg005_06E0_sub.asm | sub  | 1225    | 26    |  |
+| seg005_066C_sub.asm | sub  | 5042    | 93    | Gameport poll: measures joystick axis timing and returns button bits. |
+| seg005_06E0_sub.asm | sub  | 1225    | 26    | Joystick calibration helper; scales axis values from sub_C58C. |
 | seg005_070A_sub.asm | sub  | 1771    | 39    |  |
 | seg005_073B_sub.asm | sub  | 1061    | 25    |  |
 | seg005_0754_sub.asm | sub  | 1184    | 28    |  |
 | seg005_0773_sub.asm | sub  | 1057    | 25    |  |
 | seg005_078C_sub.asm | sub  | 5008    | 114   |  |
-| seg005_0856_sub.asm | sub  | 1281    | 28    |  |
-| seg005_0870_sub.asm | sub  | 1230    | 26    |  |
-| seg005_0882_sub.asm | sub  | 1529    | 31    |  |
-| seg005_08A8_sub.asm | sub  | 1401    | 30    |  |
-| seg005_08C1_sub.asm | sub  | 895     | 20    |  |
+| seg005_0856_sub.asm | sub  | 1281    | 28    | Lseek wrapper (int 21h AH=42h, AL=0) returning success via AX. |
+| seg005_0870_sub.asm | sub  | 1230    | 26    | Opens a file read-only via int 21h AH=3Dh. |
+| seg005_0882_sub.asm | sub  | 1529    | 31    | Gets file size by seeking to EOF then rewinding (int 21h AH=42h). |
+| seg005_08A8_sub.asm | sub  | 1401    | 30    | Reads from a file handle via int 21h AH=3Fh. |
+| seg005_08C1_sub.asm | sub  | 895     | 20    | Closes a file handle via int 21h AH=3Eh. |
 | seg005_08CD_sub.asm | sub  | 15022   | 304   |  |
 | seg005_0AAD_sub.asm | sub  | 1840    | 41    |  |
-| seg005_0AE8_sub.asm | sub  | 3314    | 64    |  |
+| seg005_0AE8_sub.asm | sub  | 3314    | 64    | VGA DAC writer; streams 256 palette entries from CS:000A. |
 | seg005_0B25_sub.asm | sub  | 3241    | 63    |  |
 | seg005_0B63_sub.asm | sub  | 1462    | 34    |  |
 | seg005_0B91_sub.asm | sub  | 1678    | 39    |  |
 | seg005_0BBF_sub.asm | sub  | 1462    | 34    |  |
 | seg005_0BED_sub.asm | sub  | 1504    | 35    |  |
 | seg005_0C1E_sub.asm | sub  | 817     | 19    |  |
-| seg005_0C32_sub.asm | sub  | 1055    | 24    |  |
+| seg005_0C32_sub.asm | sub  | 1055    | 24    | Copies the palette buffer to CS:000A and flushes it via sub_CA08. |
 | seg005_0C4D_sub.asm | sub  | 6353    | 117   |  |
-| seg005_0E35_sub.asm | sub  | 3688    | 63    |  |
-| seg005_0E85_sub.asm | sub  | 12820   | 222   |  |
-| seg005_10A7_sub.asm | sub  | 1884    | 34    |  |
-| seg005_10D7_sub.asm | sub  | 1683    | 30    |  |
+| seg005_0E35_sub.asm | sub  | 3688    | 63    | Saves INT 09h vector and installs a custom handler (int 21h AH=35h/25h). |
+| seg005_0E85_sub.asm | sub  | 12820   | 222   | Restores the INT 09h vector from dword_28140 via int 21h AH=25h. |
+| seg005_10A7_sub.asm | sub  | 1884    | 34    | Hooks INT 08h (timer) via int 21h AH=35h/25h. |
+| seg005_10D7_sub.asm | sub  | 1683    | 30    | Restores INT 08h vector via int 21h AH=25h. |
 | seg005_1118_sub.asm | sub  | 737     | 18    |  |
 | seg005_1125_sub.asm | sub  | 6259    | 133   |  |
 | seg005_11FF_sub.asm | sub  | 8583    | 181   |  |
@@ -259,8 +259,8 @@
 | seg006_4C32_sub.asm | sub  | 14265   | 290   |  |
 | seg006_4E43_sub.asm | sub  | 5198    | 105   |  |
 | seg006_4F17_sub.asm | sub  | 12758   | 258   |  |
-| seg006_511F_sub.asm | sub  | 5336    | 112   |  |
-| seg006_5219_sub.asm | sub  | 4274    | 90    |  |
+| seg006_511F_sub.asm | sub  | 5336    | 112   | Parses SCENETTO.BIN entries with an 8-byte header; uses +4/+5/+6 for alternate shape selection. |
+| seg006_5219_sub.asm | sub  | 4274    | 90    | Second SCENETTO.BIN consumer using the same 8-byte header and alternate-shape offset. |
 | seg006_52E2_sub.asm | sub  | 40158   | 837   |  |
 | seg006_5920_sub.asm | sub  | 1121    | 24    |  |
 | seg006_5950_sub.asm | sub  | 13036   | 267   |  |
@@ -288,7 +288,7 @@
 | seg006_6E18_sub.asm | sub  | 4327    | 81    |  |
 | seg006_6F34_sub.asm | sub  | 796     | 18    |  |
 | seg006_6F49_sub.asm | sub  | 11903   | 251   |  |
-| seg006_7174_sub.asm | sub  | 10217   | 214   |  |
+| seg006_7174_sub.asm | sub  | 10217   | 214   | Resolves object/tile selectors into descriptor banks; AH picks object bank, AL picks one of two tile banks. |
 | seg006_7303_sub.asm | sub  | 7538    | 158   |  |
 | seg006_743D_sub.asm | sub  | 3367    | 71    |  |
 | seg006_74CF_sub.asm | sub  | 4775    | 102   |  |
@@ -321,7 +321,7 @@
 | seg009_0003_sub.asm | sub  | 460     | 10    |  |
 | seg009_0007_sub.asm | sub  | 1729    | 35    |  |
 | seg010_000A_sub.asm | sub  | 1351    | 31    |  |
-| seg011_000D_sub.asm | sub  | 2392    | 47    |  |
+| seg011_000D_sub.asm | sub  | 2392    | 47    | Prints a "$"-terminated string via int 21h AH=09h when enabled. |
 | seg012_000D_sub.asm | sub  | 3494    | 70    |  |
 | seg013_0003_sub.asm | sub  | 5623    | 113   |  |
 | seg014_0004_sub.asm | sub  | 2825    | 57    |  |
@@ -338,15 +338,15 @@
 | seg025_000D_sub.asm | sub  | 33484   | 717   |  |
 | seg026_0006_sub.asm | sub  | 27213   | 580   |  |
 | seg027_0004_sub.asm | sub  | 6827    | 128   |  |
-| seg028_000D_sub.asm | sub  | 15066   | 280   |  |
+| seg028_000D_sub.asm | sub  | 15066   | 280   | Sets video palettes and updates INT 43h via int 21h AH=25h. |
 | seg029_0007_sub.asm | sub  | 3931    | 80    |  |
 | seg030_0005_sub.asm | sub  | 5084    | 99    |  |
 | seg031_001A_sub.asm | sub  | 10850   | 218   | DOS entry stub that validates DOS version, sets up stack/memory/BSS, installs interrupts/env state, then calls main and exit handlers. |
 | seg031_01A4_sub.asm | sub  | 833     | 18    |  |
-| seg031_01BB_sub.asm | sub  | 2355    | 48    |  |
-| seg031_0202_sub.asm | sub  | 1764    | 33    |  |
+| seg031_01BB_sub.asm | sub  | 2355    | 48    | Closes flagged handles then exits via int 21h AH=4Ch. |
+| seg031_0202_sub.asm | sub  | 1764    | 33    | Restores INT 00h (and optional vector) via int 21h AH=25h. |
 | seg031_022F_sub.asm | sub  | 983     | 20    |  |
-| seg031_0242_sub.asm | sub  | 5097    | 110   |  |
+| seg031_0242_sub.asm | sub  | 5097    | 110   | Releases a file slot, flushes/closes, and deletes \\<id> when needed. |
 | seg031_030A_sub.asm | sub  | 1785    | 40    |  |
 | seg031_0336_sub.asm | sub  | 15354   | 306   |  |
 | seg031_0528_sub.asm | sub  | 9331    | 195   |  |
@@ -358,10 +358,10 @@
 | seg031_078A_sub.asm | sub  | 1714    | 41    |  |
 | seg031_07BC_sub.asm | sub  | 1653    | 38    |  |
 | seg031_07E8_sub.asm | sub  | 1333    | 31    |  |
-| seg031_0808_sub.asm | sub  | 1351    | 27    |  |
+| seg031_0808_sub.asm | sub  | 1351    | 27    | Reads a key via int 21h AH=08h (direct console input). |
 | seg031_0820_sub.asm | sub  | 1044    | 25    |  |
 | seg031_0836_sub.asm | sub  | 5138    | 111   |  |
-| seg031_08EA_sub.asm | sub  | 2949    | 66    |  |
+| seg031_08EA_sub.asm | sub  | 2949    | 66    | Installs an INT 24h critical error handler via int 21h AH=25h. |
 | seg031_0937_sub.asm | sub  | 800     | 19    |  |
 | seg031_0940_sub.asm | sub  | 4908    | 108   |  |
 | seg031_09DC_sub.asm | sub  | 1812    | 41    |  |
@@ -394,30 +394,30 @@
 | seg031_18F0_sub.asm | sub  | 3905    | 82    |  |
 | seg031_1970_sub.asm | sub  | 2012    | 44    |  |
 | seg031_1998_sub.asm | sub  | 1884    | 41    |  |
-| seg031_19D2_sub.asm | sub  | 1565    | 33    |  |
-| seg031_19F2_sub.asm | sub  | 8834    | 164   |  |
-| seg031_1AD0_sub.asm | sub  | 6241    | 129   |  |
-| seg031_1B78_sub.asm | sub  | 5821    | 109   |  |
+| seg031_19D2_sub.asm | sub  | 1565    | 33    | Closes a file handle via int 21h AH=3Eh and clears flags. |
+| seg031_19F2_sub.asm | sub  | 8834    | 164   | Text-mode read using int 21h AH=3Fh with CR/LF and ^Z handling. |
+| seg031_1AD0_sub.asm | sub  | 6241    | 129   | Text-mode write path that seeks to EOF when append is set. |
+| seg031_1B78_sub.asm | sub  | 5821    | 109   | Writes buffered bytes via int 21h AH=40h. |
 | seg031_1BFA_sub.asm | sub  | 905     | 22    |  |
 | seg031_1C0C_sub.asm | sub  | 2729    | 59    |  |
 | seg031_1C55_sub.asm | sub  | 7807    | 162   |  |
 | seg031_1D38_sub.asm | sub  | 2238    | 49    |  |
 | seg031_1D72_sub.asm | sub  | 1248    | 28    |  |
 | seg031_1D94_sub.asm | sub  | 1416    | 32    |  |
-| seg031_1DB6_sub.asm | sub  | 4047    | 85    |  |
-| seg031_1E24_sub.asm | sub  | 3196    | 64    |  |
-| seg031_1E7A_sub.asm | sub  | 2001    | 47    |  |
-| seg031_1EBA_sub.asm | sub  | 1368    | 32    |  |
-| seg031_1ED6_sub.asm | sub  | 910     | 22    |  |
-| seg031_1EE8_sub.asm | sub  | 2312    | 51    |  |
+| seg031_1DB6_sub.asm | sub  | 4047    | 85    | Allocates DOS memory blocks via int 21h AH=48h for a table. |
+| seg031_1E24_sub.asm | sub  | 3196    | 64    | Resizes a DOS memory block via int 21h AH=4Ah. |
+| seg031_1E7A_sub.asm | sub  | 2001    | 47    | Appends one ASCIIZ string to another (path builder). |
+| seg031_1EBA_sub.asm | sub  | 1368    | 32    | Formats a value into ASCII using base arg_6 (sign handling for base 10). |
+| seg031_1ED6_sub.asm | sub  | 910     | 22    | Thin int 21h wrapper using AH/AL/DX from args. |
+| seg031_1EE8_sub.asm | sub  | 2312    | 51    | Generic int 21h thunk that loads regs from a struct and stores results. |
 | seg031_1F32_sub.asm | sub  | 1749    | 41    |  |
-| seg031_1F5E_sub.asm | sub  | 970     | 20    |  |
+| seg031_1F5E_sub.asm | sub  | 970     | 20    | Deletes a file via int 21h AH=41h. |
 | seg031_1F6C_sub.asm | sub  | 3499    | 71    |  |
 | seg031_1FB0_sub.asm | sub  | 436     | 10    |  |
 | seg031_1FB6_sub.asm | sub  | 2280    | 45    |  |
 | seg031_1FE4_sub.asm | sub  | 2780    | 61    |  |
-| seg031_2052_sub.asm | sub  | 4602    | 85    |  |
-| seg031_20CC_sub.asm | sub  | 15098   | 270   |  |
+| seg031_2052_sub.asm | sub  | 4602    | 85    | Validates and performs seeks via int 21h AH=42h. |
+| seg031_20CC_sub.asm | sub  | 15098   | 270   | Open/create/attribute handler using int 21h 3Dh/3Ch/43h/44h. |
 | seg031_225F_sub.asm | sub  | 750     | 17    |  |
 | seg031_2270_sub.asm | sub  | 1096    | 24    |  |
 | seg031_2284_sub.asm | sub  | 868     | 22    |  |
@@ -480,7 +480,7 @@
 | seg033_026E_sub.asm | sub  | 726     | 16    |  |
 | seg033_0279_sub.asm | sub  | 1413    | 33    |  |
 | seg033_02A1_sub.asm | sub  | 1838    | 38    |  |
-| seg033_02F6_sub.asm | sub  | 11929   | 235   |  |
+| seg033_02F6_sub.asm | sub  | 11929   | 235   | Loads a data block via int 21h open/read/seek/alloc/close. |
 | seg033_0489_sub.asm | sub  | 9713    | 191   |  |
 | seg033_05DB_sub.asm | sub  | 2379    | 49    |  |
 | seg033_0628_sub.asm | sub  | 1165    | 25    |  |
@@ -509,6 +509,6 @@
 | seg033_0F89_sub.asm | sub  | 2835    | 59    |  |
 | seg033_0FFA_sub.asm | sub  | 3289    | 70    |  |
 | seg033_106E_sub.asm | sub  | 1873    | 43    |  |
-| seg034_0008_sub.asm | sub  | 1521    | 34    |  |
+| seg034_0008_sub.asm | sub  | 1521    | 34    | Frees a DOS memory block via int 21h AH=49h. |
 | seg035_000A_sub.asm | sub  | 1280    | 29    |  |
 | seg035_0024_sub.asm | sub  | 3271    | 71    |  |
