@@ -39,12 +39,6 @@ export interface MapsCollection {
     cars: Mesh[];
 }
 
-// Color map entry from color.ts
-export interface ColorMapEntry {
-    color0: number;
-    color1: number;
-}
-
 // FlyControls types
 export interface MoveState {
     up: number;

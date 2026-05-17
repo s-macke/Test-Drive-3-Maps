@@ -4,72 +4,76 @@ File offset tables for Test Drive III data files.
 
 ## SCENE01.DAT (Pacific Coast)
 
-| Offset Range          | Size     | Filename | Format  | Description                                                  |
-|-----------------------|----------|----------|---------|--------------------------------------------------------------|
-| `0x00000 - 0x00299`   | `0x0299` |          | Image   | Title text "PACIFIC - YOSEMITE" 320×33                       |
-| `0x0029A - 0x0045A`   | `0x01C0` |          | Image   | Icon (same text, different font) 72×40                       |
-| `0x0045B - 0x1023F`   | `0xFDE4` |          | 3D      | Tiles                                                        |
-| `0x10240 - 0x12377`   | `0x2137` |          | Map     | First map                                                    |
-| `0x12378 - 0x124C8`   | `0x0150` |          | Palette | 112-color palette                                            |
-| `0x124C9 - 0x14233`   | `0x1D6A` |          | Image   | Unknown (16000 pixels; likely 320×50)                        |
-| `0x14234 - 0x1548F`   | `0x125B` |          | Image   | Unknown (6080 pixels; likely 320×19)                         |
-| `0x15490 - 0x17D66`   | `0x28D6` |          | Sprites | Scene render descriptor bank (same format as `SCENETT1.DAT`) |
-| `0x17D67 - 0x17D6D`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
-| `0x17D6E - 0x17D74`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
-| `0x17D75 - 0x18B9E`   | `0x0E29` |          |         | Unknown                                                      |
-| `0x18B9F - 0x257E9`   | `0xCC4A` |          |         | Unknown (not loaded)                                         |
-| `0x18B9F`             | `0x09A0` |          |         | Unknown                                                      |
-| `0x19540`             | `0x0C8B` |          |         | Unknown                                                      |
-| `0x1A1CC`             | `0x2137` |          | Map     | Second map                                                   |
-| `0x1C304 - 0x1C30A`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
-| `0x1C30B - 0x1C311`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
-| `0x1C312 - 0x1C318`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
-| `0x1C319`             | `0x2137` |          | Map     | Third map                                                    |
-| `0x1E451`             | `0x0150` |          | Palette | 112-color palette                                            |
-| `0x1E5A2`             | `0x1C09` |          | Image   | Unknown (16000 pixels; likely 320×50)                        |
-| `0x201AC`             | `0x13B8` |          | Image   | Unknown (6080 pixels; likely 320×19)                         |
-| `0x21565`             | `0x2137` |          | Map     | Fourth map                                                   |
-| `0x2369D - 0x236A3`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
-| `0x236A4 - 0x236AA`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
-| `0x236AB - 0x236B1`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                 |
-| `0x236B2`             | `0x2137` |          | Map     | Fifth map                                                    |
-| `0x257EA - 0x2593A`   | `0x0150` |          | Palette | 112-color palette                                            |
-| `0x2593B - 0x28591`   | `0x2C56` |          | Image   | Landscape 320×50                                             |
-| `0x28592 - 0x295E4`   | `0x1052` |          | Image   | Landscape 320×19                                             |
+The file holds 5 maps (Pacific Coast #1-#5) sharing **3 sub-scene palettes (A/B/C)**, **3 landscape-strip pairs** (one 320×50 ground + one 320×19 sky per pair), one **2D sprite bank** consumed by the sprite blitter, and the shared **tile geometry**. Each palette accompanies its matching landscape-strip pair; the maps reference whichever palette is active for their sub-scene.
+
+| Offset Range          | Size     | Filename | Format  | Description                                                                              |
+|-----------------------|----------|----------|---------|------------------------------------------------------------------------------------------|
+| `0x00000 - 0x00299`   | `0x0299` |          | Image   | Title text "PACIFIC - YOSEMITE" 320×33                                                   |
+| `0x0029A - 0x0045A`   | `0x01C0` |          | Image   | Icon (same text, different font) 72×40                                                   |
+| `0x0045B - 0x1023F`   | `0xFDE4` |          | 3D      | Tile geometry (shared by all 5 maps)                                                     |
+| `0x10240 - 0x12377`   | `0x2137` |          | Map     | Map 1 (Pacific Coast #1)                                                                 |
+| `0x12378 - 0x124C8`   | `0x0150` |          | Palette | **Palette A** — 112 colors, paired with landscape strips A+B below                       |
+| `0x124C9 - 0x14233`   | `0x1D6A` |          | Image   | Landscape ground strip A 320×50 (uses palette A)                                         |
+| `0x14234 - 0x1548F`   | `0x125B` |          | Image   | Landscape sky strip B 320×19 (uses palette A)                                            |
+| `0x15490 - 0x17D66`   | `0x28D6` |          | Sprites | **2D sprite bank** — 128 billboard sprites used by the sprite blitter (`sub_15153`)      |
+| `0x17D67 - 0x17D6D`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x17D6E - 0x17D74`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x17D75 - 0x18B9E`   | `0x0E29` |          |         | Unknown                                                                                  |
+| `0x18B9F - 0x257E9`   | `0xCC4A` |          |         | Unknown (not loaded)                                                                     |
+| `0x18B9F`             | `0x09A0` |          |         | Unknown                                                                                  |
+| `0x19540`             | `0x0C8B` |          |         | Unknown                                                                                  |
+| `0x1A1CC`             | `0x2137` |          | Map     | Map 2 (Pacific Coast #2)                                                                 |
+| `0x1C304 - 0x1C30A`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x1C30B - 0x1C311`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x1C312 - 0x1C318`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x1C319`             | `0x2137` |          | Map     | Map 3 (Pacific Coast #3)                                                                 |
+| `0x1E451`             | `0x0150` |          | Palette | **Palette B** — 112 colors, paired with landscape strips C+D below                       |
+| `0x1E5A2`             | `0x1C09` |          | Image   | Landscape ground strip C 320×50 (uses palette B)                                         |
+| `0x201AC`             | `0x13B8` |          | Image   | Landscape sky strip D 320×19 (uses palette B)                                            |
+| `0x21565`             | `0x2137` |          | Map     | Map 4 (Pacific Coast #4)                                                                 |
+| `0x2369D - 0x236A3`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x236A4 - 0x236AA`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x236AB - 0x236B1`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x236B2`             | `0x2137` |          | Map     | Map 5 (Pacific Coast #5)                                                                 |
+| `0x257EA - 0x2593A`   | `0x0150` |          | Palette | **Palette C** — 112 colors, paired with landscape strips E+F below                       |
+| `0x2593B - 0x28591`   | `0x2C56` |          | Image   | Landscape ground strip E 320×50 (uses palette C)                                         |
+| `0x28592 - 0x295E4`   | `0x1052` |          | Image   | Landscape sky strip F 320×19 (uses palette C)                                            |
 
 ## SCENE02.DAT (Cape Cod)
 
-| Offset Range          | Size     | Filename | Format  | Description                              |
-|-----------------------|----------|----------|---------|------------------------------------------|
-| `0x00000 - 0x002BC`   | `0x02BC` |          | Image   | Title text "CAPE COD - NIAGARA" 320×33   |
-| `0x002BD - 0x00487`   | `0x01CA` |          | Image   | Icon (same text, different font) 72×40   |
-| `0x00488 - 0x1014C`   | `0xFCC4` |          | 3D      | Tiles                                    |
-| `0x1014D`             | `0x2137` |          | Map     | First map (at 0x1022C)                   |
-| `0x12285 - 0x1228B`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
-| `0x1228C - 0x12292`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
-| `0x12293 - 0x12299`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
-| `0x1229A - 0x1534C`   | `0x30B2` |          | Sprites | Scene render descriptor bank variant     |
-| `0x1534D`             | `0x7DCC` |          | 3D      | More objects                             |
-| `0x1D11A`             | `0x1E6E` |          |         | Unknown                                  |
-| `0x1EF89`             | `0x0AE0` |          |         | Unknown                                  |
-| `0x1FA6A`             | `0x0DA6` |          |         | Unknown                                  |
-| `0x20811`             | `0x0D7D` |          |         | Unknown                                  |
-| `0x2158F`             | `0x2137` |          | Map     | Second map                               |
-| `0x236C7`             | `0x0150` |          | Palette | 112-color palette                        |
-| `0x23818`             | `0x2171` |          | Image   | Unknown (16000 pixels; likely 320×50)    |
-| `0x2598A`             | `0x08E8` |          | Image   | Unknown (6080 pixels; likely 320×19)     |
-| `0x26273`             | `0x2137` |          | Map     | Third map                                |
-| `0x283AB - 0x283B1`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
-| `0x283B2 - 0x283B8`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
-| `0x283B9 - 0x283BF`   | `0x0007` |          | Sig     | Developer signature "TJL 90"             |
-| `0x283C0`             | `0x2137` |          | Map     | Fourth map                               |
-| `0x2A4F8`             | `0x0150` |          | Palette | 112-color palette                        |
-| `0x2A649`             | `0x2318` |          | Image   | Unknown (16000 pixels; likely 320×50)    |
-| `0x2C962`             | `0x0F19` |          | Image   | Unknown (6080 pixels; likely 320×19)     |
-| `0x2D87C`             | `0x2137` |          | Map     | Fifth map                                |
-| `0x2F9B4`             | `0x0150` |          | Palette | 112-color palette                        |
-| `0x2FB05`             | `0x27DA` |          | Image   | Landscape 320×50                         |
-| `0x322E0`             | `0x0F6A` |          | Image   | Landscape 320×19                         |
+Same overall layout as SCENE01: 5 maps (Cape Cod #1-#5) sharing **3 sub-scene palettes (A/B/C)**, **3 landscape-strip pairs**, one **2D sprite bank**, and the shared **tile geometry**. Unlike SCENE01, this file also carries its own **3D scene-object bank**; Pacific Coast reuses `DATAB.DAT`'s `SCENETT0.BIN` for that.
+
+| Offset Range          | Size     | Filename | Format  | Description                                                                              |
+|-----------------------|----------|----------|---------|------------------------------------------------------------------------------------------|
+| `0x00000 - 0x002BC`   | `0x02BC` |          | Image   | Title text "CAPE COD - NIAGARA" 320×33                                                   |
+| `0x002BD - 0x00487`   | `0x01CA` |          | Image   | Icon (same text, different font) 72×40                                                   |
+| `0x00488 - 0x1014C`   | `0xFCC4` |          | 3D      | Tile geometry (shared by all 5 maps)                                                     |
+| `0x1014D`             | `0x2137` |          | Map     | Map 1 (Cape Cod #1)                                                                      |
+| `0x12285 - 0x1228B`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x1228C - 0x12292`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x12293 - 0x12299`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x1229A - 0x1534C`   | `0x30B2` |          | Sprites | **2D sprite bank** — 110 billboard sprites used by the sprite blitter (`sub_15153`)      |
+| `0x1534D`             | `0x7DCC` |          | 3D      | 3D scene-object bank (signs, traffic, billboards — 64 entries, used by Cape Cod maps)    |
+| `0x1D11A`             | `0x1E6E` |          |         | Unknown                                                                                  |
+| `0x1EF89`             | `0x0AE0` |          |         | Unknown                                                                                  |
+| `0x1FA6A`             | `0x0DA6` |          |         | Unknown                                                                                  |
+| `0x20811`             | `0x0D7D` |          |         | Unknown                                                                                  |
+| `0x2158F`             | `0x2137` |          | Map     | Map 2 (Cape Cod #2)                                                                      |
+| `0x236C7`             | `0x0150` |          | Palette | **Palette A** — 112 colors, paired with landscape strips A+B below                       |
+| `0x23818`             | `0x2171` |          | Image   | Landscape ground strip A 320×50 (uses palette A)                                         |
+| `0x2598A`             | `0x08E8` |          | Image   | Landscape sky strip B 320×19 (uses palette A)                                            |
+| `0x26273`             | `0x2137` |          | Map     | Map 3 (Cape Cod #3)                                                                      |
+| `0x283AB - 0x283B1`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x283B2 - 0x283B8`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x283B9 - 0x283BF`   | `0x0007` |          | Sig     | Developer signature "TJL 90"                                                             |
+| `0x283C0`             | `0x2137` |          | Map     | Map 4 (Cape Cod #4)                                                                      |
+| `0x2A4F8`             | `0x0150` |          | Palette | **Palette B** — 112 colors, paired with landscape strips C+D below                       |
+| `0x2A649`             | `0x2318` |          | Image   | Landscape ground strip C 320×50 (uses palette B)                                         |
+| `0x2C962`             | `0x0F19` |          | Image   | Landscape sky strip D 320×19 (uses palette B)                                            |
+| `0x2D87C`             | `0x2137` |          | Map     | Map 5 (Cape Cod #5)                                                                      |
+| `0x2F9B4`             | `0x0150` |          | Palette | **Palette C** — 112 colors, paired with landscape strips E+F below                       |
+| `0x2FB05`             | `0x27DA` |          | Image   | Landscape ground strip E 320×50 (uses palette C)                                         |
+| `0x322E0`             | `0x0F6A` |          | Image   | Landscape sky strip F 320×19 (uses palette C)                                            |
 
 ## DATAA.DAT
 

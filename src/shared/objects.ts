@@ -1,6 +1,7 @@
 import * as extract from "./extract";
 import { files } from "./files";
-import { MapsCollection, ColorMapEntry } from './types';
+import { MapsCollection } from './types';
+import { PixelPair } from './color';
 
 export const maps: MapsCollection = {
     tiles1: [],
@@ -12,7 +13,7 @@ export const maps: MapsCollection = {
 };
 
 
-export function LoadObjects(colormap: ColorMapEntry[]): void {
+export function LoadObjects(colormap: PixelPair[]): void {
     const isobj: (number | null)[] = [
         0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0,

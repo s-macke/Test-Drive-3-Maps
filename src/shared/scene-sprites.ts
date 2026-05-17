@@ -86,26 +86,66 @@ const BIT_SEED_TABLE = Uint8Array.from([
     0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00,
 ]);
 
+// Sprites are 8-bit VGA palette indices. The game's VGA palette is built from
+// a 144-entry hardcoded base (engine-side) plus a 112-color scene palette that
+// the map loader copies in via sub_CA8 at runtime. We load that scene palette
+// at the LOW bank base (16) so pixel values index directly without a shift,
+// matching the convention used by src/tools/imgextract for the in-scene
+// landscape blocks.
+//
+// Each scene .DAT carries three palette variants (A/B/C) used by different
+// sub-scenes of the same course. The sprite bytes are identical across
+// variants — only the palette differs — so we emit one PNG bank per variant
+// and the on-disk pixels stay the same, only the embedded PLTE chunk changes.
+const SCENE_PALETTE_BASE = 16;
+const SCENE_PALETTE_COUNT = 112;
+
+interface PaletteVariant {
+    readonly suffix: string;
+    readonly datFile: string;
+    readonly offset: number;
+    readonly label: string;
+}
+
+const SCENE01_VARIANTS: readonly PaletteVariant[] = [
+    { suffix: 'A', datFile: 'SCENE01.DAT', offset: 0x12378, label: 'SCENE01.DAT palette A' },
+    { suffix: 'B', datFile: 'SCENE01.DAT', offset: 0x1E451, label: 'SCENE01.DAT palette B' },
+    { suffix: 'C', datFile: 'SCENE01.DAT', offset: 0x257EA, label: 'SCENE01.DAT palette C' },
+];
+
+const SCENE02_VARIANTS: readonly PaletteVariant[] = [
+    { suffix: 'A', datFile: 'SCENE02.DAT', offset: 0x236C7, label: 'SCENE02.DAT palette A' },
+    { suffix: 'B', datFile: 'SCENE02.DAT', offset: 0x2A4F8, label: 'SCENE02.DAT palette B' },
+    { suffix: 'C', datFile: 'SCENE02.DAT', offset: 0x2F9B4, label: 'SCENE02.DAT palette C' },
+];
+
+function makeBank(id: string, datFile: string, offset: number, size: number, variant: PaletteVariant): SceneSpriteBankSpec {
+    return {
+        id: `${id}_${variant.suffix}`,
+        datFile,
+        offset,
+        size,
+        paletteLayers: [
+            {
+                datFile: variant.datFile,
+                offset: variant.offset,
+                baseIndex: SCENE_PALETTE_BASE,
+                colorCount: SCENE_PALETTE_COUNT,
+                label: variant.label,
+            },
+        ],
+    };
+}
+
 export const sceneSpriteBanks: readonly SceneSpriteBankSpec[] = [
-    {
-        id: 'SCENE01',
-        datFile: 'SCENE01.DAT',
-        offset: 0x15490,
-        size: 0x28D6,
-    },
-    {
-        id: 'SCENE02',
-        datFile: 'SCENE02.DAT',
-        offset: 0x1229A,
-        size: 0x30B2,
-    },
-    {
-        id: 'SCENETT1',
-        datFile: 'DATAB.DAT',
-        offset: 0x1ED2C,
-        size: 0x28D6,
-    },
-] as const;
+    // Pacific Coast sprite bank rendered against each of its three scene palettes.
+    ...SCENE01_VARIANTS.map((v) => makeBank('SCENE01', 'SCENE01.DAT', 0x15490, 0x28D6, v)),
+    // Cape Cod sprite bank rendered against each of its three scene palettes.
+    ...SCENE02_VARIANTS.map((v) => makeBank('SCENE02', 'SCENE02.DAT', 0x1229A, 0x30B2, v)),
+    // The title scene at DATAB.DAT:0x21603 renders with Pacific Coast tiles, so
+    // it has no palette of its own; show it against all three SCENE01 palettes.
+    ...SCENE01_VARIANTS.map((v) => makeBank('SCENETT1', 'DATAB.DAT', 0x1ED2C, 0x28D6, v)),
+];
 
 function readWord(buffer: Uint8Array, offset: number): number {
     if (offset < 0 || offset + 1 >= buffer.length) {

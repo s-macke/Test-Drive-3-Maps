@@ -2,10 +2,10 @@ import * as THREE from 'three';
 import { Scene } from './scene';
 import { FlyControls } from './FlyControls';
 import * as extract from '@shared/extract';
-import { GetColorMap } from "@shared/color";
+import { LoadRemapTable, PixelPair } from "@shared/color";
 import { LoadObjects, maps } from "@shared/objects";
 import { files, loadFiles } from "@shared/files";
-import { Mesh, ColorMapEntry } from '@shared/types';
+import { Mesh } from '@shared/types';
 
 
 const scene = new Scene();
@@ -120,7 +120,7 @@ function animate(): void {
 }
 
 function LoadMap(idx: number): void {
-    let colormap: ColorMapEntry[];
+    let colormap: PixelPair[];
     scene.RemoveAllMeshes();
 
     switch (idx) {
@@ -129,7 +129,7 @@ function LoadMap(idx: number): void {
         case 2:
         case 3:
         case 4:
-            colormap = GetColorMap(files.scene01!, mapoffset[idx]);
+            colormap = LoadRemapTable(files.scene01!, mapoffset[idx]);
             LoadObjects(colormap);
             BuildMap(files.scene01!, mapoffset[idx], maps.tiles1, maps.tiles2, maps.objs1);
             break;
@@ -139,49 +139,49 @@ function LoadMap(idx: number): void {
         case 7:
         case 8:
         case 9:
-            colormap = GetColorMap(files.scene02!, mapoffset[idx]);
+            colormap = LoadRemapTable(files.scene02!, mapoffset[idx]);
             LoadObjects(colormap);
             BuildMap(files.scene02!, mapoffset[idx], maps.tiles3, maps.tiles2, maps.objs2);
             break;
 
         case 10:
-            colormap = GetColorMap(files.scene01!, mapoffset[0]);
+            colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
             LoadObjects(colormap);
             BuildMap(files.datab!, 0x21603, maps.tiles1, maps.tiles2, maps.objs1);
             break;
 
         case 11:
-            colormap = GetColorMap(files.scene01!, mapoffset[0]);
+            colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
             LoadObjects(colormap);
             BuildObjects(maps.tiles1, 1, 5000);
             break;
 
         case 12:
-            colormap = GetColorMap(files.scene01!, mapoffset[0]);
+            colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
             LoadObjects(colormap);
             BuildObjects(maps.tiles2, 1, 5000);
             break;
 
         case 13:
-            colormap = GetColorMap(files.scene01!, mapoffset[0]);
+            colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
             LoadObjects(colormap);
             BuildObjects(maps.tiles3, 1, 5000);
             break;
 
         case 14:
-            colormap = GetColorMap(files.scene01!, mapoffset[0]);
+            colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
             LoadObjects(colormap);
             BuildObjects(maps.objs1, 3, 5000);
             break;
 
         case 15:
-            colormap = GetColorMap(files.scene01!, mapoffset[0]);
+            colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
             LoadObjects(colormap);
             BuildObjects(maps.objs2, 3, 5000);
             break;
 
         case 16:
-            colormap = GetColorMap(files.scene01!, mapoffset[0]);
+            colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
             LoadObjects(colormap);
             BuildObjects(maps.cars, 20, 10000);
             break;

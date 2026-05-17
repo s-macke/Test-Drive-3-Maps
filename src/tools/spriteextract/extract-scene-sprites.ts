@@ -23,17 +23,29 @@ function buildOutputPath(sprite: SceneSprite): string {
     return path.join('images', bankDir, `${name}.png`);
 }
 
-async function readBankData(bank: SceneSpriteBankSpec): Promise<Uint8Array> {
-    const absolutePath = path.join(process.cwd(), 'public', 'base', bank.datFile);
+async function readDatFile(datFile: string): Promise<Uint8Array> {
+    const absolutePath = path.join(process.cwd(), 'public', 'base', datFile);
     const buffer = await fs.readFile(absolutePath);
     return new Uint8Array(buffer);
 }
 
+async function loadBankFiles(bank: SceneSpriteBankSpec): Promise<Map<string, Uint8Array>> {
+    const needed = new Set<string>([bank.datFile]);
+    for (const layer of bank.paletteLayers ?? []) {
+        needed.add(layer.datFile);
+    }
+    const loaded = new Map<string, Uint8Array>();
+    for (const datFile of needed) {
+        loaded.set(datFile, await readDatFile(datFile));
+    }
+    return loaded;
+}
+
 async function exportBank(bank: SceneSpriteBankSpec): Promise<number> {
-    const fileData = await readBankData(bank);
-    const sprites = extractSceneSprites(bank, fileData);
+    const fileData = await loadBankFiles(bank);
+    const sprites = extractSceneSprites(bank, fileData.get(bank.datFile)!);
     const palette = bank.paletteLayers && bank.paletteLayers.length > 0
-        ? buildPalette(new Map([[bank.datFile, fileData]]), bank.paletteLayers)
+        ? buildPalette(fileData, bank.paletteLayers)
         : createDefaultPalette();
 
     for (const sprite of sprites) {

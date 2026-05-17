@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { GetColorMap } from "../../shared/color";
+import { LoadRemapTable } from "../../shared/color";
 import { LoadObjects, maps } from "../../shared/objects";
 import { files, loadFiles } from "../../shared/files";
 import { StoreObj } from "./toWaveFrontObj";
@@ -34,7 +34,7 @@ const mapoffset: number[] = [
 await loadFiles();
 
 const idx = 0;
-const colormap = GetColorMap(files.scene01!, mapoffset[idx]);
+const colormap = LoadRemapTable(files.scene01!, mapoffset[idx]);
 LoadObjects(colormap);
 
 for (let i = 0; i < maps.tiles1.length; i++) {
