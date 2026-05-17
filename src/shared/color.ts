@@ -16,6 +16,9 @@
 //
 // See spec/map-format.md (Tail Table section) for the full disassembly trace.
 
+import { ColorRGB } from './types';
+import { paletteColor } from './palette';
+
 const REMAP_OFFSET = 0x1F27;
 const REMAP_ENTRY_COUNT = 256;
 
@@ -28,9 +31,29 @@ const SKY_FOG_SEED_OFFSET = 0x32;   // word_285B0 (little-endian)
  * One entry of the paired-pixel lookup table: two VGA palette indices the
  * engine writes side-by-side to the framebuffer.
  */
-export interface PixelPair {
-    leftPixel: number;
-    rightPixel: number;
+export class PixelPair {
+    constructor(
+        public leftPixel: number,
+        public rightPixel: number,
+    ) {}
+
+    /** Average the two palette indices, rounding down. */
+    averageIndex(): number {
+        return (this.leftPixel + this.rightPixel) >> 1;
+    }
+
+    /**
+     * Resolve to a single `ColorRGB` by looking each of the two palette
+     * indices up independently and averaging the RGB results. This gives the
+     * visual midpoint between the two dither colors, which is what a flat-
+     * shaded polygon needs. Note this is NOT the same as `paletteColor(
+     * averageIndex())` — the VGA palette is non-linear, so averaging indices
+     * and then resolving produces a third, unrelated palette entry.
+     */
+    toColor(): ColorRGB {
+        //return paletteColor(this.leftPixel).average(paletteColor(this.rightPixel));
+        return paletteColor(this.leftPixel);
+    }
 }
 
 /**
@@ -56,10 +79,10 @@ export function LoadRemapTable(dat: Uint8Array, offset: number): PixelPair[] {
     const base = offset + REMAP_OFFSET;
     const table: PixelPair[] = new Array(REMAP_ENTRY_COUNT);
     for (let i = 0; i < REMAP_ENTRY_COUNT; i++) {
-        table[i] = {
-            leftPixel: dat[base + i * 2],
-            rightPixel: dat[base + i * 2 + 1],
-        };
+        table[i] = new PixelPair(
+            dat[base + i * 2],
+            dat[base + i * 2 + 1],
+        );
     }
     return table;
 }

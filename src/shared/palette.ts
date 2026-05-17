@@ -1,3 +1,4 @@
+import { ColorRGB } from './types';
 
 // - pal[0..15] == EGA Colors
 // - pal[16..127] == OTWCOL.BIN[0..111]
@@ -137,3 +138,15 @@ export const pal: number[] = [
     0xc0, 0xdc, 0xf4,
     0xd8, 0xec, 0xfc,
 ];
+
+/**
+ * Look up VGA palette slot `idx` and return its RGB as 0..1 floats.
+ * `idx` is a byte (0..255); out-of-range indices read uninitialised slots.
+ */
+export function paletteColor(idx: number): ColorRGB {
+    return new ColorRGB(
+        pal[idx * 3 + 0] / 256.,
+        pal[idx * 3 + 1] / 256.,
+        pal[idx * 3 + 2] / 256.,
+    );
+}

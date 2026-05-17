@@ -1,10 +1,21 @@
 import * as THREE from 'three';
 
 // Color types
-export interface ColorRGB {
-    r: number;  // 0-1 float
-    g: number;  // 0-1 float
-    b: number;  // 0-1 float
+export class ColorRGB {
+    constructor(
+        public r: number,  // 0-1 float
+        public g: number,  // 0-1 float
+        public b: number,  // 0-1 float
+    ) {}
+
+    /** Element-wise average with another color. */
+    average(other: ColorRGB): ColorRGB {
+        return new ColorRGB(
+            (this.r + other.r) * 0.5,
+            (this.g + other.g) * 0.5,
+            (this.b + other.b) * 0.5,
+        );
+    }
 }
 
 // 3D geometry types

@@ -1,7 +1,27 @@
 import * as THREE from 'three';
-import { ColorRGB, Mesh } from './types';
+import { Mesh } from './types';
 import { PixelPair } from './color';
-import { pal } from './palette.ts';
+import { paletteColor } from './palette';
+
+// 32-entry polygon-color LUT used by the engine's polygon shader. Each 5-bit
+// `color0` / `color1` field from a polygon descriptor (`idx2 >> 11`,
+// `idx3 >> 11`) maps through this table to a VGA palette index; the two
+// resulting bytes are then drawn as a left/right dither pair (we average them
+// in RGB space for flat-shaded mesh output).
+//
+// NOTE: This table is currently a hand-rolled empirical approximation — its
+// bytes do not appear verbatim in any DAT/EXE we searched. The real engine
+// LUT (32 bytes) hasn't been located yet. The 256-entry remap table at
+// `map[0x1F27]` is a *different* lookup used by the sprite blitter
+// (`sub_15153`) and sky/fog gradient (`sub_11408`), not by polygons.
+// TODO: locate the real polygon-color LUT in the disassembly and replace
+// this hand-rolled table.
+const ColorIndex: readonly number[] = [
+    0, 1, 2, 3, 4, 5, 6, 7,
+    0, 9, 10, 11, 12, 13, 14, 15,  // index 8 → 0 (street)
+    19, 15, 107, 13, 38, 5, 55, 27,
+    21, 75, 109, 13, 43, 13, 94, 29,
+];
 
 // more information about the file structures can be found here:
 // http://www.accursedfarms.com/forums/viewtopic.php?f=63&t=5960
@@ -40,44 +60,6 @@ object info 7 byte header
 0x12167-0x12168 color of street
 0x12189-0x1218a color of NPC car in map 1 and of lakes
 */
-
-const ColorIndex: number[] = [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-
-    0, // street
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-
-    19,
-    15,
-    107,
-    13,
-    38,
-    5,
-    55,
-    27,
-
-    21,
-    75,
-    109,
-    13,
-    43,
-    13,
-    94,
-    29
-];
 
 export function Read16(dat: Uint8Array, address: number): number {
     return dat[address] | (dat[address + 1] << 8);
@@ -159,25 +141,13 @@ export function BuildObject(name: string, buf: Uint8Array, _colormap: PixelPair[
         const color0 = idx2 >> 11;
         const color1 = idx3 >> 11;
 
-        const color0idx = ColorIndex[color0];
-        const color1idx = ColorIndex[color1];
-        //const color0idx = color0;
-        //const color1idx = color1;
-        const c0: ColorRGB = {
-            r: pal[color0idx * 3 + 0] / 256.,
-            g: pal[color0idx * 3 + 1] / 256.,
-            b: pal[color0idx * 3 + 2] / 256.
-        };
-        const c1: ColorRGB = {
-            r: pal[color1idx * 3 + 0] / 256.,
-            g: pal[color1idx * 3 + 1] / 256.,
-            b: pal[color1idx * 3 + 2] / 256.
-        };
-        const c: ColorRGB = {
-            r: (c0.r + c1.r) * 0.5,
-            g: (c0.g + c1.g) * 0.5,
-            b: (c0.b + c1.b) * 0.5
-        };
+        // Resolve each 5-bit polygon color through the 32-entry polygon LUT to
+        // a VGA palette index, look that up in pal[], then average the two
+        // RGBs as the flat-fill polygon color (since Three.js does flat
+        // shading and we can't dither per-pixel).
+        const c0 = paletteColor(ColorIndex[color0]);
+        const c1 = paletteColor(ColorIndex[color1]);
+        const c  = c0.average(c1);
 
         idx1 = idx1 & 0x7FF;
         idx2 = idx2 & 0x7FF;
@@ -284,14 +254,6 @@ export function BuildObject(name: string, buf: Uint8Array, _colormap: PixelPair[
     material.side = THREE.DoubleSide;
     mesh.obj!.add(new THREE.Mesh(geom, material));
     return mesh;
-}
-
-export function LoadPalette(buf: Uint8Array, offset: number): void {
-    for (let i = 0; i < 112; i++) {
-        pal[i * 3 + 0 + 144 * 3] = buf[i * 3 + 0 + offset] * 4;
-        pal[i * 3 + 1 + 144 * 3] = buf[i * 3 + 1 + offset] * 4;
-        pal[i * 3 + 2 + 144 * 3] = buf[i * 3 + 2 + offset] * 4;
-    }
 }
 
 export function BuildObjectList(name: string, buf: Uint8Array, colormap: PixelPair[], offset: number, n: number, isobj: (number | null)[]): Mesh[] {
