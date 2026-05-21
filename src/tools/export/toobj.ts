@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { LoadRemapTable } from "../../shared/color";
+import { LoadRemapTable, LoadTrailerTable } from "../../shared/color";
 import { LoadObjects, maps } from "../../shared/objects";
 import { files, loadFiles } from "../../shared/files";
 import { StoreObj } from "./toWaveFrontObj";
@@ -35,7 +35,8 @@ await loadFiles();
 
 const idx = 0;
 const colormap = LoadRemapTable(files.scene01!, mapoffset[idx]);
-LoadObjects(colormap);
+const trailer = LoadTrailerTable(files.scene01!, mapoffset[idx]);
+LoadObjects(colormap, trailer);
 
 for (let i = 0; i < maps.tiles1.length; i++) {
     StoreObj(join(objsDir, `tiles1_${i}.obj`), [maps.tiles1[i]], objsDir);

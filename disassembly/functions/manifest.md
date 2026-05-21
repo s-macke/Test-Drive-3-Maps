@@ -199,7 +199,7 @@
 | seg006_23B3_sub.asm | sub  | 1056    | 24    |  |
 | seg006_23DA_sub.asm | sub  | 3350    | 69    |  |
 | seg006_2470_sub.asm | sub  | 1167    | 26    |  |
-| seg006_2498_sub.asm | sub  | 4979    | 86    |  |
+| seg006_2498_sub.asm | sub  | 4979    | 86    | Rebuilds the 32-byte primary polygon-color LUT at word_2D8A0 from weather/time-of-day flags. |
 | seg006_25EA_sub.asm | sub  | 1275    | 27    |  |
 | seg006_2605_sub.asm | sub  | 3553    | 78    |  |
 | seg006_268C_sub.asm | sub  | 3464    | 74    |  |
@@ -256,7 +256,7 @@
 | seg006_4B2C_sub.asm | sub  | 3346    | 74    |  |
 | seg006_4BDC_sub.asm | sub  | 523     | 12    |  |
 | seg006_4BE9_sub.asm | sub  | 2152    | 44    |  |
-| seg006_4C32_sub.asm | sub  | 14265   | 290   |  |
+| seg006_4C32_sub.asm | sub  | 14265   | 290   | Per-frame polygon-color override (fog, brake lights, NPC paint, headlights). Reads render-mode from word 3, may rewrite runtime word 4. |
 | seg006_4E43_sub.asm | sub  | 5198    | 105   |  |
 | seg006_4F17_sub.asm | sub  | 12758   | 258   |  |
 | seg006_511F_sub.asm | sub  | 5336    | 112   | Parses SCENETTO.BIN entries with an 8-byte header; uses +4/+5/+6 for alternate shape selection. |
@@ -289,7 +289,7 @@
 | seg006_6F34_sub.asm | sub  | 796     | 18    |  |
 | seg006_6F49_sub.asm | sub  | 11903   | 251   |  |
 | seg006_7174_sub.asm | sub  | 10217   | 214   | Resolves object/tile selectors into descriptor banks; AH picks object bank, AL picks one of two tile banks. |
-| seg006_7303_sub.asm | sub  | 7538    | 158   |  |
+| seg006_7303_sub.asm | sub  | 7538    | 158   | Load-time polygon decoder: 8-byte on-disk -> 10-byte runtime, resolves material color via primary LUT and map[0x1F27] paired-pixel table. |
 | seg006_743D_sub.asm | sub  | 3367    | 71    |  |
 | seg006_74CF_sub.asm | sub  | 4775    | 102   |  |
 | seg006_7568_sub.asm | sub  | 5320    | 111   |  |

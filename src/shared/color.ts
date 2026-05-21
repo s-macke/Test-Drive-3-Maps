@@ -5,14 +5,18 @@
 // engine writes directly to the framebuffer:
 //
 //   - sub_11408 (sky/horizon gradient): emits the pair via `rep stosw`.
-//   - sub_15153 (sprite blitter, race mode 0x13 only): emits one pair per
-//     2 sprite pixels via `mov [di], cx`.
+//   - sub_15153 (polygon-load decoder, VGA mode 13h path only): consumes a
+//     pair when the engine is running in VGA mode (word_2D628 == 0x13);
+//     this is the production renderer for TD3. The EGA-mode fallback path
+//     bypasses this table and nibble-masks colors directly.
 //
 // The table is indexed by `idx = ((highSeed & 0xF) << 4) | (lowSeed & 0xF)`,
-// where the seeds come from either the pre-grid header (sky/fog) or sprite
-// source bytes (mode 0x13). Diagonal entries (where the two seeds match) are
-// the only ones the sky-base lookup can hit; off-diagonal entries hold dither
-// pairs that visually average two adjacent palette indices.
+// where the seeds come from either the pre-grid header (sky/fog) or the
+// LUT'd polygon color fields. Diagonal entries (where the two seeds match)
+// are the only ones the sky-base lookup and the polygon decoder can hit
+// (the polygon's two color fields are always equal in on-disk data);
+// off-diagonal entries hold dither pairs that visually average two adjacent
+// palette indices and are reached by the sky-fog seed and by sprite blits.
 //
 // See spec/map-format.md (Tail Table section) for the full disassembly trace.
 
@@ -21,6 +25,14 @@ import { paletteColor } from './palette';
 
 const REMAP_OFFSET = 0x1F27;
 const REMAP_ENTRY_COUNT = 256;
+
+// 16-byte secondary trailer at map[0x2127]. Used by the polygon decoder
+// (sub_15153 in TD3.EXE, VGA mode 13h path) when the primary LUT outputs a
+// value with bit 4 set (i.e., 5-bit material colors 16..31): the final
+// pixel byte is `trailer[c & 0xF]` instead of a diagonal entry of the
+// 0x1F27 paired-pixel table.
+const TRAILER_OFFSET = 0x2127;
+const TRAILER_LENGTH = 16;
 
 // Pre-grid header offsets of the seeds that key into the table.
 const SKY_BASE_DAY_OFFSET = 0x2E;   // byte_285AC
@@ -37,11 +49,6 @@ export class PixelPair {
         public rightPixel: number,
     ) {}
 
-    /** Average the two palette indices, rounding down. */
-    averageIndex(): number {
-        return (this.leftPixel + this.rightPixel) >> 1;
-    }
-
     /**
      * Resolve to a single `ColorRGB` by looking each of the two palette
      * indices up independently and averaging the RGB results. This gives the
@@ -51,8 +58,8 @@ export class PixelPair {
      * and then resolving produces a third, unrelated palette entry.
      */
     toColor(): ColorRGB {
-        //return paletteColor(this.leftPixel).average(paletteColor(this.rightPixel));
-        return paletteColor(this.leftPixel);
+        return paletteColor(this.leftPixel).average(paletteColor(this.rightPixel));
+        //return paletteColor(this.leftPixel);
     }
 }
 
@@ -83,6 +90,21 @@ export function LoadRemapTable(dat: Uint8Array, offset: number): PixelPair[] {
             dat[base + i * 2],
             dat[base + i * 2 + 1],
         );
+    }
+    return table;
+}
+
+/**
+ * Load the 16-byte secondary trailer table from a map blob.
+ *
+ * @param dat - Full DAT file bytes.
+ * @param offset - Map base offset within `dat`.
+ */
+export function LoadTrailerTable(dat: Uint8Array, offset: number): number[] {
+    const base = offset + TRAILER_OFFSET;
+    const table: number[] = new Array(TRAILER_LENGTH);
+    for (let i = 0; i < TRAILER_LENGTH; i++) {
+        table[i] = dat[base + i];
     }
     return table;
 }
@@ -123,8 +145,8 @@ export function indexForSkyFog(seedWord: number): number {
 
 /**
  * Resolve a `(highSeed, lowSeed)` byte pair to its emitted pixel pair through
- * the table. Mirrors the sprite-blit packing used by `sub_15153` in race mode
- * 0x13.
+ * the table. Mirrors the lookup-index packing used by `sub_15153` in the
+ * VGA mode 13h path (word_2D628 == 0x13).
  */
 export function lookupPair(
     table: PixelPair[],

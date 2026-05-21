@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { Scene } from './scene';
 import { FlyControls } from './FlyControls';
 import * as extract from '@shared/extract';
-import { LoadRemapTable, PixelPair } from "@shared/color";
+import { LoadRemapTable, LoadTrailerTable, PixelPair } from "@shared/color";
 import { LoadObjects, maps } from "@shared/objects";
 import { files, loadFiles } from "@shared/files";
 import { Mesh } from '@shared/types';
@@ -121,6 +121,7 @@ function animate(): void {
 
 function LoadMap(idx: number): void {
     let colormap: PixelPair[];
+    let trailer: number[];
     scene.RemoveAllMeshes();
 
     switch (idx) {
@@ -130,7 +131,8 @@ function LoadMap(idx: number): void {
         case 3:
         case 4:
             colormap = LoadRemapTable(files.scene01!, mapoffset[idx]);
-            LoadObjects(colormap);
+            trailer = LoadTrailerTable(files.scene01!, mapoffset[idx]);
+            LoadObjects(colormap, trailer);
             BuildMap(files.scene01!, mapoffset[idx], maps.tiles1, maps.tiles2, maps.objs1);
             break;
 
@@ -140,49 +142,57 @@ function LoadMap(idx: number): void {
         case 8:
         case 9:
             colormap = LoadRemapTable(files.scene02!, mapoffset[idx]);
-            LoadObjects(colormap);
+            trailer = LoadTrailerTable(files.scene02!, mapoffset[idx]);
+            LoadObjects(colormap, trailer);
             BuildMap(files.scene02!, mapoffset[idx], maps.tiles3, maps.tiles2, maps.objs2);
             break;
 
         case 10:
             colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
-            LoadObjects(colormap);
+            trailer = LoadTrailerTable(files.scene01!, mapoffset[0]);
+            LoadObjects(colormap, trailer);
             BuildMap(files.datab!, 0x21603, maps.tiles1, maps.tiles2, maps.objs1);
             break;
 
         case 11:
             colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
-            LoadObjects(colormap);
+            trailer = LoadTrailerTable(files.scene01!, mapoffset[0]);
+            LoadObjects(colormap, trailer);
             BuildObjects(maps.tiles1, 1, 5000);
             break;
 
         case 12:
             colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
-            LoadObjects(colormap);
+            trailer = LoadTrailerTable(files.scene01!, mapoffset[0]);
+            LoadObjects(colormap, trailer);
             BuildObjects(maps.tiles2, 1, 5000);
             break;
 
         case 13:
             colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
-            LoadObjects(colormap);
+            trailer = LoadTrailerTable(files.scene01!, mapoffset[0]);
+            LoadObjects(colormap, trailer);
             BuildObjects(maps.tiles3, 1, 5000);
             break;
 
         case 14:
             colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
-            LoadObjects(colormap);
+            trailer = LoadTrailerTable(files.scene01!, mapoffset[0]);
+            LoadObjects(colormap, trailer);
             BuildObjects(maps.objs1, 3, 5000);
             break;
 
         case 15:
             colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
-            LoadObjects(colormap);
+            trailer = LoadTrailerTable(files.scene01!, mapoffset[0]);
+            LoadObjects(colormap, trailer);
             BuildObjects(maps.objs2, 3, 5000);
             break;
 
         case 16:
             colormap = LoadRemapTable(files.scene01!, mapoffset[0]);
-            LoadObjects(colormap);
+            trailer = LoadTrailerTable(files.scene01!, mapoffset[0]);
+            LoadObjects(colormap, trailer);
             BuildObjects(maps.cars, 20, 10000);
             break;
     }

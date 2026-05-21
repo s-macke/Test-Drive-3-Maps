@@ -1,27 +1,49 @@
 import * as THREE from 'three';
-import { Mesh } from './types';
+import { ColorRGB, Mesh } from './types';
 import { PixelPair } from './color';
 import { paletteColor } from './palette';
 
-// 32-entry polygon-color LUT used by the engine's polygon shader. Each 5-bit
-// `color0` / `color1` field from a polygon descriptor (`idx2 >> 11`,
-// `idx3 >> 11`) maps through this table to a VGA palette index; the two
-// resulting bytes are then drawn as a left/right dither pair (we average them
-// in RGB space for flat-shaded mesh output).
+// Engine polygon-color resolution path, derived from sub_15153 (load-time
+// polygon decoder, seg006:7303) and sub_102E8 (primary LUT generator,
+// seg006:2498) in TD3.EXE. See disassembly/notes/polygon-color-pipeline.md.
 //
-// NOTE: This table is currently a hand-rolled empirical approximation — its
-// bytes do not appear verbatim in any DAT/EXE we searched. The real engine
-// LUT (32 bytes) hasn't been located yet. The 256-entry remap table at
-// `map[0x1F27]` is a *different* lookup used by the sprite blitter
-// (`sub_15153`) and sky/fog gradient (`sub_11408`), not by polygons.
-// TODO: locate the real polygon-color LUT in the disassembly and replace
-// this hand-rolled table.
-const ColorIndex: readonly number[] = [
-    0, 1, 2, 3, 4, 5, 6, 7,
-    0, 9, 10, 11, 12, 13, 14, 15,  // index 8 → 0 (street)
-    19, 15, 107, 13, 38, 5, 55, 27,
-    21, 75, 109, 13, 43, 13, 94, 29,
-];
+// Stage 1 — primary LUT: 32-byte table at `word_2D8A0`, rebuilt at runtime
+// by sub_102E8 from weather/time-of-day flags. In the default state (dry,
+// no fog, no rain) it is identity *except* for two engine-hardcoded
+// overrides:
+//   LUT[7] = 8   (line/marker bumped to "paint" shade)
+//   LUT[8] = 0   (road surface collapses to black under engine logic)
+function primaryLUT(c: number): number {
+    if (c === 7) return 8;
+    if (c === 8) return 0;
+    return c & 0x1F;
+}
+
+// Stage 2 — VGA mode 13h pair resolution (sub_15153 takes the
+// word_2D628 == 0x13 branch). Given the LUT'd 5-bit color `n`:
+//   - If n < 16: look up `colormap[(n<<4) | n]` — the diagonal of the
+//     map's 256-entry paired-pixel table at map[0x1F27]. Because the two
+//     on-disk color fields are always equal (224/224 polys inspected),
+//     the engine's combined index `(LUT[w2]<<4) | LUT[w1]` always lands
+//     on a diagonal entry where left == right.
+//   - If n >= 16 (primary LUT result has bit 4 set): the engine falls
+//     into the secondary path and replaces each pixel-pair byte with
+//     `trailer[n & 0xF]` from the 16-byte map[0x2127] table.
+//
+// The EGA fallback path (word_2D628 != 0x13) is intentionally not modeled
+// here — it would be `paletteColor(LUT[c] & 0x0F)`, i.e., a flat 16-color
+// EGA palette with no map remapping. TD3 ships running VGA mode 13h.
+function resolvePolygonColor(
+    color5: number,
+    colormap: PixelPair[],
+    trailer: number[],
+): ColorRGB {
+    const n = primaryLUT(color5);
+    if (n < 16) {
+        return colormap[(n << 4) | n].toColor();
+    }
+    return paletteColor(trailer[n & 0x0F]);
+}
 
 // more information about the file structures can be found here:
 // http://www.accursedfarms.com/forums/viewtopic.php?f=63&t=5960
@@ -83,7 +105,7 @@ function cylinderMesh(pointX: THREE.Vector3, pointY: THREE.Vector3, radius: numb
     return edgeGeometry;
 }
 
-export function BuildObject(name: string, buf: Uint8Array, _colormap: PixelPair[], offset: number, isobj: boolean): Mesh {
+export function BuildObject(name: string, buf: Uint8Array, colormap: PixelPair[], trailer: number[], offset: number, isobj: boolean): Mesh {
     console.log("BuildObject " + name);
     const geom = new THREE.BufferGeometry();
 
@@ -141,12 +163,13 @@ export function BuildObject(name: string, buf: Uint8Array, _colormap: PixelPair[
         const color0 = idx2 >> 11;
         const color1 = idx3 >> 11;
 
-        // Resolve each 5-bit polygon color through the 32-entry polygon LUT to
-        // a VGA palette index, look that up in pal[], then average the two
-        // RGBs as the flat-fill polygon color (since Three.js does flat
-        // shading and we can't dither per-pixel).
-        const c0 = paletteColor(ColorIndex[color0]);
-        const c1 = paletteColor(ColorIndex[color1]);
+        // Resolve each 5-bit color through the engine's polygon-color pipeline
+        // (primary LUT → diagonal of map[0x1F27] OR map[0x2127] trailer).
+        // On disk these two values are always equal, but resolve both
+        // independently and average for defence — same as the engine would do
+        // if a polygon ever encoded a true dither pair.
+        const c0 = resolvePolygonColor(color0, colormap, trailer);
+        const c1 = resolvePolygonColor(color1, colormap, trailer);
         const c  = c0.average(c1);
 
         idx1 = idx1 & 0x7FF;
@@ -256,7 +279,7 @@ export function BuildObject(name: string, buf: Uint8Array, _colormap: PixelPair[
     return mesh;
 }
 
-export function BuildObjectList(name: string, buf: Uint8Array, colormap: PixelPair[], offset: number, n: number, isobj: (number | null)[]): Mesh[] {
+export function BuildObjectList(name: string, buf: Uint8Array, colormap: PixelPair[], trailer: number[], offset: number, n: number, isobj: (number | null)[]): Mesh[] {
     const objs: Mesh[] = [];
     for (let i = 0; i < n; i++) {
         let idx = i;
@@ -275,7 +298,7 @@ export function BuildObjectList(name: string, buf: Uint8Array, colormap: PixelPa
             });
         } else {
             const n = name + "_" + i;
-            objs.push(BuildObject(n, buf, colormap, offset + objectoffset, !!isobj[i]));
+            objs.push(BuildObject(n, buf, colormap, trailer, offset + objectoffset, !!isobj[i]));
         }
     }
     return objs;
