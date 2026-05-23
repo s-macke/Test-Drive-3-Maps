@@ -2,9 +2,10 @@
 
 Reverse engineered and extracted maps of the DOS Game *Test Drive III: The Passion* by Accolade
 
+![Extracted Game Cars](images/cars_joined.png)
 
 # **[Online Viewer](https://s-macke.github.io/Test-Drive-3-Maps/)**
-# **[Extracted Images](images/)**
+# **[Extracted Images Gallery](images/README.md)**
 
 Wavefront Object files are available in the objs directory.
 
@@ -75,11 +76,16 @@ images/          # Extracted VGA images (PNG format)
 spec/            # File format specifications
 ```
 
-Example extracted images:
+## Extracted Images Gallery
 
-- [images/SCENE01/SCENE01_0x0_320x33.png](images/SCENE01/SCENE01_0x0_320x33.png)
-- [images/DATAA/TITLELET.LZ.png](images/DATAA/TITLELET.LZ.png)
-- [images/DATAB/COPA.LZ.png](images/DATAB/COPA.LZ.png)
+For a visual overview and previews of all extracted UI assets, scene sprites, map palettes, and car designs, visit the **[Project Images Gallery Index](images/README.md)**. Each individual directory contains its own generated visual gallery:
+- [📁 Corvette ZR-1 Asset Gallery](images/CCERV/README.md)
+- [📁 Honda NSX Asset Gallery](images/CCNSX/README.md)
+- [📁 Lamborghini Diablo Asset Gallery](images/CDIAB/README.md)
+- [📁 Mythos Asset Gallery](images/CMYTH/README.md)
+- [📁 Chevrolet Corvette Stelvio Asset Gallery](images/CSTEL/README.md)
+- [📁 Scenery Sprites Galleries](images/SCENE01_SPRITES/README.md)
+
 
 ## File Format Specifications
 
