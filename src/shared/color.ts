@@ -2,26 +2,59 @@
 //
 // Every map carries a 256-entry table at `map_base + 0x1F27`. Each entry is a
 // 2-byte (leftPixel, rightPixel) VGA palette-index pair that the original
-// engine writes directly to the framebuffer:
+// engine writes directly to the framebuffer. The table is consumed by two
+// distinct render paths with OPPOSITE video-mode dispatches:
 //
-//   - sub_11408 (sky/horizon gradient): emits the pair via `rep stosw`.
-//   - sub_15153 (polygon-load decoder, VGA mode 13h path only): consumes a
-//     pair when the engine is running in VGA mode (word_2D628 == 0x13);
-//     this is the production renderer for TD3. The EGA-mode fallback path
-//     bypasses this table and nibble-masks colors directly.
+//   - sub_15153 (polygon-load decoder): uses this table in VGA mode 13h
+//     (word_2D628 == 0x13) and bypasses it (nibble-mask only) in EGA modes.
+//   - sub_11408 (sky/horizon gradient): the opposite — in VGA mode 13h it
+//     uses the per-map sky-base bytes (byte_285AE day / byte_285AF night) as
+//     raw palette indices and `rep stosw`es them as a solid band, completely
+//     skipping the map[0x1F27] table. In EGA modes it routes the same byte
+//     through the table's diagonal to produce a dithered band that
+//     approximates the same hue inside the 16-color EGA palette.
+//
+// TD3 ships running VGA mode 13h, so the production paths are: polygons →
+// this table, sky → raw palette index from the map header.
 //
 // The table is indexed by `idx = ((highSeed & 0xF) << 4) | (lowSeed & 0xF)`,
-// where the seeds come from either the pre-grid header (sky/fog) or the
-// LUT'd polygon color fields. Diagonal entries (where the two seeds match)
-// are the only ones the sky-base lookup and the polygon decoder can hit
-// (the polygon's two color fields are always equal in on-disk data);
-// off-diagonal entries hold dither pairs that visually average two adjacent
-// palette indices and are reached by the sky-fog seed and by sprite blits.
+// where the seeds come from the pre-grid header (EGA-mode sky/fog only) or
+// the LUT'd polygon color fields. Diagonal entries (where the two seeds
+// match) are what the polygon decoder hits when on-disk word 1 color ==
+// word 2 color (e.g., cars); off-diagonal entries hold dither pairs or
+// hand-curated single-color substitutes and are reached by tile polygons
+// (where word 1 and word 2 color differ) and by the EGA-mode sky-fog seed.
 //
 // See spec/map-format.md (Tail Table section) for the full disassembly trace.
 
 import { ColorRGB } from './types';
 import { paletteColor } from './palette';
+
+/**
+ * The four LUT variants the engine generates from the (word_2AC5F,
+ * word_2AC61) weather flags via `sub_102E8` (seg006:2498). Identification
+ * comes from `sub_123A8` (the per-frame particle blitter):
+ *
+ *   - word_2AC5F → gray particles (`al=7`) + road-blackening LUT override.
+ *     Visually this is rain (gray streaks, wet asphalt).
+ *   - word_2AC61 → white particles (`al=0xF`) + terrain-whitening LUT
+ *     override. Visually this is snow (white flakes, snow covers grass).
+ *
+ *   - Dry:         word_2AC5F = 0, word_2AC61 = 0
+ *   - Rain:        word_2AC5F != 0, word_2AC61 = 0
+ *   - Snow:        word_2AC5F = 0,  word_2AC61 != 0
+ *   - RainAndSnow: both != 0
+ *
+ * Combined with the per-map `byte_285B3` flag (map[0x35]) this yields the
+ * full 4×2 = 8 LUT states the engine actually produces. See
+ * `primaryLUT` in `extract.ts` for the decoded LUT for each combination.
+ */
+export enum WeatherMode {
+    Dry,
+    Rain,
+    Snow,
+    RainAndSnow,
+}
 
 const REMAP_OFFSET = 0x1F27;
 const REMAP_ENTRY_COUNT = 256;
@@ -38,6 +71,7 @@ const TRAILER_LENGTH = 16;
 const SKY_BASE_DAY_OFFSET = 0x2E;   // byte_285AC
 const SKY_BASE_NIGHT_OFFSET = 0x2F; // byte_285AD
 const SKY_FOG_SEED_OFFSET = 0x32;   // word_285B0 (little-endian)
+const PRIMARY_LUT_MODE_OFFSET = 0x35; // byte_285B3 — controls LUT[7]/LUT[8] road tweaks
 
 /**
  * One entry of the paired-pixel lookup table: two VGA palette indices the
@@ -107,6 +141,28 @@ export function LoadTrailerTable(dat: Uint8Array, offset: number): number[] {
         table[i] = dat[base + i];
     }
     return table;
+}
+
+/**
+ * Read the per-map primary-LUT mode flag (byte_285B3 in TD3.EXE, at
+ * map[0x35]).
+ *
+ * The engine's primary LUT generator (sub_102E8) consults this byte to
+ * decide whether to override `LUT[7]` and `LUT[8]` (the "road shoulder"
+ * and "road surface" color slots). When it is zero, the engine takes the
+ * "dry / no fog" subpath which collapses `LUT[8] -> 0` (black road) and
+ * `LUT[7] -> 8` (gray shoulder). When it is non-zero, neither override
+ * fires and both colors stay at their identity values (`LUT[7] = 7`,
+ * `LUT[8] = 8` = palette idx 8 = gray).
+ *
+ * Empirically per-scene:
+ *   - Pacific maps 1, 4, 5: flag = 0 -> black road
+ *   - Pacific maps 2, 3:    flag = 1 -> gray road
+ *   - Cape Cod maps 1, 4, 5: flag = 1 -> gray road
+ *   - Cape Cod maps 2, 3:    flag = 0 -> black road
+ */
+export function LoadPrimaryLutMode(dat: Uint8Array, offset: number): number {
+    return dat[offset + PRIMARY_LUT_MODE_OFFSET];
 }
 
 /**

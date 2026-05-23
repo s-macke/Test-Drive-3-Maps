@@ -16,12 +16,14 @@ function CloneMesh(obj: Mesh, xt: number, yt: number, zt: number, rot: number): 
         lines: obj.lines,
         tris: obj.tris
     };
+    console.log(rot)
     for (let i = 0; i < obj.vertices.length; i++) {
         const p = obj.vertices[i];
-        const xp = p.x * Math.cos(rot) - p.y * Math.sin(rot);
-        const yp = p.x * Math.sin(rot) + p.y * Math.cos(rot);
-        const zp = p.z;
-        obj2.vertices.push(new THREE.Vector3(xp + xt, yp + yt, zp + zt));
+        // Rotate in the X/Z horizontal plane around the Y height axis
+        const xp = p.x * Math.cos(rot) - p.z * Math.sin(rot);
+        const zp = p.x * Math.sin(rot) + p.z * Math.cos(rot);
+        const yp = p.y;
+        obj2.vertices.push(new THREE.Vector3(xp + xt, zp + yt, yp + zt));
     }
     return obj2;
 }
@@ -68,7 +70,7 @@ export function BuildMap(dat: Uint8Array, offset: number, tiles1: Mesh[], tiles2
         const yp = extract.Read16(dat, ofs + 6 + 320 * 3 + i * 2);
         const ob = objs[objid & 63];
 
-        const rot = dat[ofs + 6 + 320 * 4 + i] >> 6;
+        const rot = dat[ofs + 6 + 320 * 4 + i * 2 + 1] >> 6;
 
         const obt = CloneMesh(
             ob,

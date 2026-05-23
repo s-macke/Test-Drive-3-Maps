@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { ColorRGB, Mesh } from './types';
-import { PixelPair } from './color';
+import { PixelPair, WeatherMode } from './color';
 import { paletteColor } from './palette';
 
 // Engine polygon-color resolution path, derived from sub_15153 (load-time
@@ -8,41 +8,89 @@ import { paletteColor } from './palette';
 // seg006:2498) in TD3.EXE. See disassembly/notes/polygon-color-pipeline.md.
 //
 // Stage 1 — primary LUT: 32-byte table at `word_2D8A0`, rebuilt at runtime
-// by sub_102E8 from weather/time-of-day flags. In the default state (dry,
-// no fog, no rain) it is identity *except* for two engine-hardcoded
-// overrides:
-//   LUT[7] = 8   (line/marker bumped to "paint" shade)
-//   LUT[8] = 0   (road surface collapses to black under engine logic)
-function primaryLUT(c: number): number {
-    if (c === 7) return 8;
-    if (c === 8) return 0;
+// by sub_102E8 from the per-scene mode flag (`byte_285B3` = map[0x35]) and
+// the two weather flags. Per the particle blitter in sub_123A8:
+//   - word_2AC5F → gray particles, road-blackening LUT  →  Rain
+//   - word_2AC61 → white particles, terrain-whitening LUT  →  Snow
+//
+// Full 8-state truth table (per `(lutMode, weather)` combination):
+//
+//   lutMode == 0 (Pacific 1/4/5, Cape Cod 2/3):
+//     LUT[7] = 8           (shoulder bumped to gray)
+//     LUT[8] = 0           (road collapses to black; no further effect
+//                           from Rain since it's already 0)
+//     When Snow is active:
+//       LUT[2] = LUT[3] = LUT[10] = 7   (gray-snow terrain)
+//
+//   lutMode != 0 (Pacific 2/3, Cape Cod 1/4/5):
+//     LUT[7] = 7 always.
+//     LUT[8] = 8 (gray road) UNLESS Rain active → 0 (wet asphalt).
+//     LUT[2] = LUT[3] = LUT[10] = c (identity) UNLESS Snow active → 0xF
+//                                                                  (white).
+//
+// All other entries are identity in every state.
+function primaryLUT(c: number, lutMode: number, weather: WeatherMode): number {
+    const rain = weather === WeatherMode.Rain || weather === WeatherMode.RainAndSnow;
+    const snow = weather === WeatherMode.Snow || weather === WeatherMode.RainAndSnow;
+
+    if (c === 7) return lutMode === 0 ? 8 : 7;
+
+    if (c === 8) {
+        if (lutMode === 0) return 0;          // road always black on B3==0 maps
+        return rain ? 0 : 8;                  // B3!=0: rain wets road to black, else gray
+    }
+
+    if (c === 2 || c === 3 || c === 10) {
+        if (!snow) return c;
+        return lutMode === 0 ? 7 : 0x0F;      // snow covers terrain: gray on B3==0, white on B3!=0
+    }
+
     return c & 0x1F;
 }
 
 // Stage 2 — VGA mode 13h pair resolution (sub_15153 takes the
-// word_2D628 == 0x13 branch). Given the LUT'd 5-bit color `n`:
-//   - If n < 16: look up `colormap[(n<<4) | n]` — the diagonal of the
-//     map's 256-entry paired-pixel table at map[0x1F27]. Because the two
-//     on-disk color fields are always equal (224/224 polys inspected),
-//     the engine's combined index `(LUT[w2]<<4) | LUT[w1]` always lands
-//     on a diagonal entry where left == right.
-//   - If n >= 16 (primary LUT result has bit 4 set): the engine falls
-//     into the secondary path and replaces each pixel-pair byte with
-//     `trailer[n & 0xF]` from the 16-byte map[0x2127] table.
+// word_2D628 == 0x13 branch). The engine combines both on-disk color
+// fields into a single 8-bit index `bx = (LUT[w2]<<4) | LUT[w1]` and
+// performs ONE lookup of a 16-bit pixel pair from map[0x1F27].
+//
+// For polygons where w1_color == w2_color (e.g., cars), this lands on a
+// diagonal entry. For tile polygons where they differ, the combined
+// index hits off-diagonal entries, which can be true dither pairs OR
+// hand-curated single-color substitutes (e.g., (low=2, high=3) →
+// palette[104] on Pacific 1, not a mix of palette[2] and palette[3]).
+//
+// Secondary path (one or both LUT outputs >= 16): the engine replaces
+// each ≥16 byte with `trailer[byte & 0xF]` from map[0x2127] and leaves
+// the <16 byte at its raw LUT value. There is no combined-pair lookup
+// in this path.
 //
 // The EGA fallback path (word_2D628 != 0x13) is intentionally not modeled
 // here — it would be `paletteColor(LUT[c] & 0x0F)`, i.e., a flat 16-color
 // EGA palette with no map remapping. TD3 ships running VGA mode 13h.
 function resolvePolygonColor(
-    color5: number,
+    color0: number,  // on-disk word 1 top-5 = LUT input for "left" pixel
+    color1: number,  // on-disk word 2 top-5 = LUT input for "right" pixel
     colormap: PixelPair[],
     trailer: number[],
+    lutMode: number, // byte_285B3 = map[0x35], drives LUT[7]/LUT[8] road tweaks
+    weather: WeatherMode,
 ): ColorRGB {
-    const n = primaryLUT(color5);
-    if (n < 16) {
-        return colormap[(n << 4) | n].toColor();
+    const n1 = primaryLUT(color0, lutMode, weather);
+    const n2 = primaryLUT(color1, lutMode, weather);
+
+    let leftByte: number;
+    let rightByte: number;
+
+    if (n1 < 16 && n2 < 16) {
+        const pair = colormap[(n2 << 4) | n1];
+        leftByte = pair.leftPixel;
+        rightByte = pair.rightPixel;
+    } else {
+        leftByte  = n1 < 16 ? n1 : trailer[n1 & 0x0F];
+        rightByte = n2 < 16 ? n2 : trailer[n2 & 0x0F];
     }
-    return paletteColor(trailer[n & 0x0F]);
+
+    return paletteColor(leftByte).average(paletteColor(rightByte));
 }
 
 // more information about the file structures can be found here:
@@ -105,7 +153,7 @@ function cylinderMesh(pointX: THREE.Vector3, pointY: THREE.Vector3, radius: numb
     return edgeGeometry;
 }
 
-export function BuildObject(name: string, buf: Uint8Array, colormap: PixelPair[], trailer: number[], offset: number, isobj: boolean): Mesh {
+export function BuildObject(name: string, buf: Uint8Array, colormap: PixelPair[], trailer: number[], lutMode: number, weather: WeatherMode, offset: number, isobj: boolean): Mesh {
     console.log("BuildObject " + name);
     const geom = new THREE.BufferGeometry();
 
@@ -163,14 +211,11 @@ export function BuildObject(name: string, buf: Uint8Array, colormap: PixelPair[]
         const color0 = idx2 >> 11;
         const color1 = idx3 >> 11;
 
-        // Resolve each 5-bit color through the engine's polygon-color pipeline
-        // (primary LUT → diagonal of map[0x1F27] OR map[0x2127] trailer).
-        // On disk these two values are always equal, but resolve both
-        // independently and average for defence — same as the engine would do
-        // if a polygon ever encoded a true dither pair.
-        const c0 = resolvePolygonColor(color0, colormap, trailer);
-        const c1 = resolvePolygonColor(color1, colormap, trailer);
-        const c  = c0.average(c1);
+        // Combined VGA-mode-13h pair lookup: one index `(LUT[w2]<<4)|LUT[w1]`
+        // → 16-bit dither pair → RGB-averaged for flat-shaded output. For
+        // cars (w1==w2 everywhere) this lands on a diagonal; for tiles, the
+        // off-diagonal entries carry hand-curated dither substitutes.
+        const c = resolvePolygonColor(color0, color1, colormap, trailer, lutMode, weather);
 
         idx1 = idx1 & 0x7FF;
         idx2 = idx2 & 0x7FF;
@@ -279,7 +324,7 @@ export function BuildObject(name: string, buf: Uint8Array, colormap: PixelPair[]
     return mesh;
 }
 
-export function BuildObjectList(name: string, buf: Uint8Array, colormap: PixelPair[], trailer: number[], offset: number, n: number, isobj: (number | null)[]): Mesh[] {
+export function BuildObjectList(name: string, buf: Uint8Array, colormap: PixelPair[], trailer: number[], lutMode: number, weather: WeatherMode, offset: number, n: number, isobj: (number | null)[]): Mesh[] {
     const objs: Mesh[] = [];
     for (let i = 0; i < n; i++) {
         let idx = i;
@@ -298,7 +343,7 @@ export function BuildObjectList(name: string, buf: Uint8Array, colormap: PixelPa
             });
         } else {
             const n = name + "_" + i;
-            objs.push(BuildObject(n, buf, colormap, trailer, offset + objectoffset, !!isobj[i]));
+            objs.push(BuildObject(n, buf, colormap, trailer, lutMode, weather, offset + objectoffset, !!isobj[i]));
         }
     }
     return objs;

@@ -1,7 +1,7 @@
 import * as extract from "./extract";
 import { files } from "./files";
 import { MapsCollection } from './types';
-import { PixelPair } from './color';
+import { PixelPair, WeatherMode } from './color';
 
 export const maps: MapsCollection = {
     tiles1: [],
@@ -13,7 +13,7 @@ export const maps: MapsCollection = {
 };
 
 
-export function LoadObjects(colormap: PixelPair[], trailer: number[]): void {
+export function LoadObjects(colormap: PixelPair[], trailer: number[], lutMode: number, weather: WeatherMode): void {
     const isobj: (number | null)[] = [
         0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0,
@@ -24,9 +24,9 @@ export function LoadObjects(colormap: PixelPair[], trailer: number[]): void {
         0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0,
     ];
-    maps.tiles1 = extract.BuildObjectList("tiles1", files.scene01!, colormap, trailer, 0x0045B, 59, isobj);
-    maps.tiles2 = extract.BuildObjectList("tiles2", files.datab!, colormap, trailer, 0x2373B, 64, isobj);
-    maps.tiles3 = extract.BuildObjectList("tiles3", files.scene02!, colormap, trailer, 0x00488, 64, isobj);
+    maps.tiles1 = extract.BuildObjectList("tiles1", files.scene01!, colormap, trailer, lutMode, weather, 0x0045B, 59, isobj);
+    maps.tiles2 = extract.BuildObjectList("tiles2", files.datab!, colormap, trailer, lutMode, weather, 0x2373B, 64, isobj);
+    maps.tiles3 = extract.BuildObjectList("tiles3", files.scene02!, colormap, trailer, lutMode, weather, 0x00488, 64, isobj);
 
     const isobj2: (number | null)[] = [
         0,    0,    0,    0,    0,    0,    0,    0,
@@ -39,7 +39,7 @@ export function LoadObjects(colormap: PixelPair[], trailer: number[]): void {
         1,    1,    0,    0,    0,    0,    0,    0,
     ];
 
-    maps.objs1 = extract.BuildObjectList("objs1", files.datab!, colormap, trailer, 0x32F1A, 64, isobj2);
+    maps.objs1 = extract.BuildObjectList("objs1", files.datab!, colormap, trailer, lutMode, weather, 0x32F1A, 64, isobj2);
 
     const isobj3: (number | null)[] = [
         null, null, null, null, null, 0,    0,    0,
@@ -52,14 +52,14 @@ export function LoadObjects(colormap: PixelPair[], trailer: number[]): void {
         1,    1,    0,    0,    0,    0,    0,    0,
     ];
 
-    maps.objs2 = extract.BuildObjectList("objs2", files.scene02!, colormap, trailer, 0x1534D, 64, isobj3);
+    maps.objs2 = extract.BuildObjectList("objs2", files.scene02!, colormap, trailer, lutMode, weather, 0x1534D, 64, isobj3);
 
     maps.cars = [
-        extract.BuildObject("car1", files.cmyth!, colormap, trailer, 0, true),
-        extract.BuildObject("car2", files.cdiab!, colormap, trailer, 0, true),
-        extract.BuildObject("car3", files.ccerv!, colormap, trailer, 0, true),
-        extract.BuildObject("car4", files.cstel!, colormap, trailer, 0, true),
-        extract.BuildObject("car5", files.ccnsx!, colormap, trailer, 0, true)
+        extract.BuildObject("car1", files.cmyth!, colormap, trailer, lutMode, weather, 0, true),
+        extract.BuildObject("car2", files.cdiab!, colormap, trailer, lutMode, weather, 0, true),
+        extract.BuildObject("car3", files.ccerv!, colormap, trailer, lutMode, weather, 0, true),
+        extract.BuildObject("car4", files.cstel!, colormap, trailer, lutMode, weather, 0, true),
+        extract.BuildObject("car5", files.ccnsx!, colormap, trailer, lutMode, weather, 0, true)
     ];
 
     // datab  0x32F1A
