@@ -46,8 +46,12 @@ export function BuildMap(dat: Uint8Array, offset: number, tiles1: Mesh[], tiles2
                 if (tile < tiles1.length)
                     ob = tiles1[tile];
             }
-            if (ob == null) {
-                console.log("No object found " + tile + " " + tiles2.length + " " + tiles1.length);
+            if (ob == null || ob.vertices.length === 0) {
+                console.log("No object found or empty geometry for tile " + tile + ", falling back to tile 0");
+                if (tiles2.length > 0)
+                    ob = tiles2[0];
+            }
+            if (ob == null || ob.vertices.length === 0) {
                 continue;
             }
             const obt = CloneMesh(

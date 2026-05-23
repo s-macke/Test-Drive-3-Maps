@@ -39,17 +39,25 @@ function BuildMap(dat: Uint8Array, offset: number, tiles1: Mesh[], tiles2: Mesh[
             let tile = dat[mapoffsetLocal + (i + j * 32) * 2 + 0];
             const rot = dat[mapoffsetLocal + (i + j * 32) * 2 + 1] >> 6;
             const height = dat[mapoffsetLocal + (i + j * 32) * 2 + 1] & 0x3F;
-            let ob: THREE.Object3D | null = null;
+            let obMesh: Mesh | null = null;
             if (tile < 0x40) {
                 if (tile < tiles2.length)
-                    ob = tiles2[tile].obj!.clone();
+                    obMesh = tiles2[tile];
             } else {
                 tile -= 0x40;
                 if (tile < tiles1.length)
-                    ob = tiles1[tile].obj!.clone();
+                    obMesh = tiles1[tile];
+            }
+            if (obMesh == null || obMesh.vertices.length === 0) {
+                console.log("No object found or empty geometry for tile " + tile + ", falling back to tile 0");
+                if (tiles2.length > 0)
+                    obMesh = tiles2[0];
+            }
+            let ob: THREE.Object3D | null = null;
+            if (obMesh != null && obMesh.obj != null) {
+                ob = obMesh.obj.clone();
             }
             if (ob == null) {
-                console.log("No object found " + tile + " " + tiles2.length + " " + tiles1.length);
                 continue;
             }
             ob.rotation.z += -Math.PI / 2 * (rot);
