@@ -15,22 +15,35 @@ export function ColorToHex(color: ColorRGB): string {
 let mtlcontent = "# Wavefront Material Library\n\n";
 const colorsStored = new Set<string>();
 
-function AddMtl(color: ColorRGB): void {
+function AddMtl(color: ColorRGB, light: boolean): void {
     const hex = ColorToHex(color);
-    if (colorsStored.has(hex)) {
+    const key = (light ? "light_" : "") + hex;
+    if (colorsStored.has(key)) {
         return;
     }
-    colorsStored.add(hex);
-    mtlcontent += "newmtl color_#" + hex + "\n";
+    colorsStored.add(key);
+    mtlcontent += "newmtl " + matName(color, light) + "\n";
     mtlcontent += "Kd " + color.r + " " + color.g + " " + color.b + "\n";
+    if (light) {
+        // OBJ/MTL has no additive-blend slot; emit emissive + alpha as the
+        // closest portable hint. Renderers that honour Ke + d will at least
+        // glow these surfaces instead of drawing them as opaque flat fills.
+        mtlcontent += "Ke " + color.r + " " + color.g + " " + color.b + "\n";
+        mtlcontent += "d 0.5\n";
+        mtlcontent += "illum 1\n";
+    }
     mtlcontent += "\n";
+}
+
+function matName(color: ColorRGB, light: boolean): string {
+    return (light ? "light_color_#" : "color_#") + ColorToHex(color);
 }
 
 interface MeshLike {
     name: string;
     vertices: { x: number; y: number; z: number }[];
-    lines: { p1: number; p2: number; color: ColorRGB }[];
-    tris: { p1: number; p2: number; p3: number; color: ColorRGB }[];
+    lines: { p1: number; p2: number; color: ColorRGB; light?: boolean }[];
+    tris: { p1: number; p2: number; p3: number; color: ColorRGB; light?: boolean }[];
 }
 
 export function StoreObj(filename: string, objs: MeshLike[], objsDir: string): void {
@@ -55,14 +68,16 @@ export function StoreObj(filename: string, objs: MeshLike[], objsDir: string): v
         }
         for (let i = 0; i < obj.lines.length; i++) {
             const l = obj.lines[i];
-            AddMtl(l.color);
-            content += "usemtl color_#" + ColorToHex(l.color) + "\n";
+            const light = !!l.light;
+            AddMtl(l.color, light);
+            content += "usemtl " + matName(l.color, light) + "\n";
             content += "l " + (l.p1 + 1 + nbase) + " " + (l.p2 + 1 + nbase) + "\n";
         }
         for (let i = 0; i < obj.tris.length; i++) {
             const t = obj.tris[i];
-            AddMtl(t.color);
-            content += "usemtl color_#" + ColorToHex(t.color) + "\n";
+            const light = !!t.light;
+            AddMtl(t.color, light);
+            content += "usemtl " + matName(t.color, light) + "\n";
             content += "f " + (t.p1 + 1 + nbase) + " " + (t.p2 + 1 + nbase) + " " + (t.p3 + 1 + nbase) + "\n";
         }
         nbase += obj.vertices.length;

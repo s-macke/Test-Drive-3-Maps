@@ -172,6 +172,13 @@ export function BuildObject(name: string, buf: Uint8Array, colormap: PixelPair[]
     const positionstemp: THREE.Vector3[] = [];
     const positions: number[] = [];
     const colors: number[] = [];
+    // Render-mode 0 ("light") polygons: in the original engine these go through
+    // an `or es:[di], ax` rasterizer path that OR-blends the dither pair onto
+    // the framebuffer. Because the VGA palette past index 0x10 is laid out as
+    // 16 hue-blocks × 16 dark-to-light ramps, OR-ing brightens the underlying
+    // pixel within its own hue. Approximated here with THREE.AdditiveBlending.
+    const lightPositions: number[] = [];
+    const lightColors: number[] = [];
 
     offset += isobj ? 8 : 4;
 
@@ -210,6 +217,12 @@ export function BuildObject(name: string, buf: Uint8Array, colormap: PixelPair[]
         const type = idx1 >> 13;
         const color0 = idx2 >> 11;
         const color1 = idx3 >> 11;
+        // Render mode lives in word 3 top-5; mode 0 is the OR-blend "light"
+        // polygon path in sub_15ADD / sub_11EA0 (see polygon-color-pipeline.md).
+        const renderMode = idx4 >> 11;
+        const isLight = renderMode === 0;
+        const polyPositions = isLight ? lightPositions : positions;
+        const polyColors = isLight ? lightColors : colors;
 
         // Combined VGA-mode-13h pair lookup: one index `(LUT[w2]<<4)|LUT[w1]`
         // → 16-bit dither pair → RGB-averaged for flat-shaded output. For
@@ -240,13 +253,14 @@ export function BuildObject(name: string, buf: Uint8Array, colormap: PixelPair[]
                 mesh.lines.push({
                     p1: idx1,
                     p2: idx2,
-                    color: c
+                    color: c,
+                    light: isLight,
                 });
 
                 const array = line.toNonIndexed().attributes["position"].array as Float32Array;
                 for (let j = 0; j < array.length / 3; j++) {
-                    positions.push(array[j * 3 + 0], array[j * 3 + 1], array[j * 3 + 2]);
-                    colors.push(c.r, c.g, c.b);
+                    polyPositions.push(array[j * 3 + 0], array[j * 3 + 1], array[j * 3 + 2]);
+                    polyColors.push(c.r, c.g, c.b);
                 }
             }
                 break;
@@ -257,17 +271,18 @@ export function BuildObject(name: string, buf: Uint8Array, colormap: PixelPair[]
                 if (idx1 >= npoints) continue;
                 if (idx2 >= npoints) continue;
                 if (idx3 >= npoints) continue;
-                positions.push(positionstemp[idx1].x, positionstemp[idx1].y, positionstemp[idx1].z);
-                positions.push(positionstemp[idx2].x, positionstemp[idx2].y, positionstemp[idx2].z);
-                positions.push(positionstemp[idx3].x, positionstemp[idx3].y, positionstemp[idx3].z);
-                colors.push(c.r, c.g, c.b);
-                colors.push(c.r, c.g, c.b);
-                colors.push(c.r, c.g, c.b);
+                polyPositions.push(positionstemp[idx1].x, positionstemp[idx1].y, positionstemp[idx1].z);
+                polyPositions.push(positionstemp[idx2].x, positionstemp[idx2].y, positionstemp[idx2].z);
+                polyPositions.push(positionstemp[idx3].x, positionstemp[idx3].y, positionstemp[idx3].z);
+                polyColors.push(c.r, c.g, c.b);
+                polyColors.push(c.r, c.g, c.b);
+                polyColors.push(c.r, c.g, c.b);
                 mesh.tris.push({
                     p1: idx1,
                     p2: idx2,
                     p3: idx3,
-                    color: c
+                    color: c,
+                    light: isLight,
                 });
                 break;
 
@@ -278,30 +293,32 @@ export function BuildObject(name: string, buf: Uint8Array, colormap: PixelPair[]
                 if (idx2 >= npoints) continue;
                 if (idx3 >= npoints) continue;
                 if (idx4 >= npoints) continue;
-                positions.push(positionstemp[idx1].x, positionstemp[idx1].y, positionstemp[idx1].z);
-                positions.push(positionstemp[idx2].x, positionstemp[idx2].y, positionstemp[idx2].z);
-                positions.push(positionstemp[idx3].x, positionstemp[idx3].y, positionstemp[idx3].z);
-                colors.push(c.r, c.g, c.b);
-                colors.push(c.r, c.g, c.b);
-                colors.push(c.r, c.g, c.b);
+                polyPositions.push(positionstemp[idx1].x, positionstemp[idx1].y, positionstemp[idx1].z);
+                polyPositions.push(positionstemp[idx2].x, positionstemp[idx2].y, positionstemp[idx2].z);
+                polyPositions.push(positionstemp[idx3].x, positionstemp[idx3].y, positionstemp[idx3].z);
+                polyColors.push(c.r, c.g, c.b);
+                polyColors.push(c.r, c.g, c.b);
+                polyColors.push(c.r, c.g, c.b);
                 mesh.tris.push({
                     p1: idx1,
                     p2: idx2,
                     p3: idx3,
-                    color: c
+                    color: c,
+                    light: isLight,
                 });
 
-                positions.push(positionstemp[idx3].x, positionstemp[idx3].y, positionstemp[idx3].z);
-                positions.push(positionstemp[idx4].x, positionstemp[idx4].y, positionstemp[idx4].z);
-                positions.push(positionstemp[idx1].x, positionstemp[idx1].y, positionstemp[idx1].z);
-                colors.push(c.r, c.g, c.b);
-                colors.push(c.r, c.g, c.b);
-                colors.push(c.r, c.g, c.b);
+                polyPositions.push(positionstemp[idx3].x, positionstemp[idx3].y, positionstemp[idx3].z);
+                polyPositions.push(positionstemp[idx4].x, positionstemp[idx4].y, positionstemp[idx4].z);
+                polyPositions.push(positionstemp[idx1].x, positionstemp[idx1].y, positionstemp[idx1].z);
+                polyColors.push(c.r, c.g, c.b);
+                polyColors.push(c.r, c.g, c.b);
+                polyColors.push(c.r, c.g, c.b);
                 mesh.tris.push({
                     p1: idx3,
                     p2: idx4,
                     p3: idx1,
-                    color: c
+                    color: c,
+                    light: isLight,
                 });
                 break;
 
@@ -321,6 +338,22 @@ export function BuildObject(name: string, buf: Uint8Array, colormap: PixelPair[]
     const material = new THREE.MeshLambertMaterial({ color: 0xffffff, vertexColors: true });
     material.side = THREE.DoubleSide;
     mesh.obj!.add(new THREE.Mesh(geom, material));
+
+    if (lightPositions.length > 0) {
+        const lightGeom = new THREE.BufferGeometry();
+        lightGeom.setAttribute('position', new THREE.Float32BufferAttribute(lightPositions, 3));
+        lightGeom.setAttribute('color', new THREE.Float32BufferAttribute(lightColors, 3));
+        const lightMaterial = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            vertexColors: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+            transparent: true,
+            side: THREE.DoubleSide,
+        });
+        mesh.obj!.add(new THREE.Mesh(lightGeom, lightMaterial));
+    }
+
     return mesh;
 }
 

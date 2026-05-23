@@ -96,6 +96,65 @@ Current evidence from the extractor-side reconstruction:
 - this means its first `16` colors populate palette entries `16..31`
 - not palette entries `0..15`
 
+## OTWCOL.BIN Internal Structure
+
+The 112 colors `OTWCOL.BIN` writes into palette slots `0x10..0x7F` are not a flat
+sampler — they are laid out as **7 hue blocks of 16 entries each**, where every
+block is a monotone dark-to-light ramp inside one hue family.
+
+| Slot range   | Hue family       | Ramp endpoints (approx RGB) |
+|--------------|------------------|-----------------------------|
+| `0x10..0x1F` | neutral gray     | `08 08 08` → `FC E0 FC`     |
+| `0x20..0x2F` | red              | `40 00 00` → `FC D8 D8`     |
+| `0x30..0x3F` | brown / tan      | `40 20 00` → `E4 AC 8C`     |
+| `0x40..0x4F` | blue             | `00 00 40` → `D8 D8 FC`     |
+| `0x50..0x5F` | green            | `18 28 10` → `F8 FC D0`     |
+| `0x60..0x6F` | teal             | `00 18 20` → `EC FC F0`     |
+| `0x70..0x7F` | steel / sky blue | `00 14 28` → `D8 EC FC`     |
+
+So a palette index `0xHB` in this range decomposes naturally into
+`H` = hue-family nibble and `B` = brightness-within-hue nibble. The brightness
+nibble is **strictly monotonic** within each block: higher `B` means lighter.
+
+The arrangement is identical across all OTWCOL variants we've sampled, which is
+why the layout is documented here under the format rather than as per-map data.
+
+### Why the layout matters — OR-blend lighting
+
+This structure is the precondition that makes the engine's render-mode-0
+("light") polygon path work. The rasterizers in `sub_15ADD` (triangle/quad) and
+`sub_11EA0` (line) take an alternate scanline path for these polygons:
+
+```
+or  es:[di], ax     ; instead of `rep stosw`
+```
+
+i.e. the polygon's resolved 16-bit dither pair is **bitwise-OR'd** into the
+framebuffer rather than overwriting it. The typical mode-0 pair is `0x0707`,
+which OR's the constant `0x07` into every covered pixel.
+
+Because the OTWCOL layout above stores `H` in the high nibble and `B` in the
+low nibble, OR-ing `0x07` preserves the hue family and **raises the brightness
+nibble to at least 7**:
+
+| Background pixel      | OR with 0x07 | Effect                    |
+|-----------------------|--------------|---------------------------|
+| `0x40` darkest blue   | `0x47`       | jumps to mid-bright blue  |
+| `0x50` darkest green  | `0x57`       | jumps to mid-bright green |
+| `0x68` mid teal       | `0x6F`       | jumps to brightest teal   |
+| `0x77` already bright | `0x77`       | no-op (saturated)         |
+
+That is the entire "light polygon" effect: in-palette brightening that follows
+the hue of whatever the polygon is drawn on top of. The fixed EGA block at
+`0x00..0x0F` does **not** participate cleanly in this trick (it has its own
+unrelated layout), which is one reason that range is excluded from
+`OTWCOL.BIN`'s payload.
+
+Practical consequence for tooling: any reconstructor that re-packs or
+re-quantises `OTWCOL.BIN` must preserve the block-and-ramp ordering, otherwise
+mode-0 polygons will produce nonsense colors at runtime even if the individual
+RGB triples are still present in the palette.
+
 ## Working Model
 
 The current best model is:

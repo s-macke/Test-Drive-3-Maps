@@ -23,6 +23,7 @@ export interface Line {
     p1: number;  // vertex index
     p2: number;  // vertex index
     color: ColorRGB;
+    light?: boolean;  // render-mode 0: OR-blended onto framebuffer (lightens hue ramp)
 }
 
 export interface Triangle {
@@ -30,6 +31,7 @@ export interface Triangle {
     p2: number;  // vertex index
     p3: number;  // vertex index
     color: ColorRGB;
+    light?: boolean;  // render-mode 0: OR-blended onto framebuffer (lightens hue ramp)
 }
 
 export interface Mesh {
