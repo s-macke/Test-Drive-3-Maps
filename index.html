@@ -4,10 +4,20 @@
     <title>Test Drive III Maps</title>
     <meta charset="utf-8">
     <style>
+        :root {
+            --accent: #ff8a3d;
+            --accent-2: #2dd4bf;
+            --panel: rgba(15, 18, 26, 0.72);
+            --border: rgba(255, 255, 255, 0.12);
+            --text: #f2f4f8;
+            --muted: #aab2c0;
+        }
+
         html, body {
             margin: 0;
             height: 100%;
-            overflow: hidden
+            overflow: hidden;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
 
         canvas {
@@ -15,44 +25,231 @@
             height: 100%
         }
 
-        #info {
+        #header {
             position: absolute;
-            top: 0px;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 5px;
+            box-sizing: border-box;
             z-index: 100;
-            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px 22px;
+            padding: 12px 18px;
+            color: var(--text);
+            background: linear-gradient(180deg, var(--panel) 0%, rgba(15, 18, 26, 0) 100%);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            user-select: none;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+            padding-right: 18px;
+            border-right: 1px solid var(--border);
+        }
+
+        .brand .title {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .brand .subtitle {
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        .field {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .field label {
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .select-wrap {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .select-wrap::after {
+            content: "";
+            position: absolute;
+            right: 12px;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid var(--muted);
+            border-bottom: 2px solid var(--muted);
+            transform: rotate(45deg) translateY(-2px);
+            pointer-events: none;
+        }
+
+        #selector {
+            appearance: none;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 34px 8px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: border-color 0.15s ease, background 0.15s ease;
+        }
+
+        #selector:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        #selector:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        #selector optgroup {
+            color: var(--muted);
+            background: #1a1e28;
+        }
+
+        #selector option {
+            color: var(--text);
+            background: #1a1e28;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px 8px;
+            margin-left: auto;
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        .controls .hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        kbd {
+            display: inline-block;
+            min-width: 7px;
+            text-align: center;
+            padding: 1px 4px;
+            font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border);
+            border-bottom-width: 2px;
+            border-radius: 4px;
+        }
+
+        .source-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 11px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: border-color 0.15s ease, background 0.15s ease;
+        }
+
+        .source-link:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--accent);
         }
     </style>
 </head>
 <body>
 
-<div id="info">
-    fly controls
-    <b>WASD</b> move, <b>R|F</b> up | down, <b>Q|E</b> roll, <b>up|down</b> pitch, <b>left|right</b> yaw
+<header id="header">
+    <div class="brand">
+        <span class="title">Test Drive III</span>
+        <span class="subtitle">The Passion &middot; Map Viewer</span>
+    </div>
 
-    <input id="mousenav" type="checkbox" name="mousenav" value="mnav"> Mouse Navigation
+    <div class="field">
+        <label for="selector">Scene</label>
+        <div class="select-wrap">
+            <select id="selector" name="Mapselector">
+                <optgroup label="Pacific Coast">
+                    <option value="0">Pacific Course 1</option>
+                    <option value="1">Pacific Course 2</option>
+                    <option value="2">Pacific Course 3</option>
+                    <option value="3">Pacific Course 4</option>
+                    <option value="4">Pacific Course 5</option>
+                </optgroup>
+                <optgroup label="Cape Cod">
+                    <option value="5">Cape Cod Course 1</option>
+                    <option value="6">Cape Cod Course 2</option>
+                    <option value="7">Cape Cod Course 3</option>
+                    <option value="8">Cape Cod Course 4</option>
+                    <option value="9">Cape Cod Course 5</option>
+                </optgroup>
+                <optgroup label="Other">
+                    <option value="10">Unknown map</option>
+                </optgroup>
+                <optgroup label="Tiles">
+                    <option value="11">Tiles 1</option>
+                    <option value="12">Tiles 2</option>
+                    <option value="13">Tiles 3</option>
+                </optgroup>
+                <optgroup label="Objects">
+                    <option value="14">Objects 1</option>
+                    <option value="15">Objects 2</option>
+                </optgroup>
+                <optgroup label="Vehicles">
+                    <option value="16">Cars</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
 
-    <select id="selector" name="Mapselector">
-        <option value="0">Pacific Course 1</option>
-        <option value="1">Pacific Course 2</option>
-        <option value="2">Pacific Course 3</option>
-        <option value="3">Pacific Course 4</option>
-        <option value="4">Pacific Course 5</option>
-        <option value="5">Cape Cod Course 1</option>
-        <option value="6">Cape Cod Course 2</option>
-        <option value="7">Cape Cod Course 3</option>
-        <option value="8">Cape Cod Course 4</option>
-        <option value="9">Cape Cod Course 5</option>
-        <option value="10">Unknown map</option>
-        <option value="11">Tiles 1</option>
-        <option value="12">Tiles 2</option>
-        <option value="13">Tiles 3</option>
-        <option value="14">Objects 1</option>
-        <option value="15">Objects 2</option>
-        <option value="16">Cars</option>
-    </select>
-</div>
+    <nav class="controls">
+        <span class="hint"><kbd>WASD</kbd> move</span>
+        <span class="hint"><kbd>R</kbd><kbd>F</kbd> up/down</span>
+        <span class="hint"><kbd>Q</kbd><kbd>E</kbd> roll</span>
+        <span class="hint"><kbd>&uarr;&darr;&larr;&rarr;</kbd> look</span>
+        <span class="hint"><kbd>Drag</kbd> aim</span>
+    </nav>
+
+    <a class="source-link" href="https://github.com/s-macke/Test-Drive-3-Maps"
+       target="_blank" rel="noopener" title="View source on GitHub">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+        <span class="source-label">Source</span>
+    </a>
+</header>
 
 <script type="module" src="/src/browser/main.ts"></script>
 

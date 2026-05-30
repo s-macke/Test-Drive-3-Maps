@@ -20,8 +20,7 @@ Test-Drive-3-Maps/
 ├── src/
 │   ├── browser/        # Browser-only modules (TypeScript)
 │   │   ├── main.ts     # Browser entry point
-│   │   ├── scene.ts    # Three.js scene setup
-│   │   └── FlyControls.ts # Camera controls
+│   │   └── scene.ts    # Three.js scene setup
 │   ├── shared/         # Browser + Node shared modules (TypeScript)
 │   │   ├── extract.ts  # Binary parser for TD3 formats
 │   │   ├── mapgen.ts   # Map assembly logic
@@ -93,7 +92,6 @@ See [`spec/lst-file-format.md`](spec/lst-file-format.md) for detailed format doc
 |------------------|-----------------------------------------------------------------|
 | `main.ts`        | Browser entry point. Loads data files, builds maps, handles UI. |
 | `scene.ts`       | Three.js scene setup (camera, lights, renderer).                |
-| `FlyControls.ts` | Camera fly-through controls.                                    |
 
 ### Shared (src/shared/)
 | File         | Description                                                                    |

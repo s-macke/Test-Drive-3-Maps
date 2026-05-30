@@ -4,7 +4,7 @@ Reverse engineered and extracted maps of the DOS Game *Test Drive III: The Passi
 
 ![Extracted Game Cars](images/cars_joined.png)
 
-# **[Online Viewer](https://s-macke.github.io/Test-Drive-3-Maps/)**
+# **[Online Viewer](https://s-macke.github.io/Test-Drive-3-Maps/)** &middot; **[Ground Fly Mode](https://s-macke.github.io/Test-Drive-3-Maps/?view=fly)**
 # **[Extracted Images Gallery](images/README.md)**
 
 Wavefront Object files are available in the objs directory.

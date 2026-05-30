@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { Scene } from './scene';
-import { FlyControls } from './FlyControls';
+import { FlyControls } from 'three/addons/controls/FlyControls.js';
 import * as extract from '@shared/extract';
 import { LoadRemapTable, LoadTrailerTable, LoadPrimaryLutMode, WeatherMode } from "@shared/color";
 import { LoadObjects, maps } from "@shared/objects";
@@ -10,12 +10,43 @@ import { Mesh } from '@shared/types';
 
 const scene = new Scene();
 
-const controls = new FlyControls(scene.camera);
+const controls = new FlyControls(scene.camera, scene.renderer.domElement);
 controls.movementSpeed = 50;
-controls.domElement = scene.renderer.domElement;
 controls.rollSpeed = Math.PI / 12;
 controls.autoForward = false;
-controls.dragToLook = false;
+controls.dragToLook = true; // mouse only rotates the camera while a button is held
+
+// dragToLook handles rotation-on-drag, but the stock control does not move the
+// camera on button press in that mode. Drive forward/back ourselves: left button
+// moves forward, right button moves back, while still steering by dragging.
+let mouseMove = 0; // -1 back, 0 idle, +1 forward
+scene.renderer.domElement.addEventListener('pointerdown', (e: PointerEvent) => {
+    if (e.button === 0) mouseMove = 1;
+    else if (e.button === 2) mouseMove = -1;
+});
+const stopMouseMove = () => { mouseMove = 0; };
+scene.renderer.domElement.addEventListener('pointerup', stopMouseMove);
+scene.renderer.domElement.addEventListener('pointercancel', stopMouseMove);
+
+// Starting camera view, selectable via the `?view=` URL parameter:
+//   (default)   top   - top-down overview, high above the map looking straight down
+//   ?view=fly         - ground-level fly start, at the centre of the map slightly
+//                       above the ground, looking horizontally across the scene
+// The map spans a 32x16 tile grid centred near world (-2048, 2048); scaled by 0.01
+// (see BuildMap) that is (-20.48, 20.48) in camera space, with +z pointing up.
+function applyStartView(): void {
+    const view = new URLSearchParams(window.location.search).get('view');
+    if (view === 'fly') {
+        scene.camera.position.set(-20.48, 20.48, 40);
+        // Default camera looks down -z; rotating +90deg about x aims it along +y
+        // (horizontal) with +z as the up vector.
+        scene.camera.rotation.set(Math.PI / 2, 0, 0);
+    } else {
+        scene.camera.position.set(0, 0, 500);
+        scene.camera.rotation.set(0, 0, 0);
+    }
+}
+applyStartView();
 
 const mapoffset: number[] = [
     0x10240,
@@ -124,6 +155,9 @@ function animate(): void {
     requestAnimationFrame(animate);
     const delta = scene.clock.getDelta();
     controls.update(delta);
+    if (mouseMove !== 0) {
+        scene.camera.translateZ(-mouseMove * controls.movementSpeed * delta);
+    }
     scene.Render();
 }
 
@@ -213,11 +247,6 @@ selector.addEventListener('keydown', function (e: KeyboardEvent) {
         if (e.preventDefault)
             e.preventDefault();
     }
-});
-
-const mousenav = document.getElementById("mousenav") as HTMLInputElement;
-mousenav.addEventListener('change', function (this: HTMLInputElement) {
-    controls.ChangeMouseStatus(this.checked);
 });
 
 loadFiles().then(() => {
