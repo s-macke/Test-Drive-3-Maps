@@ -34,9 +34,9 @@ scene.renderer.domElement.addEventListener('pointercancel', stopMouseMove);
 //                       above the ground, looking horizontally across the scene
 // The map spans a 32x16 tile grid centred near world (-2048, 2048); scaled by 0.01
 // (see BuildMap) that is (-20.48, 20.48) in camera space, with +z pointing up.
+const flyMode = new URLSearchParams(window.location.search).get('view') === 'fly';
 function applyStartView(): void {
-    const view = new URLSearchParams(window.location.search).get('view');
-    if (view === 'fly') {
+    if (flyMode) {
         scene.camera.position.set(-20.48, 20.48, 40);
         // Default camera looks down -z; rotating +90deg about x aims it along +y
         // (horizontal) with +z as the up vector.
@@ -47,6 +47,21 @@ function applyStartView(): void {
     }
 }
 applyStartView();
+
+// In fly mode, keep the horizon level: re-orient the camera each frame so its up
+// vector stays world-up (+z). This cancels the banking that FlyControls would
+// otherwise accumulate from combined yaw/pitch, and disables the roll keys.
+const _worldUp = new THREE.Vector3(0, 0, 1);
+const _dir = new THREE.Vector3();
+const _target = new THREE.Vector3();
+function keepLevel(): void {
+    scene.camera.getWorldDirection(_dir);
+    // Skip near-vertical looks to avoid a gimbal flip when up and forward align.
+    if (Math.abs(_dir.z) > 0.999) return;
+    _target.copy(scene.camera.position).add(_dir);
+    scene.camera.up.copy(_worldUp);
+    scene.camera.lookAt(_target);
+}
 
 const mapoffset: number[] = [
     0x10240,
@@ -157,6 +172,9 @@ function animate(): void {
     controls.update(delta);
     if (mouseMove !== 0) {
         scene.camera.translateZ(-mouseMove * controls.movementSpeed * delta);
+    }
+    if (flyMode) {
+        keepLevel();
     }
     scene.Render();
 }
